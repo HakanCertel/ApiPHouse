@@ -1,0 +1,16 @@
+C:\Users\User\Desktop\YayınEviUygulaması\YayinEviApi-last\Core\YayinEviApi.Application\bin\Debug\net8.0\YayinEviApi.Application.deps.json
+C:\Users\User\Desktop\YayınEviUygulaması\YayinEviApi-last\Core\YayinEviApi.Application\bin\Debug\net8.0\YayinEviApi.Application.dll
+C:\Users\User\Desktop\YayınEviUygulaması\YayinEviApi-last\Core\YayinEviApi.Application\bin\Debug\net8.0\YayinEviApi.Application.pdb
+C:\Users\User\Desktop\YayınEviUygulaması\YayinEviApi-last\Core\YayinEviApi.Application\bin\Debug\net8.0\YayinEviApi.Domain.dll
+C:\Users\User\Desktop\YayınEviUygulaması\YayinEviApi-last\Core\YayinEviApi.Application\bin\Debug\net8.0\YayinEviApi.Domain.pdb
+C:\Users\User\Desktop\YayınEviUygulaması\YayinEviApi-last\Core\YayinEviApi.Application\obj\Debug\net8.0\YayinEviApi.Application.csproj.AssemblyReference.cache
+C:\Users\User\Desktop\YayınEviUygulaması\YayinEviApi-last\Core\YayinEviApi.Application\obj\Debug\net8.0\YayinEviApi.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\Desktop\YayınEviUygulaması\YayinEviApi-last\Core\YayinEviApi.Application\obj\Debug\net8.0\YayinEviApi.Application.AssemblyInfoInputs.cache
+C:\Users\User\Desktop\YayınEviUygulaması\YayinEviApi-last\Core\YayinEviApi.Application\obj\Debug\net8.0\YayinEviApi.Application.AssemblyInfo.cs
+C:\Users\User\Desktop\YayınEviUygulaması\YayinEviApi-last\Core\YayinEviApi.Application\obj\Debug\net8.0\YayinEviApi.Application.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\YayınEviUygulaması\YayinEviApi-last\Core\YayinEviApi.Application\obj\Debug\net8.0\YayinEviApi.Application.sourcelink.json
+C:\Users\User\Desktop\YayınEviUygulaması\YayinEviApi-last\Core\YayinEviApi.Application\obj\Debug\net8.0\YayinEvi.6BD2C877.Up2Date
+C:\Users\User\Desktop\YayınEviUygulaması\YayinEviApi-last\Core\YayinEviApi.Application\obj\Debug\net8.0\YayinEviApi.Application.dll
+C:\Users\User\Desktop\YayınEviUygulaması\YayinEviApi-last\Core\YayinEviApi.Application\obj\Debug\net8.0\refint\YayinEviApi.Application.dll
+C:\Users\User\Desktop\YayınEviUygulaması\YayinEviApi-last\Core\YayinEviApi.Application\obj\Debug\net8.0\YayinEviApi.Application.pdb
+C:\Users\User\Desktop\YayınEviUygulaması\YayinEviApi-last\Core\YayinEviApi.Application\obj\Debug\net8.0\ref\YayinEviApi.Application.dll

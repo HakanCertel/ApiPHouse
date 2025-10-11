@@ -1,0 +1,6 @@
+@YayinEviApi.API_HostAddress = http://localhost:5152
+
+GET {{YayinEviApi.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
