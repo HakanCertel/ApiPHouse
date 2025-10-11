@@ -67,7 +67,7 @@ namespace YayinEviApi.Persistence
         {
             //services.AddDbContext<YayinEviApiDbContext>(options => 
             //options.UseSqlServer(@"Server=DESKTOP-DNL1VKI;Database=YayinEviDB;Trusted_Connection=True;TrustServerCertificate=True"));
-            services.AddDbContext<YayinEviApiDbContext>(options => options.UseSqlServer(Configurations.Connectionstring));
+            services.AddDbContext<YayinEviApiDbContext>(options => options.UseNpgsql(Configurations.Connectionstring));
 
             services.AddIdentity<AppUser, AppRole>(options =>
             {
