@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using System.Reflection;
 using System.Security.Claims;
 using System.Text;
 using YayinEviApi.Application;
@@ -28,7 +29,21 @@ builder.Services.AddCors(options=>options.AddDefaultPolicy(policy=>
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+
+    // Geliştirme ortamında çalışıyorsanız Path.Combine kullanın, aksi takdirde
+    // sadece dosya adını kullanmayı deneyin veya yol arama mantığınızı basitleştirin.
+
+    // 1. En sık kullanılan ve güvenli yöntem:
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFilename);
+
+    // Eğer bu hala çalışmazsa, yalnızca dosyayı arayın (Daha az güvenilir ama hızlı test)
+    // var xmlPath = xmlFilename;
+
+    c.IncludeXmlComments(xmlPath, includeControllerXmlComments: true);
+});
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer("Admin", options =>
     {
