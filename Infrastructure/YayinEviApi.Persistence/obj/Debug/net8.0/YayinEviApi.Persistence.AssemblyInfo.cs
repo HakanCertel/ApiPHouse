@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("YayinEviApi.Persistence")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fd7fda1a59a31611aaf729d52ed68a8cd60fd142")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+42e47b02b87a7c6502b540dbfa58054eca539a47")]
 [assembly: System.Reflection.AssemblyProductAttribute("YayinEviApi.Persistence")]
 [assembly: System.Reflection.AssemblyTitleAttribute("YayinEviApi.Persistence")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

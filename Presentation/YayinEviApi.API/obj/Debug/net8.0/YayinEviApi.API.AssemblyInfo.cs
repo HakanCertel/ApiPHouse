@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("YayinEviApi.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+859d20919cb4eee04a3619e6b5f5f72114eeeb5d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+42e47b02b87a7c6502b540dbfa58054eca539a47")]
 [assembly: System.Reflection.AssemblyProductAttribute("YayinEviApi.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("YayinEviApi.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
