@@ -1406,7 +1406,7 @@
     "ContainingType": "YayinEviApi.API.Controllers.ProccessCategoryController",
     "Method": "GetAll",
     "RelativePath": "api/ProccessCategory",
-    "HttpMethod": "",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [],

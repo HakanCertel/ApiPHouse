@@ -36,7 +36,7 @@ namespace YayinEviApi.API.Controllers
             _username = _httpContextAccessor.UserName();
             
         }
-
+        [HttpGet]
         public async Task<IActionResult> GetAll()
         {
 

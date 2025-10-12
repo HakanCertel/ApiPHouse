@@ -67,7 +67,7 @@ namespace YayinEviApi.Persistence
         {
             //services.AddDbContext<YayinEviApiDbContext>(options => 
             //options.UseSqlServer(@"Server=DESKTOP-DNL1VKI;Database=YayinEviDB;Trusted_Connection=True;TrustServerCertificate=True"));
-            services.AddDbContext<YayinEviApiDbContext>(options => options.UseNpgsql(Configurations.Connectionstring));
+            services.AddDbContext<YayinEviApiDbContext>(options => options.UseNpgsql("Host=dpg-d3lcdommcj7s739r24lg-a.oregon-postgres.render.com;Port=5432;Database=phousedb;Username=hakan;Password=lAkHeHFrbGC2CrOygKtGIpwViNn8UfOD;Ssl Mode=Require;Trust Server Certificate=True"));
 
             services.AddIdentity<AppUser, AppRole>(options =>
             {
