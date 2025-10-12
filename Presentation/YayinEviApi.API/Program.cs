@@ -21,7 +21,7 @@ builder.Services.AddSignalRServices();
 
 
 builder.Services.AddCors(options=>options.AddDefaultPolicy(policy=>
-    policy.WithOrigins("http://localhost:4200", "https://localhost:4200").AllowAnyHeader().AllowAnyMethod().AllowCredentials()));
+    policy.WithOrigins("https://publishhouse.netlify.app/", "https://publishhouse.netlify.app/").AllowAnyHeader().AllowAnyMethod().AllowCredentials()));
 // Add services to the container.
 
 
