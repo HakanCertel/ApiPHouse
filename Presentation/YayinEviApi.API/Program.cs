@@ -31,18 +31,17 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
-    var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    // 1. Yayınlanan (Published) .dll dosyasının adını al
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
 
-    // Geliştirme ortamında çalışıyorsanız Path.Combine kullanın, aksi takdirde
-    // sadece dosya adını kullanmayı deneyin veya yol arama mantığınızı basitleştirin.
+    // 2. Uygulamanın çalıştığı mevcut dizin ile XML dosyasını birleştir
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
 
-    // 1. En sık kullanılan ve güvenli yöntem:
-    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFilename);
-
-    // Eğer bu hala çalışmazsa, yalnızca dosyayı arayın (Daha az güvenilir ama hızlı test)
-    // var xmlPath = xmlFilename;
-
-    c.IncludeXmlComments(xmlPath, includeControllerXmlComments: true);
+    // KRİTİK: Dosyanın varlığını kontrol edin ve yoksa uyarıyı atlayın (hata vermez)
+    if (File.Exists(xmlPath))
+    {
+        c.IncludeXmlComments(xmlPath);
+    }
 });
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer("Admin", options =>
