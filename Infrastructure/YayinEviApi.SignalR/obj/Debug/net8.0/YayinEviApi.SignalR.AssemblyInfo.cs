@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("YayinEviApi.SignalR")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7475933f25781d8cad30884722341a79c9964117")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8c6ed99a0574af3bae23fdfd8de4d9df1f4ca3cd")]
 [assembly: System.Reflection.AssemblyProductAttribute("YayinEviApi.SignalR")]
 [assembly: System.Reflection.AssemblyTitleAttribute("YayinEviApi.SignalR")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

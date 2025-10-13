@@ -9,7 +9,10 @@ wwwroot\resorce\author-File\Brown-Simple-Illustration-Florist-Logo.png
 wwwroot\resorce\author-File\Cream-Black-Typography-Loop-Brand-Logo.png
 wwwroot\resorce\author-File\Cream-Minimalist-Oval-Floral-Handmade-Candle-Business-Logo.png
 wwwroot\resorce\author-File\Cute-Anime-Cartoon-Illustration-Girl-Avatar.png
+wwwroot\resorce\author-File\Cute-Anime-Illustration-Boy-Avatar.png
 wwwroot\resorce\author-File\Dark-Green-Luxury-Real-Estate-Logo.png
+wwwroot\resorce\author-File\Kirmizi-Bej-Klasik-Kus-Fotografi-Kitap-Kapagi.png
+wwwroot\resorce\author-File\Mor-ve-Pembe-Sade-Doga-Romantik-Kitap-Kapagi.png
 wwwroot\resorce\author-File\Mor-ve-Sari-illustrasyon-Wattpad-Kitap-Kapagi.png
 wwwroot\resorce\author-File\personavatarcircleicon.png
 wwwroot\resorce\author-File\Pink-and-Orange-Playful-Anime-Girl-Avatar--.png

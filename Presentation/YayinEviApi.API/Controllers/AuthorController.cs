@@ -123,7 +123,9 @@ namespace YayinEviApi.API.Controllers
                 PhoneNumber = author.PhoneNumber,
                 Gender = author.Gender.GetEnum<Gender>(),
                 UpdatingUserId=_user.UserId,
-                CreatingUserId=author.CreatingUserId
+                CreatingUserId=author.CreatingUserId,
+                CreatedDate=author.CreatedDate,
+                UpdatedDate=DateTime.Now,
             });
             await _authorWriteRepository.SaveAsync();
 
@@ -204,6 +206,12 @@ namespace YayinEviApi.API.Controllers
         {
             ChangeShowcaseImageCommandResponse response = await _mediator.Send(changeShowcaseImageCommandRequest);
             return Ok(response);
+        }
+        public async Task<IActionResult> DeleteFile(string id)
+        {
+            await _authorFileWriteRepository.RemoveAsync(id);
+            await _authorFileWriteRepository.SaveAsync();
+            return Ok();
         }
     }
 }

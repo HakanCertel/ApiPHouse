@@ -282,6 +282,22 @@
   },
   {
     "ContainingType": "YayinEviApi.API.Controllers.AuthorController",
+    "Method": "DeleteFile",
+    "RelativePath": "api/Author",
+    "HttpMethod": "",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "YayinEviApi.API.Controllers.AuthorController",
     "Method": "Delete",
     "RelativePath": "api/Author/{Id}",
     "HttpMethod": "DELETE",
