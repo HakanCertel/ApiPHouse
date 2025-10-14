@@ -959,7 +959,7 @@
     "Parameters": [
       {
         "Name": "createWorktype",
-        "Type": "YayinEviApi.API.Controllers.CreateWorkType",
+        "Type": "YayinEviApi.Application.DTOs.HelperEntityDtos.WorkTypeDto",
         "IsRequired": true
       }
     ],
@@ -975,7 +975,7 @@
     "Parameters": [
       {
         "Name": "createWorkCategory",
-        "Type": "YayinEviApi.API.Controllers.CreateWorkCategory",
+        "Type": "YayinEviApi.Application.DTOs.HelperEntityDtos.WorkCategoryDto",
         "IsRequired": true
       }
     ],
@@ -3344,7 +3344,7 @@
   },
   {
     "ContainingType": "YayinEviApi.API.Controllers.WorkCategoryController",
-    "Method": "CretaeWorkCategory",
+    "Method": "Add",
     "RelativePath": "api/WorkCategory",
     "HttpMethod": "POST",
     "IsController": true,
@@ -3352,7 +3352,7 @@
     "Parameters": [
       {
         "Name": "createWorkCategory",
-        "Type": "YayinEviApi.API.Controllers.CreateWorkCategory",
+        "Type": "YayinEviApi.Application.DTOs.HelperEntityDtos.WorkCategoryDto",
         "IsRequired": true
       }
     ],
@@ -3360,12 +3360,60 @@
   },
   {
     "ContainingType": "YayinEviApi.API.Controllers.WorkCategoryController",
-    "Method": "GetAllWorkCategory",
+    "Method": "Edit",
+    "RelativePath": "api/WorkCategory",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "workCategory",
+        "Type": "YayinEviApi.Application.DTOs.HelperEntityDtos.WorkCategoryDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "YayinEviApi.API.Controllers.WorkCategoryController",
+    "Method": "GetAll",
     "RelativePath": "api/WorkCategory",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "YayinEviApi.API.Controllers.WorkCategoryController",
+    "Method": "Delete",
+    "RelativePath": "api/WorkCategory/{Id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "YayinEviApi.API.Controllers.WorkCategoryController",
+    "Method": "GetById",
+    "RelativePath": "api/WorkCategory/GetById/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   },
   {
@@ -3625,7 +3673,7 @@
   },
   {
     "ContainingType": "YayinEviApi.API.Controllers.WorkTypeController",
-    "Method": "GetWorkType",
+    "Method": "GetAll",
     "RelativePath": "api/WorkType",
     "HttpMethod": "GET",
     "IsController": true,
@@ -3635,7 +3683,7 @@
   },
   {
     "ContainingType": "YayinEviApi.API.Controllers.WorkTypeController",
-    "Method": "CretaeWorkType",
+    "Method": "Add",
     "RelativePath": "api/WorkType",
     "HttpMethod": "POST",
     "IsController": true,
@@ -3643,7 +3691,55 @@
     "Parameters": [
       {
         "Name": "createWorktype",
-        "Type": "YayinEviApi.API.Controllers.CreateWorkType",
+        "Type": "YayinEviApi.Application.DTOs.HelperEntityDtos.WorkTypeDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "YayinEviApi.API.Controllers.WorkTypeController",
+    "Method": "Edit",
+    "RelativePath": "api/WorkType",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "workType",
+        "Type": "YayinEviApi.Application.DTOs.HelperEntityDtos.WorkTypeDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "YayinEviApi.API.Controllers.WorkTypeController",
+    "Method": "Delete",
+    "RelativePath": "api/WorkType/{Id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "YayinEviApi.API.Controllers.WorkTypeController",
+    "Method": "GetById",
+    "RelativePath": "api/WorkType/GetById/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
         "IsRequired": true
       }
     ],

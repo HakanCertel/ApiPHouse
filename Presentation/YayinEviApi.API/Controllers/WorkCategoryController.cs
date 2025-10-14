@@ -1,49 +1,80 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
+using YayinEviApi.Application.Abstractions.Services;
 using YayinEviApi.Application.DTOs.HelperEntityDtos;
+using YayinEviApi.Application.DTOs.User;
 using YayinEviApi.Application.Repositories.IHelperEntitiesR.IWorkCategoryR;
 
 namespace YayinEviApi.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize(AuthenticationSchemes = "Admin")]
+    [Authorize(AuthenticationSchemes = "Admin")]
     public class WorkCategoryController : ControllerBase
     {
+        private IUserService _userService;
+        readonly CreateUser _user;
         readonly IWorkCategoryWriteRepository _workCategoryWriteRepository;
         readonly IWorkCategoryReadRepository _workCategoryReadRepository;
 
-        public WorkCategoryController(IWorkCategoryWriteRepository workCategoryWriteRepository, IWorkCategoryReadRepository workCategoryReadRepository)
+        public WorkCategoryController(IWorkCategoryWriteRepository workCategoryWriteRepository, IWorkCategoryReadRepository workCategoryReadRepository, IUserService userService)
         {
             _workCategoryWriteRepository = workCategoryWriteRepository;
             _workCategoryReadRepository = workCategoryReadRepository;
+            _userService = userService;
+            _user = _userService.GetUser().Result;
         }
 
         [HttpPost()]
-        public async Task<IActionResult> CretaeWorkCategory(CreateWorkCategory createWorkCategory)
+        public async Task<IActionResult> Add(WorkCategoryDto createWorkCategory)
         {
             await _workCategoryWriteRepository.AddAsync(new()
             {
-                WorkTypeId = createWorkCategory.WorkTypeId,
-                Code = createWorkCategory.Code,
-                Name = createWorkCategory.Name,
+                Code = createWorkCategory.CategoryCode,
+                Name = createWorkCategory.CategoryName,
                 Description = createWorkCategory.Description,
+                IsActive=true,
+                CreatingUserId=_user.UserId,
             });
             await _workCategoryWriteRepository.SaveAsync();
 
             return StatusCode((int)HttpStatusCode.Created);
         }
-        
-        [HttpGet()]
-        public async Task<IActionResult> GetAllWorkCategory()
+        [HttpPut]
+        public async Task<IActionResult> Edit(WorkCategoryDto workCategory)
         {
-            var work = _workCategoryReadRepository.Select(null,x=>new WorkCategoryL
+
+            _workCategoryWriteRepository.Update(new()
+            {
+                Id = Guid.Parse(workCategory.CategoryId),
+                Code = workCategory.CategoryCode,
+                Name = workCategory.CategoryName,
+                IsActive = workCategory.IsActive,
+                CreatingUserId=workCategory.CreatingUserId,
+                UpdatingUserId = _user.UserId,
+            });
+            await _workCategoryWriteRepository.SaveAsync();
+
+            return StatusCode((int)HttpStatusCode.Created);
+
+        }
+
+        [HttpDelete("{Id}")]
+        [Authorize(AuthenticationSchemes = "Admin")]
+        public async Task<IActionResult> Delete(string id)
+        {
+            await _workCategoryWriteRepository.RemoveAsync(id);
+            await _workCategoryWriteRepository.SaveAsync();
+            return Ok();
+        }
+
+        [HttpGet()]
+        public async Task<IActionResult> GetAll()
+        {
+            var work = _workCategoryReadRepository.Select(null,x=>new WorkCategoryDto
             {
                 CategoryId=x.Id.ToString(),
-                WorkTypeId = x.WorkTypeId.ToString(),
-                WorkTypeName=x.WorkType.TypeName,
                 CategoryCode=x.Code,
                 CategoryName = x.Name,
                 Description = x.Description,
@@ -51,16 +82,22 @@ namespace YayinEviApi.API.Controllers
             }).ToList();
             return Ok(work);
         }
-    }
 
+        [HttpGet("[action]/{id}")]
+        [Authorize(AuthenticationSchemes = "Admin")]
+        public async Task<IActionResult> GetById(string id)
+        {
+            var workCategory = await _workCategoryReadRepository.GetByIdAsync(id);
+            var newWorkCategory = new WorkCategoryDto
+            {
+                CategoryId = workCategory.Id.ToString(),
+                CategoryCode = workCategory.Code ?? "",
+                CategoryName = workCategory.Name ?? "",
+                IsActive = workCategory.IsActive,
+            };
 
-    public class CreateWorkCategory
-    {
-        public Guid WorkTypeId { get; set; }
-        public string Code { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-
+            return Ok(newWorkCategory);
+        }
     }
 
 }

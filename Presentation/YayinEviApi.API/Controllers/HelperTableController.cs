@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
+using YayinEviApi.Application.DTOs.HelperEntityDtos;
 using YayinEviApi.Application.Features.Commands.Product.CreateProduct;
 using YayinEviApi.Application.Repositories;
 using YayinEviApi.Application.Repositories.IHelperEntitiesR.IWorkCategoryR;
@@ -31,7 +32,7 @@ namespace YayinEviApi.API.Controllers
             return Ok(work);
         }
         [HttpPost("cwt")]
-        public async Task<IActionResult> CretaeWorkType(CreateWorkType createWorktype)
+        public async Task<IActionResult> CretaeWorkType(WorkTypeDto createWorktype)
         {
             await _workTypeWriteRepository.AddAsync(new()
             {
@@ -44,13 +45,13 @@ namespace YayinEviApi.API.Controllers
             return StatusCode((int)HttpStatusCode.Created);
         }
         [HttpPost("wc")]
-        public async Task<IActionResult> CretaeWorkCategory(CreateWorkCategory createWorkCategory)
+        public async Task<IActionResult> CretaeWorkCategory(WorkCategoryDto createWorkCategory)
         {
             await _workCategoryWriteRepository.AddAsync(new()
             {
-                WorkTypeId=createWorkCategory.WorkTypeId,
-                Code = createWorkCategory.Code,
-                Name = createWorkCategory.Name,
+                //WorkTypeId=createWorkCategory.WorkTypeId,
+                //Code = createWorkCategory.Code,
+                //Name = createWorkCategory.Name,
                 Description = createWorkCategory.Description,
             });
             await _workTypeWriteRepository.SaveAsync();

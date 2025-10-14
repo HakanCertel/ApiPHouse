@@ -29,6 +29,7 @@ namespace YayinEviApi.API.Controllers
             {
                 Code = department.Code,
                 Name = department.Name,
+                IsActive=true,
 
             });
             await _departmentWriteRepository.SaveAsync();
@@ -43,8 +44,9 @@ namespace YayinEviApi.API.Controllers
                 Id =Guid.Parse( department.Id.ToString()),
                 Code = department.Code,
                 Name = department.Name,
-               // CreatedDate=(DateTime)department.CreatedDate,
-                //UpdatedDate=(DateTime)department.UpdatedDate,
+                IsActive = department.IsActive,
+                CreatedDate =Convert.ToDateTime( department.CreatedDate),
+                UpdatedDate =DateTime.Now,
             });
             await _departmentWriteRepository.SaveAsync();
 
@@ -68,6 +70,7 @@ namespace YayinEviApi.API.Controllers
                 Id = x.Id.ToString(),
                 Name = x.Name,
                 Code = x.Code,
+                IsActive = x.IsActive,
                 CreatedDate = x.CreatedDate,
                 UpdatedDate = x.UpdatedDate,
             }).ToList();
@@ -84,6 +87,7 @@ namespace YayinEviApi.API.Controllers
                 Id = department.Id.ToString(),
                 Code = department.Code ?? "",
                 Name = department.Name ?? "",
+                IsActive = department.IsActive,
             };
 
             return Ok(newDepartment);

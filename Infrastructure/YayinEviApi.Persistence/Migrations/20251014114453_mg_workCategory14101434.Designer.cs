@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using YayinEviApi.Persistence.Contexts;
@@ -11,9 +12,11 @@ using YayinEviApi.Persistence.Contexts;
 namespace YayinEviApi.Persistence.Migrations
 {
     [DbContext(typeof(YayinEviApiDbContext))]
-    partial class YayinEviApiDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251014114453_mg_workCategory14101434")]
+    partial class mg_workCategory14101434
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -967,33 +970,25 @@ namespace YayinEviApi.Persistence.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("CreatingUserId")
-                        .HasColumnType("text");
-
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("boolean");
 
                     b.Property<string>("TypeCode")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("TypeName")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("UpdatingUserId")
-                        .HasColumnType("text");
-
-                    b.Property<Guid>("WorkCategoryId")
-                        .HasColumnType("uuid");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("WorkCategoryId");
 
                     b.ToTable("WorkTypes");
                 });
@@ -2883,17 +2878,6 @@ namespace YayinEviApi.Persistence.Migrations
                         .HasForeignKey("ProccessCategoryId");
 
                     b.Navigation("ProccessCategory");
-                });
-
-            modelBuilder.Entity("YayinEviApi.Domain.Entities.HelperEntities.WorkType", b =>
-                {
-                    b.HasOne("YayinEviApi.Domain.Entities.HelperEntities.WorkCategory", "WorkCategory")
-                        .WithMany()
-                        .HasForeignKey("WorkCategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("WorkCategory");
                 });
 
             modelBuilder.Entity("YayinEviApi.Domain.Entities.Identity.AppUser", b =>

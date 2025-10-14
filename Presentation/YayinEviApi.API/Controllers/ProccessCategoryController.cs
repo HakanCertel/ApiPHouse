@@ -45,6 +45,7 @@ namespace YayinEviApi.API.Controllers
                 Id = x.Id.ToString(),
                 Name = x.Name,
                 Code = x.Code,
+                IsActive=x.IsActive,
                 CreatedDate = x.CreatedDate,
                 UpdatedDate = x.UpdatedDate,
                 CreatingUserId=x.CreatingUserId,
@@ -65,6 +66,7 @@ namespace YayinEviApi.API.Controllers
                 Id = proccessCategory.Id.ToString(),
                 Code = proccessCategory.Code ?? "",
                 Name = proccessCategory.Name ?? "",
+                IsActive= proccessCategory.IsActive,
             };
 
             return Ok(newProccessCategory);
@@ -79,6 +81,7 @@ namespace YayinEviApi.API.Controllers
             {
                 Code = proccessCategory.Code,
                 Name = proccessCategory.Name,
+                IsActive= proccessCategory.IsActive,
                 CreatingUserId=user?.Id,
             });
             await _proccessCategoryWriteRepository.SaveAsync();
@@ -95,6 +98,7 @@ namespace YayinEviApi.API.Controllers
                 Id =Guid.Parse(proccessCategory.Id),
                 Code = proccessCategory.Code,
                 Name = proccessCategory.Name,
+                IsActive= proccessCategory.IsActive,
                 UpdatingUserId=user.Id
             });
             await _proccessCategoryWriteRepository.SaveAsync();
