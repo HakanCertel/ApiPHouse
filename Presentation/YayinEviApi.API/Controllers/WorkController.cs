@@ -5,9 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Net;
 using YayinEviApi.Application.Abstractions.Storage;
-using YayinEviApi.Application.DTOs.HelperEntityDtos;
 using YayinEviApi.Application.DTOs.WorkDtos;
-using YayinEviApi.Application.Features.Commands.ProductImageFile.RemoveProductImage;
 using YayinEviApi.Application.Features.Commands.WorkFiles.ChangeShowcaseImage;
 using YayinEviApi.Application.Features.Commands.WorkFiles.RemoveWorkFile;
 using YayinEviApi.Application.Features.Queries.GetWorkFiles.GetWorkImages;
@@ -17,12 +15,11 @@ using YayinEviApi.Application.RequestParameters;
 using YayinEviApi.Domain.Entities;
 using YayinEviApi.Domain.Entities.Identity;
 using YayinEviApi.Domain.Entities.WorkE;
-using Microsoft.EntityFrameworkCore;
 namespace YayinEviApi.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize(AuthenticationSchemes = "Admin")]
+    [Authorize(AuthenticationSchemes = "Admin")]
     public class WorkController : ControllerBase
     {
         readonly IWorkReadRepository _workReadRepository;
@@ -70,18 +67,7 @@ namespace YayinEviApi.API.Controllers
                 CategoryName=x.Category.Name,
                 CertificateNumber=x.CertificateNumber,
                 Description=x.Description,
-                FirstPrintingDate=x.FirstPrintingDate,
                 ISBN=x.isbn,
-                LastPrintingQuantity=x.LastPrintingQuantity,
-                LasttPrintingDate=x.LasttPrintingDate,
-                PrintingHouse=x.PrintingHouse.ToString(),
-                ProjectName=x.ProjectName.ToString(),
-                StockQuantity=x.StockQuantity,
-                NameTranslating=x.NameTranslating,
-                NameDrawing=x.NameDrawing,
-                NameReading=x.NameReading,
-                NameReducting=x.NameReducting,
-                NameTypeSetting=x.NameTypeSetting,
                 WorkOrginalName=x.WorkOrginalName,
                 CreatedDate = x.CreatedDate,
                 Language = x.Language,
@@ -111,18 +97,7 @@ namespace YayinEviApi.API.Controllers
                 CategoryName=x.Category.Name,
                 CertificateNumber = x.CertificateNumber,
                 Description = x.Description,
-                FirstPrintingDate = x.FirstPrintingDate,
                 ISBN = x.isbn,
-                LastPrintingQuantity = x.LastPrintingQuantity,
-                LasttPrintingDate = x.LasttPrintingDate,
-                PrintingHouse = x.PrintingHouse.ToString(),
-                ProjectName = x.ProjectName,
-                StockQuantity = x.StockQuantity,
-                NameTranslating = x.NameTranslating,
-                NameDrawing = x.NameDrawing,
-                NameReading = x.NameReading,
-                NameReducting = x.NameReducting,
-                NameTypeSetting = x.NameTypeSetting,
                 WorkOrginalName = x.WorkOrginalName,
                 Language = x.Language,
                 Subject = x.Subject,
@@ -147,17 +122,6 @@ namespace YayinEviApi.API.Controllers
                 CertificateNumber = works.CertificateNumber,
                 Description = works.Description,
                 isbn = works.ISBN,
-                FirstPrintingDate = works.FirstPrintingDate,
-                LasttPrintingDate = works.LasttPrintingDate,
-                LastPrintingQuantity = works.LastPrintingQuantity,
-                PrintingHouse = null,
-                ProjectName = works.ProjectName,
-                StockQuantity = works.StockQuantity,
-                NameTranslating = works.NameTranslating,
-                NameDrawing = works.NameDrawing,
-                NameReading = works.NameReading,
-                NameReducting = works.NameReducting,
-                NameTypeSetting = works.NameTypeSetting,
                 WorkOrginalName = works.WorkOrginalName,
                 Language = works.Language,
             };
@@ -186,18 +150,7 @@ namespace YayinEviApi.API.Controllers
                 CertificateNumber = work.CertificateNumber,
                 Description = work.Description,
                 Subject=work.Subject,
-                FirstPrintingDate = work.FirstPrintingDate,
                 isbn = work.ISBN,
-                LastPrintingQuantity =Convert.ToInt32( work.LastPrintingQuantity),
-                LasttPrintingDate = work.LasttPrintingDate,
-                PrintingHouse =null,//Guid.Parse( work.PrintingHouse),
-                ProjectName =work.ProjectName,//Guid.Parse( work.ProjectId),
-                StockQuantity = Convert.ToInt32(work.StockQuantity),
-                NameTranslating = work.NameTranslating,
-                NameDrawing = work.NameDrawing,
-                NameReading = work.NameReading,
-                NameReducting = work.NameReducting,
-                NameTypeSetting = work.NameTypeSetting,
                 WorkOrginalName = work.WorkOrginalName,
                 Language = work.Language,
             });

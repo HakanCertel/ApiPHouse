@@ -53,12 +53,15 @@ namespace YayinEviApi.API.Controllers
             var authorss = _authorReadRepository.Table.Select(x => new
             {
                 author = x,
+                agency=x.Agency,
                 creatingUsername = _userService.GetUser(x.CreatingUserId).Result.NameSurname,
                 updatingUsername = _userService.GetUser(x.UpdatingUserId).Result.NameSurname,
             }).Select(x => new AuthorS
             {
                 Id = x.author.Id.ToString(),
                 Name = x.author.Name,
+                AgencyId= x.author.AgencyId.ToString(),
+                AgencyName=x.agency.Name,
                 Address = x.author.Address,
                 Code = x.author.Code,
                 Email = x.author.Email,
@@ -173,7 +176,9 @@ namespace YayinEviApi.API.Controllers
             //var datas = await _storageService.UploadAsync("files", Request.Form.Files); AZURE için
             //var datas = await _fileService.UploadAsync("resorce/product-images", Request.Form.Files);
 
-            var datas = await _storageService.UploadAsync($@"resorce\author-File", Request.Form.Files);
+            var datas = await _storageService.UploadCloudAsync($@"resorce\author-File", Request.Form.Files);
+
+            //var datas = await _storageService.UploadCloudAsync($@"/app/uploads/author", Request.Form.Files);
 
             Author author = await _authorReadRepository.GetByIdAsync(id);
            

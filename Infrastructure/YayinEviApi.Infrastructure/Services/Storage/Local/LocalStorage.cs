@@ -74,6 +74,34 @@ namespace YayinEviApi.Infrastructure.Services.Storage.Local
           
             return datas;
         }
+
+        public async Task<List<(string filename, string pathOrContainerName)>> UploadCloudAsync(string path, IFormFileCollection fileCollection)
+        {
+            string uploadPath = Path.Combine(_webHostEnvironment.ContentRootPath, path);
+
+            if (Directory.Exists(uploadPath))
+            {
+                Directory.CreateDirectory(uploadPath);
+            }
+
+            List<(string filename, string path)> datas = new();
+
+            foreach (IFormFile file in fileCollection)
+            {
+
+                //string fileNewName=await FileRenameAsync(file.FileName);
+                //todo FileReNameAsync metodu aynı isimde olan fosyalar için 1,2,3 olarak sıralamıyor
+                string fileNewName = await FileRenameAsync(path, file.Name, hasFile);
+
+
+                await CopyFileAsync($"{uploadPath}\\{fileNewName}", file);
+
+                datas.Add((fileNewName, $"{path}\\{fileNewName}"));
+
+            }
+
+            return datas;
+        }
         async Task<bool> CopyFileAsync(string filePath, IFormFile file)
         {
             try

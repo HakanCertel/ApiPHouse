@@ -71,7 +71,7 @@ namespace YayinEviApi.API.Controllers
                 Town=x.Town,
                 CreatedDate = x.CreatedDate,
                 UpdatedDate = x.UpdatedDate,
-                AgencyFiles = x.AgencyFiles,
+                AgencyFiles = x.AgencyFiles.ToList(),
             }).Select(x => x).Skip(pagination.Page * pagination.Size).Take(pagination.Size).ToList();
             
             return Ok(new { totalAgencyCount, agency });
@@ -95,7 +95,7 @@ namespace YayinEviApi.API.Controllers
                 Country = x.Country,
                 LocalOrForeing = x.LocalOrForeing != null ? x.LocalOrForeing.toName() : "",
                 State = x.State != null ? x.State.toName() : "",
-                AgencyFiles = x.AgencyFiles,
+                AgencyFiles = x.AgencyFiles.ToList(),
                 Mail=x.Mail,
                 PhoneNumber_1=x.PhoneNumber_1,
                 PhoneNumber_2=x.PhoneNumber_2,

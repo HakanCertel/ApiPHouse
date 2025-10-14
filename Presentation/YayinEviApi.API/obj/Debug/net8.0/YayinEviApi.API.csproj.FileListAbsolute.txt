@@ -207,7 +207,6 @@ C:\Users\User\Documents\GitHub\ApiPHouse\Presentation\YayinEviApi.API\obj\Debug\
 C:\Users\User\Documents\GitHub\ApiPHouse\Presentation\YayinEviApi.API\obj\Debug\net8.0\YayinEviApi.API.AssemblyInfoInputs.cache
 C:\Users\User\Documents\GitHub\ApiPHouse\Presentation\YayinEviApi.API\obj\Debug\net8.0\YayinEviApi.API.AssemblyInfo.cs
 C:\Users\User\Documents\GitHub\ApiPHouse\Presentation\YayinEviApi.API\obj\Debug\net8.0\YayinEviApi.API.csproj.CoreCompileInputs.cache
-C:\Users\User\Documents\GitHub\ApiPHouse\Presentation\YayinEviApi.API\obj\Debug\net8.0\YayinEviApi.API.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\User\Documents\GitHub\ApiPHouse\Presentation\YayinEviApi.API\obj\Debug\net8.0\YayinEviApi.API.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\User\Documents\GitHub\ApiPHouse\Presentation\YayinEviApi.API\obj\Debug\net8.0\YayinEviApi.API.sourcelink.json
 C:\Users\User\Documents\GitHub\ApiPHouse\Presentation\YayinEviApi.API\obj\Debug\net8.0\scopedcss\bundle\YayinEviApi.API.styles.css

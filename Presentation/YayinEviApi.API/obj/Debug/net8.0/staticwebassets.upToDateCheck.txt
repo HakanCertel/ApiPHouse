@@ -5,6 +5,7 @@ wwwroot\resorce\author-File\Black-And-White-Modern-Typographic-Simple-Virus-Appa
 wwwroot\resorce\author-File\Black-Beige-Vintage-Illustration-Mermaid-Restaurant-Logo.png
 wwwroot\resorce\author-File\Black-White-Minimalist-Professional-Initial-Logo.png
 wwwroot\resorce\author-File\Blue-and-White-Illustrated-Fairy-Tales-Book-Cover.png
+wwwroot\resorce\author-File\Blue-Green-Illustrative-Magic-World-Kids-Book-Cover--1.png
 wwwroot\resorce\author-File\Brown-Simple-Illustration-Florist-Logo.png
 wwwroot\resorce\author-File\Cream-Black-Typography-Loop-Brand-Logo.png
 wwwroot\resorce\author-File\Cream-Minimalist-Oval-Floral-Handmade-Candle-Business-Logo.png
@@ -14,6 +15,7 @@ wwwroot\resorce\author-File\Dark-Green-Luxury-Real-Estate-Logo.png
 wwwroot\resorce\author-File\Kirmizi-Bej-Klasik-Kus-Fotografi-Kitap-Kapagi.png
 wwwroot\resorce\author-File\Mor-ve-Pembe-Sade-Doga-Romantik-Kitap-Kapagi.png
 wwwroot\resorce\author-File\Mor-ve-Sari-illustrasyon-Wattpad-Kitap-Kapagi.png
+wwwroot\resorce\author-File\penguen.jpg
 wwwroot\resorce\author-File\personavatarcircleicon.png
 wwwroot\resorce\author-File\Pink-and-Orange-Playful-Anime-Girl-Avatar--.png
 wwwroot\resorce\author-File\plusroundicon.png
@@ -48,12 +50,15 @@ wwwroot\resorce\work-images\Bej-Tonlu-Minimal-Kitap-Kapagi.png
 wwwroot\resorce\work-images\Beyaz-Minimalist-Dugun-Ani-Defteri-Kapak-Tasarimi.png
 wwwroot\resorce\work-images\Black-and-Grey-Dark-Forest-Aesthetic-Book-Cover.png
 wwwroot\resorce\work-images\Black-And-White-Modern-Typographic-Simple-Virus-Apparel-Logo.png
+wwwroot\resorce\work-images\Black-Beige-Vintage-Illustration-Mermaid-Restaurant-Logo.png
 wwwroot\resorce\work-images\Blue-and-White-Illustrated-Fairy-Tales-Book-Cover.png
 wwwroot\resorce\work-images\Blue-Green-Illustrative-Magic-World-Kids-Book-Cover-.png
 wwwroot\resorce\work-images\Blue-Green-Illustrative-Magic-World-Kids-Book-Cover--1.png
+wwwroot\resorce\work-images\Brown-Simple-Illustration-Florist-Logo.png
 wwwroot\resorce\work-images\closecircledicon.png
 wwwroot\resorce\work-images\Cream-Black-Typography-Loop-Brand-Logo.png
 wwwroot\resorce\work-images\Cream-Minimalist-Oval-Floral-Handmade-Candle-Business-Logo.png
+wwwroot\resorce\work-images\Cute-Anime-Cartoon-Illustration-Girl-Avatar.png
 wwwroot\resorce\work-images\Dark-Green-Luxury-Real-Estate-Logo.png
 wwwroot\resorce\work-images\Green-and-Blue-Watercolor-Childrens-Book-Cover.png
 wwwroot\resorce\work-images\IMG20250610064904.jpg

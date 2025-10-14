@@ -33,5 +33,7 @@ namespace YayinEviApi.Infrastructure.Services.Storage
 
         public Task<List<(string filename, string pathOrContainerName)>> UploadAsync(string pathOrContainerName, IFormFileCollection fileCollection)
             =>_storage.UploadAsync(pathOrContainerName, fileCollection);
+        public Task<List<(string filename, string pathOrContainerName)>> UploadCloudAsync(string pathOrContainerName, IFormFileCollection fileCollection)
+            => _storage.UploadAsync(pathOrContainerName, fileCollection);
     }
 }

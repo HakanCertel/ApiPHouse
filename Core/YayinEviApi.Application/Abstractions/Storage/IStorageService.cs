@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace YayinEviApi.Application.Abstractions.Storage
 {
-    public interface IStorageService:IStorage
+    public interface IStorageService:IStorage,ICloudStorage
     {
         public string StorageName { get; }
     }

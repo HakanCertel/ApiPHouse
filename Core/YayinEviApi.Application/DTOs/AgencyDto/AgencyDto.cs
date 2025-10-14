@@ -29,7 +29,7 @@ namespace YayinEviApi.Application.DTOs.AgencyDto
         public string? WebSite { get; set; }
         public DateTime? CreatedDate { get; set; }
         public DateTime? UpdatedDate { get; set; }
-        public ICollection<AgencyFile>? AgencyFiles { get; set; }
+        public List<AgencyFile>? AgencyFiles { get; set; }
 
     }
     public class AgencyDetail 
