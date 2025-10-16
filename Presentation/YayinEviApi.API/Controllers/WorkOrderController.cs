@@ -53,10 +53,10 @@ namespace YayinEviApi.API.Controllers
             _userManager = userManager;
             _workOrderMessagesWriteRepository = workOrderMessagesWriteRepository;
             _workOrderMessagesReadRepository = workOrderMessagesReadRepository;
+            _hubMessageWriteRepository = hubMessageWriteRepository;
 
             _user = _userService.GetUser().Result;
             _user.ImagePath = _fileManagementReadRepository.FindAsync(x => x.EntityId == _user.UserId && x.IsActive, x => x).Result.Path;
-            _hubMessageWriteRepository = hubMessageWriteRepository;
         }
 
         [HttpGet]
