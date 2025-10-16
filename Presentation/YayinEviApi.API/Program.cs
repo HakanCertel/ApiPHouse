@@ -12,6 +12,8 @@ using YayinEviApi.SignalR;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddHttpContextAccessor();//Client'tan gelen request neticvesinde oluþturulan HttpContext nesnesine katmanlardaki class'lar üzerinden(busineess logic) eriþebilmemizi saðlayan bir servistir.
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);//uygulama genelinde paylaşılan anahtarları ve değerleri yönetmeyi sağlar. bu radaki kullanım amacı postgreSql ' datetime kayıtlarının yapılabilmesini sağlamaktır. daha sonra bu yapı tüm kontrollerdaki datetime ları utc'ye çevrilerek giderilecektir
+
 builder.Services.AddPersistenceServices();
 builder.Services.AddInfrastructureServices();
 builder.Services.AddApplicationServices();
