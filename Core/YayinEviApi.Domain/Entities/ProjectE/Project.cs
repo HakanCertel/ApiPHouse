@@ -9,14 +9,12 @@ namespace YayinEviApi.Domain.Entities.ProjectE
     public class Project:BaseEntity
     {
         public string Code { get; set; }
-        public Guid? AgencyId { get; set; }
-        public Guid WorkId { get; set; }
+        public Guid? WorkId { get; set; }
         public State State { get; set; }=State.Waiting;
-        public DateTime? ContractStartDate { get; set; }
-        public DateTime? ContractFinishDate { get; set; }
-        public decimal? ContractPrice { get; set; }
-
-        public Agency Agency { get; set; }
+        public string? Description { get; set; }
+        public string CreatingUserId { get; set; }
+        public string? UpdatingUserId { get; set; }
+       
         public Work Work { get; set; }
         public ICollection<WorkOrder> WorkOrders { get; set; }
 

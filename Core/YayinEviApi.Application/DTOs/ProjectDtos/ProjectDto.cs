@@ -40,6 +40,8 @@ namespace YayinEviApi.Application.DTOs.ProjectDtos
         public int StockQuantity { get; set; }
         public string? Description { get; set; }
         public string? Subject { get; set; }
+        public string? CreatingUserId { get; set; }
+        public string? UpdatingUserId { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
     }
