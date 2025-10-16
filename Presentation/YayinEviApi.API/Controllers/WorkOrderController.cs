@@ -56,7 +56,7 @@ namespace YayinEviApi.API.Controllers
             _hubMessageWriteRepository = hubMessageWriteRepository;
 
             _user = _userService.GetUser().Result;
-            _user.ImagePath = _fileManagementReadRepository.FindAsync(x => x.EntityId == _user.UserId && x.IsActive, x => x).Result.Path;
+            //_user.ImagePath = _fileManagementReadRepository.FindAsync(x => x.EntityId == _user.UserId && x.IsActive, x => x).Result?.Path;
         }
 
         [HttpGet]
@@ -192,6 +192,7 @@ namespace YayinEviApi.API.Controllers
         [HttpGet("[action]/{id}")]
         public async Task<IActionResult> GetById(string id)
         {
+            _user.ImagePath = _fileManagementReadRepository.FindAsync(x => x.EntityId == _user.UserId && x.IsActive, x => x).Result?.Path;
             var wo =await _workOrderReadRepository.Table.Select( x => new
             {
                 wo = x,
