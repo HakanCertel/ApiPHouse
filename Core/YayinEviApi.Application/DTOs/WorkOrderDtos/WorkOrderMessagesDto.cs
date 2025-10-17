@@ -10,7 +10,7 @@
         public string? Email { get; set; }
         public string? Department { get; set; }
         public string? ImagePath { get; set; }
-        public string Messages { get; set; }
+        public string? Messages { get; set; }
         public DateTime? CreatedDate { get; set; }
     }
 }

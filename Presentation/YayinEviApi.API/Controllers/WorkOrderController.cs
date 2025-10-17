@@ -178,7 +178,7 @@ namespace YayinEviApi.API.Controllers
         public async Task<IActionResult> GetById(string id)
         {
             _user.ImagePath = _fileManagementReadRepository.FindAsync(x => x.EntityId == _user.UserId && x.IsActive, x => x).Result?.Path;
-            var wo =await _workOrderReadRepository.Table.Select( x => new
+            var wo = await _workOrderReadRepository.Table.Select(x => new
             {
                 wo = x,
                 prj = x.Project,
@@ -186,19 +186,20 @@ namespace YayinEviApi.API.Controllers
                 path = x.Project.Work.PublishFiles.FirstOrDefault(p => p.Showcase).Path,
                 prc = x.Proccess,
                 assignedUsers = x.WorkAssignedUsers,
-                messages=x.WorkOrderMessages
-               
+                messages = x.WorkOrderMessages
+
             }).Select(x => new WorkOrderDto
             {
                 Id = x.wo.Id.ToString(),
                 AuthUserId = _user.UserId,
-                AuthUserName=_user.Username,
-                AuthUserNameSurname=_user.NameSurname,
-                AuthImagePath=_user.ImagePath,
+                AuthUserName = _user.Username,
+                AuthUserNameSurname = _user.NameSurname,
+                AuthImagePath = _user.ImagePath,
                 WorkOrderCode = x.wo.Code,
-                ProccessId=x.prc.Id.ToString(),
+                ProccessId = x.prc.Id.ToString(),
                 ProccessName = x.prc.Name,
                 ProccessCategoryName = x.prc.ProccessCategory.Name,
+                ProjectId = x.prj.Id.ToString(),
                 AssignedUserId = x.wo.AssignedUserId,
                 //AssignedUserName = x.assignedUserName,
                 CreatingUserId = x.wo.CreatingUserId,
@@ -229,12 +230,13 @@ namespace YayinEviApi.API.Controllers
                 //NameTypeSetting = x.prj.Work.NameTypeSetting,
                 WorkOrginalName = x.prj.Work.WorkOrginalName,
                 Language = x.prj.Work.Language,
+                FinishedDate=x.wo.FinishedDate,
                 Subject = x.prj.Work.Subject,
                 CreatedDate = x.prj.CreatedDate,
                 UpdatedDate = x.prj.UpdatedDate,
                 WorkAssignedUsers = x.assignedUsers,
-                WorkOrderMessages=x.messages,
-                WorkState=x.wo.WorkState.toName(),
+                WorkOrderMessages = x.messages,
+                WorkState = x.wo.WorkState.toName(),
             }).FirstOrDefaultAsync(x=>x.Id == id);
 
             return Ok(wo);
@@ -304,13 +306,12 @@ namespace YayinEviApi.API.Controllers
         //[Authorize(AuthenticationSchemes = "Admin")]
         public async Task<IActionResult> UploadForWorkOrder(string entityId, string? whichPage)
         {
-            //todo FileService sınıfında FileRenameAsync() metodu ile dosya adının aynı olmaması için bir yapı kuruldu video 28 tekrar izleyip yapıyı oluştur
-            //var datas = await _storageService.UploadAsync("files", Request.Form.Files); AZURE için
-            //var datas = await _fileService.UploadAsync("resorce/product-images", Request.Form.Files);
-
             var datas = await _storageService.UploadAsync($@"resorce\workOrder-images", Request.Form.Files);
-            var entity=_fileManagementReadRepository.GetSingleAsync(x=>x.EntityId == entityId&&x.IsActive).Result;
-            entity.IsActive = false;
+
+            var entity = _fileManagementReadRepository.GetSingleAsync(x => x.EntityId == entityId && x.IsActive).Result;
+
+            if(entity != null)
+                entity.IsActive = false;
             await _fileManagementWriteRepository.AddRangeAsync(datas.Select(d => new FileManagement
             {
                 FileName = d.filename,
@@ -324,19 +325,9 @@ namespace YayinEviApi.API.Controllers
             }).ToList());
             
             await _fileManagementWriteRepository.SaveAsync();
-            _fileManagementWriteRepository.Update(entity);
-            //var workOrder=_workOrderReadRepository.Select(x=>x.Id.ToString()==entityId,x=>new WorkOrderDto
-            //{
-            //    WorkName=x.Project.Work.Name,
-            //    ProccessName=x.Proccess.Name,
-            //}).FirstOrDefaultAsync();
-            
-            //var body = $"{workOrder?.Result?.WorkName} projesine {workOrder.Result.ProccessName} sürecinde bir dosya eklendi";
-            //var users=_workAssignedUsersReadRepository.Select(x=>x.WorkOrderId.ToString()==entityId,x=>x).ToList();
+            if(entity!=null)
+                _fileManagementWriteRepository.Update(entity);
 
-            //CreateHubMessages.Create("Dosya Eklendi", body, _user, users);
-            //await _hubMessageWriteRepository.AddRangeAsync(CreateHubMessages.Create("Dosya Eklendi", body, _user, users));
-            //await _hubMessageWriteRepository.SaveAsync();
             return Ok();
 
         }
@@ -401,7 +392,7 @@ namespace YayinEviApi.API.Controllers
         public async Task<IActionResult> GetAllWorkAssignedUserForWorkOrder(string id) 
         {
             
-            var assignedUsers = _workAssignedUsersReadRepository.Select(x => x.WorkOrderId.ToString() == id,x=> new WorkAssignedUsersDto
+            var assignedUsers = _workAssignedUsersReadRepository.Select(x => x.WorkOrderId == Guid.Parse(id),x=> new WorkAssignedUsersDto
             {
                 Id=x.Id.ToString(),
                 UserId = x.UserId,
@@ -414,7 +405,7 @@ namespace YayinEviApi.API.Controllers
                     var user = _userManager.FindByIdAsync(x.UserId).Result;
                     x.UserName = _user.Username;
                     x.NameAndSurname=_user.NameSurname;
-                    x.ImagePath = _fileManagementReadRepository.FindAsync(y => y.EntityId == x.UserId && y.IsActive, y => y).Result.Path;
+                    x.ImagePath = _fileManagementReadRepository.FindAsync(y => y.EntityId == x.UserId && y.IsActive, y => y).Result?.Path;
                 });
             }
             return Ok(assignedUsers);
@@ -441,17 +432,18 @@ namespace YayinEviApi.API.Controllers
             return Ok();
         }
 
-        [HttpGet("[action]/{id}")]
+        [HttpGet("[action]/{id?}")]
         public async Task<IActionResult> GetAllMessagesForWorkOrder(string? id)
         {
-
-            var messages = _workOrderMessagesReadRepository.Select(x => x.WorkOrderId.ToString() == id, x => new WorkOrderMessagesDto
+            List<WorkOrderMessagesDto> messages=null;
+            if (id != null)
+                messages = _workOrderMessagesReadRepository.Select(x => x.WorkOrderId.ToString() == id, x => new WorkOrderMessagesDto
             {
                 Id = x.Id.ToString(),
                 UserId = x.UserId,
-                WorkOrderId=x.WorkOrderId.ToString(),
-                Messages=x.Message,
-                CreatedDate=x.CreatedDate,
+                WorkOrderId = x.WorkOrderId.ToString(),
+                Messages = x.Message,
+                CreatedDate = x.CreatedDate,
             }).ToList();
             if (messages != null || messages.Count != 0)
             {
@@ -460,7 +452,7 @@ namespace YayinEviApi.API.Controllers
                     var user = _userManager.FindByIdAsync(x.UserId).Result;
                     x.UserName = user?.UserName;
                     x.NameAndSurname = user?.NameSurname;
-                    x.ImagePath = _fileManagementReadRepository.FindAsync(y => y.EntityId == x.UserId && y.IsActive, y => y).Result.Path;
+                    x.ImagePath = _fileManagementReadRepository.FindAsync(y => y.EntityId == x.UserId && y.IsActive, y => y).Result?.Path;
                 });
             }
 

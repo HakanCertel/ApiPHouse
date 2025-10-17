@@ -88,21 +88,17 @@ namespace YayinEviApi.API.Controllers
         //[Authorize(AuthenticationSchemes = "Admin")]
         public async Task<IActionResult> Upload(string entityId, string? whichPage)
         {
-            //todo FileService sınıfında FileRenameAsync() metodu ile dosya adının aynı olmaması için bir yapı kuruldu video 28 tekrar izleyip yapıyı oluştur
-            //var datas = await _storageService.UploadAsync("files", Request.Form.Files); AZURE için
-            //var datas = await _fileService.UploadAsync("resorce/product-images", Request.Form.Files);
 
             var datas = await _storageService.UploadAsync($@"resorce\user-images", Request.Form.Files);
 
             //Work work = await _fileManagementReadRepository.GetByIdAsync(id);
-
-            await _fileManagementWriteRepository.AddRangeAsync(datas.Select(d => new FileManagement
+                 await _fileManagementWriteRepository.AddRangeAsync(datas.Select(d => new FileManagement
             {
                 FileName = d.filename,
                 Path = d.pathOrContainerName,
                 Storage = _storageService.StorageName,
                 EntityId= entityId,
-                WhichPage=whichPage,
+                //WhichPage=whichPage,
                 WhichClass="AppUserClass",
                 AddingUserId=_user.UserId,
 
