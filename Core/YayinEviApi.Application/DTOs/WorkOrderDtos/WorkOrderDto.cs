@@ -14,11 +14,12 @@ namespace YayinEviApi.Application.DTOs.WorkOrderDtos
         public string? WorkOrderCode { get; set; }
         public string? ProjectId { get; set; }
         public string? ProjectCode { get; set; }
+        public string? ProjectState { get; set; }
         public string? ProccessId { get; set; }
         public string? WorkId { get; set; }
         public string? WorkName { get; set; }
-        public DateTime? FinishedDate { get; set; }
         public string? WorkState { get; set; }
+        public DateTime? FinishedDate { get; set; }
         public string? ImagePath { get; set; }
         public string? Bandrol { get; set; }
         public string? WorkOrginalName { get; set; }

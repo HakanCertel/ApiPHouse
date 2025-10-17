@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 using System.Net;
 using YayinEviApi.Application.Abstractions.Services;
 using YayinEviApi.Application.DTOs.ProjectDtos;
@@ -9,8 +10,10 @@ using YayinEviApi.Application.DTOs.User;
 using YayinEviApi.Application.Repositories.ProjectR;
 using YayinEviApi.Application.RequestParameters;
 using YayinEviApi.Domain.Entities.ProjectE;
+using YayinEviApi.Domain.Entities.WarehouseE;
 using YayinEviApi.Domain.Enum;
 using YayinEviApi.Infrastructure.Operations;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace YayinEviApi.API.Controllers
 {
@@ -23,6 +26,7 @@ namespace YayinEviApi.API.Controllers
         readonly IProjectWriteRepository _projectWriteRepository;
         private IUserService _userService;
         readonly CreateUser _user;
+        private Expression<Func<Project, bool>>? _projectFilterExpression;
 
         public ProjectController(IProjectWriteRepository projectWriteRepository, IProjectReadRepository projectReadRepository, IUserService userService)
         {
@@ -30,21 +34,25 @@ namespace YayinEviApi.API.Controllers
             _projectReadRepository = projectReadRepository;
             _userService = userService;
             _user = _userService.GetUser().Result;
+            _projectFilterExpression = x => x.Id != null;
         }
 
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] Pagination pagination)
         {
-            var totalProjectCount = _projectReadRepository.GetAll(false).Count();
+            _projectFilterExpression = pagination.State == "Tümü" ? x => x.Id != null: pagination.State != null ? x => x.State == pagination.State.GetEnum<State>() : x => x.Id != null;
+            
+            var totalProjectCount = _projectReadRepository.GetAll(false).Where(_projectFilterExpression).Count();
 
-            var projects = _projectReadRepository.Table.Select(x => new
+            var projects = _projectReadRepository.Table.Where(_projectFilterExpression).Select(x => new
             {
-                prj=x,
-                work=x.Work,
-                agency=x.Work.Author.Agency,
-                author=x.Work.Author,
-                path=x.Work.PublishFiles.FirstOrDefault(p=>p.Showcase).Path
-            }).Select(x => new ProjectDto
+                prj = x,
+                work = x.Work,
+                agency = x.Work.Author.Agency,
+                author = x.Work.Author,
+                category = x.Work.Category,
+                path = x.Work.PublishFiles.FirstOrDefault(p => p.Showcase).Path
+            }).ToList().Select(x => new ProjectDto
             {
                 Id = x.prj.Id.ToString(),
                 Code = x.prj.Code,
@@ -52,15 +60,15 @@ namespace YayinEviApi.API.Controllers
                 AgencyId = x.agency.Id.ToString(),
                 AgencyName = x.agency.Name,
                 WorkId = x.prj.WorkId.ToString(),
-                WorkCode=x.work.Code,
+                WorkCode = x.work.Code,
                 WorkName = x.work.Name,
-                ImagePath=x.path,
+                ImagePath = x.path,
                 AuthorId = x.author.Id.ToString(),
-                AuthorNameAndSurnmae = x.prj.Work.Author.Name + " " + x.prj.Work.Author.Surname,
+                AuthorNameAndSurnmae = x.author.Name + " " + x.author.Surname,
                 Bandrol = x.work.Bandrol,
                 Barcode = x.work.Barcode,
                 CategoryId = x.work.CategoryId.ToString(),
-                CategoryName = x.work.Category.Name,
+                CategoryName = x.category.Name,
                 CertificateNumber = x.work.CertificateNumber,
                 Description = x.work.Description,
                 ISBN = x.prj.Work.isbn,
@@ -69,10 +77,9 @@ namespace YayinEviApi.API.Controllers
                 Subject = x.work.Subject,
                 CreatedDate = x.prj.CreatedDate,
                 UpdatedDate = x.prj.UpdatedDate,
-                CreatingUserId=x.prj.CreatingUserId,
-                UpdatingUserId=x.prj.UpdatingUserId,
-            })
-                .Select(x => x)?.Skip(pagination.Page * pagination.Size).Take(pagination.Size);
+                CreatingUserId = x.prj.CreatingUserId,
+                UpdatingUserId = x.prj.UpdatingUserId,
+            }).Select(x => x)?.Skip(pagination.Page * pagination.Size).Take(pagination.Size);
             return Ok(new { totalProjectCount, projects });
 
         }

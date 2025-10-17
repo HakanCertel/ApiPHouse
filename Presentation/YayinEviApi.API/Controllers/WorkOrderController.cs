@@ -182,7 +182,8 @@ namespace YayinEviApi.API.Controllers
             {
                 wo = x,
                 prj = x.Project,
-                //wrk = x.Project.Work,
+                agency=x.Project.Work.Agency,
+                work = x.Project.Work,
                 path = x.Project.Work.PublishFiles.FirstOrDefault(p => p.Showcase).Path,
                 prc = x.Proccess,
                 assignedUsers = x.WorkAssignedUsers,
@@ -200,14 +201,14 @@ namespace YayinEviApi.API.Controllers
                 ProccessName = x.prc.Name,
                 ProccessCategoryName = x.prc.ProccessCategory.Name,
                 ProjectId = x.prj.Id.ToString(),
+                ProjectState=x.prj.State.toName(),
                 AssignedUserId = x.wo.AssignedUserId,
-                //AssignedUserName = x.assignedUserName,
                 CreatingUserId = x.wo.CreatingUserId,
                 UpdatingUserId = x.wo.UpdatingUserId,
-                //AgencyId = x.prj.AgencyId.ToString(),
-                //AgencyName = x.prj.Agency.Name,
+                AgencyId =x.agency!=null ?x.agency.Id.ToString():null,
+                AgencyName = x.agency != null ?x.agency.Name:null,
                 WorkId = x.prj.WorkId.ToString(),
-                WorkName = x.prj.Work.Name,
+                WorkName = x.work.Name,
                 ImagePath = x.path,
                 AuthorId = x.prj.Work.AuthorId.ToString(),
                 AuthorName = x.prj.Work.Author.Name + " " + x.prj.Work.Author.Surname,
@@ -217,17 +218,7 @@ namespace YayinEviApi.API.Controllers
                 CategoryName = x.prj.Work.Category.Name,
                 CertificateNumber = x.prj.Work.CertificateNumber,
                 Description = x.wo.Description,
-                //FirstPrintingDate = x.prj.Work.FkirstPrintingDate,
                 ISBN = x.prj.Work.isbn,
-                //LastPrintingQuantity = x.prj.Work.LastPrintingQuantity,
-                //LasttPrintingDate = x.prj.Work.LasttPrintingDate,
-                //PrintingHouse = x.prj.Work.PrintingHouse.ToString(),
-                //StockQuantity = x.prj.Work.StockQuantity,
-                //NameTranslating = x.prj.Work.NameTranslating,
-                //NameDrawing = x.prj.Work.NameDrawing,
-                //NameReading = x.prj.Work.NameReading,
-                //NameReducting = x.prj.Work.NameReducting,
-                //NameTypeSetting = x.prj.Work.NameTypeSetting,
                 WorkOrginalName = x.prj.Work.WorkOrginalName,
                 Language = x.prj.Work.Language,
                 FinishedDate=x.wo.FinishedDate,
@@ -335,7 +326,7 @@ namespace YayinEviApi.API.Controllers
         //[Authorize(AuthenticationSchemes = "Admin")]
         public async Task<IActionResult> GetFiles(string entityId)
         {
-            var file = _fileManagementReadRepository.Select(x => x.EntityId == entityId, x => x);
+            IList<FileManagement> file= _fileManagementReadRepository.Select(x => x.EntityId == entityId, x => x).ToList();
 
             return Ok(file);
         }

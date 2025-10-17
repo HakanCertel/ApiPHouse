@@ -95,9 +95,15 @@ wwwroot\resorce\work-images\Yesil-Sari-Renkli-Nostaljik-cerceve-Desenli-Kitap-Ka
 wwwroot\resorce\workOrder-images\Black-and-Grey-Dark-Forest-Aesthetic-Book-Cover.png
 wwwroot\resorce\workOrder-images\Black-Beige-Vintage-Illustration-Mermaid-Restaurant-Logo.png
 wwwroot\resorce\workOrder-images\Black-White-Minimalist-Professional-Initial-Logo.png
+wwwroot\resorce\workOrder-images\Blue-and-Green-Comic-Cartoon-Anime-Boy-Avatar.png
 wwwroot\resorce\workOrder-images\Blue-Green-Illustrative-Magic-World-Kids-Book-Cover-.png
 wwwroot\resorce\workOrder-images\Brown-Simple-Illustration-Florist-Logo.png
 wwwroot\resorce\workOrder-images\Cream-Black-Typography-Loop-Brand-Logo.png
 wwwroot\resorce\workOrder-images\Cream-Minimalist-Oval-Floral-Handmade-Candle-Business-Logo.png
+wwwroot\resorce\workOrder-images\Cute-Anime-Cartoon-Illustration-Girl-Avatar.png
+wwwroot\resorce\workOrder-images\Dark-Green-Luxury-Real-Estate-Logo.png
+wwwroot\resorce\workOrder-images\Pink-and-Orange-Playful-Anime-Girl-Avatar--.png
 wwwroot\resorce\workOrder-images\Projeler.pdf
 wwwroot\resorce\workOrder-images\Rahatlatici-Romantik-Kitap-Kapagi.png
+wwwroot\resorce\workOrder-images\Simple-Elegant-Young-Adult-Fantasy-Romance-Book-Cover.png
+wwwroot\resorce\workOrder-images\Yellow-and-Green-Illustration-Story-Tale-Book-Cover.png
