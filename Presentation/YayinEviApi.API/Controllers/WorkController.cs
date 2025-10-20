@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.IO;
 using System.Net;
 using YayinEviApi.Application.Abstractions.Storage;
 using YayinEviApi.Application.DTOs.WorkDtos;
@@ -267,11 +268,20 @@ namespace YayinEviApi.API.Controllers
             return Ok();
 
         }
+        
         [HttpGet("[action]")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(FileStreamResult))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> DownloadFile(string fullPath,string fileName)
         {
-            await _storageService.DownloadFile(fullPath, fileName);
-            return Ok();
+            var obj=_storageService.DownloadFile(fullPath, fileName).Result;
+
+            return File(
+                obj.FileStream,
+                obj.ContenetType,
+                // İndirilecek dosyanın adını belirtir
+                obj.FileName
+            );
         }
        
         [HttpDelete("[action]/{id}")]

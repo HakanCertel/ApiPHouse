@@ -8,5 +8,6 @@ namespace YayinEviApi.Application.Abstractions.Storage.Local
 {
     public interface ILocalStorage:IStorage,ICloudStorage
     {
+
     }
 }

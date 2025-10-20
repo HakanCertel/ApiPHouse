@@ -22,8 +22,11 @@ namespace YayinEviApi.Infrastructure.Services.Storage
         public async Task DeleteAsync(string pathOrContainerName, string fileName)
             =>await _storage.DeleteAsync(pathOrContainerName, fileName);
 
-        public Task<bool> DownloadFile(string fullPath, string fileName)
+        public Task<FileObject> DownloadFile(string fullPath, string fileName)
             =>_storage.DownloadFile(fullPath, fileName);
+
+        public Task<ZipFileObjects> DownloadFileInZip(List<string> filePathList)
+            =>_storage.DownloadFileInZip(filePathList);
 
         public List<string> GetFiles(string pathOrContainerName)
             =>_storage.GetFiles(pathOrContainerName);

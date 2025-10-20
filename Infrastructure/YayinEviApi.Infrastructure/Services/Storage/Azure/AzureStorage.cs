@@ -2,11 +2,7 @@
 using Azure.Storage.Blobs.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using YayinEviApi.Application.Abstractions.Storage;
 using YayinEviApi.Application.Abstractions.Storage.Azure;
 
 namespace YayinEviApi.Infrastructure.Services.Storage.Azure
@@ -27,7 +23,12 @@ namespace YayinEviApi.Infrastructure.Services.Storage.Azure
             await blobClient.DeleteAsync();
         }
 
-        public Task<bool> DownloadFile(string fullPath, string fileName)
+        public Task<FileObject> DownloadFile(string fullPath, string fileName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ZipFileObjects> DownloadFileInZip(List<string> filePathList)
         {
             throw new NotImplementedException();
         }
