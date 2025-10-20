@@ -40,8 +40,8 @@ namespace YayinEviApi.API.Controllers
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] Pagination pagination)
         {
+            var ssjs = pagination.State.GetEnum<State>();
             _projectFilterExpression = pagination.State == "Tümü" ? x => x.Id != null: pagination.State != null ? x => x.State == pagination.State.GetEnum<State>() : x => x.Id != null;
-            
             var totalProjectCount = _projectReadRepository.GetAll(false).Where(_projectFilterExpression).Count();
 
             var projects = _projectReadRepository.Table.Where(_projectFilterExpression).Select(x => new
