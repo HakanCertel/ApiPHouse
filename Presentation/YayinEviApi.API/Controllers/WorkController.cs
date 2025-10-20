@@ -244,7 +244,8 @@ namespace YayinEviApi.API.Controllers
             //var datas = await _storageService.UploadAsync("files", Request.Form.Files); AZURE için
             //var datas = await _fileService.UploadAsync("resorce/product-images", Request.Form.Files);
 
-            var datas = await _storageService.UploadAsync($@"resorce\work-images", Request.Form.Files);
+            var datas = await _storageService.UploadCloudAsync($@"resorce\work-images", Request.Form.Files);
+            
             var isActive = _publishFileReadRepository.Select(x => x.EntityId == id, x => x).Any(a => a.IsActive);
             Work work = await _workReadRepository.GetByIdAsync(id);
 
