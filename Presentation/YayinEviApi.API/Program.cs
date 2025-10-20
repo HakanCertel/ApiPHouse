@@ -20,19 +20,19 @@ builder.Services.AddApplicationServices();
 builder.Services.AddStorage<LocalStorage>();
 //builder.Services.AddStorage<AzureStorage>();
 builder.Services.AddSignalRServices();
-const string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
+
 var allowedOrigins = new[]
 {
     "https://publishhouse.netlify.app", 
     "http://localhost:4200",
     "https://apiphouse.onrender.com"
 };
-//builder.Services.AddCors(options => options.AddDefaultPolicy( policy =>
-//    policy.WithOrigins(allowedOrigins).AllowAnyHeader().AllowAnyMethod().AllowCredentials())
-//);
 builder.Services.AddCors(options => options.AddDefaultPolicy(policy =>
-    policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().AllowCredentials())
+    policy.WithOrigins(allowedOrigins).AllowAnyHeader().AllowAnyMethod().AllowCredentials())
 );
+//builder.Services.AddCors(options=> options.AddDefaultPolicy(policy=>policy.AllowAnyOrigin().AllowAnyHeader().AllowCredentials())
+//);
 // Add services to the container.
 
 
