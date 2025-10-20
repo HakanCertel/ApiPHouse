@@ -237,8 +237,9 @@ namespace YayinEviApi.API.Controllers
         }
 
         [HttpPost("[action]")]
+        [DisableRequestSizeLimit]
         [Authorize(AuthenticationSchemes = "Admin")]
-        public async Task<IActionResult> Upload(string id,string? departmentId,string? userId)
+        public async Task<IActionResult> Upload([FromQuery] string id, [FromQuery]  string? departmentId, [FromQuery] string? userId)
         {
             //todo FileService sınıfında FileRenameAsync() metodu ile dosya adının aynı olmaması için bir yapı kuruldu video 28 tekrar izleyip yapıyı oluştur
             //var datas = await _storageService.UploadAsync("files", Request.Form.Files); AZURE için

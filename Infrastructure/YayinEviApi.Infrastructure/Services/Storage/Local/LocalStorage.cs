@@ -50,6 +50,7 @@ namespace YayinEviApi.Infrastructure.Services.Storage.Local
         public async Task<List<(string filename, string pathOrContainerName)>> UploadAsync(string path, IFormFileCollection fileCollection)
         {
             string uploadPath = Path.Combine(_webHostEnvironment.WebRootPath, path);
+            //string uploadPath = Path.Combine(_webHostEnvironment.ContentRootPath, path);
 
             if (Directory.Exists(uploadPath))
             {
@@ -77,7 +78,7 @@ namespace YayinEviApi.Infrastructure.Services.Storage.Local
 
         public async Task<List<(string filename, string pathOrContainerName)>> UploadCloudAsync(string path, IFormFileCollection fileCollection)
         {
-            string uploadPath = Path.Combine(_webHostEnvironment.ContentRootPath, path);
+            string uploadPath = Path.Combine(Path.GetTempFileName(), path);
 
             if (Directory.Exists(uploadPath))
             {

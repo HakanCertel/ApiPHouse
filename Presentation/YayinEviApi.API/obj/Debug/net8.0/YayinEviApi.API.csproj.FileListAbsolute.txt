@@ -223,3 +223,4 @@ C:\Users\User\Documents\GitHub\ApiPHouse\Presentation\YayinEviApi.API\obj\Debug\
 C:\Users\User\Documents\GitHub\ApiPHouse\Presentation\YayinEviApi.API\obj\Debug\net8.0\ref\YayinEviApi.API.dll
 C:\Users\User\Documents\GitHub\ApiPHouse\Presentation\YayinEviApi.API\bin\Debug\net8.0\YayinEviApi.API.xml
 C:\Users\User\Documents\GitHub\ApiPHouse\Presentation\YayinEviApi.API\obj\Debug\net8.0\YayinEviApi.API.xml
+C:\Users\User\Documents\GitHub\ApiPHouse\Presentation\YayinEviApi.API\obj\Debug\net8.0\YayinEviApi.API.MvcApplicationPartsAssemblyInfo.cs

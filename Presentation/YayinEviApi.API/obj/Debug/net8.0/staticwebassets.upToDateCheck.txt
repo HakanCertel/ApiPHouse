@@ -13,6 +13,7 @@ wwwroot\resorce\author-File\Cute-Anime-Cartoon-Illustration-Girl-Avatar.png
 wwwroot\resorce\author-File\Cute-Anime-Illustration-Boy-Avatar.png
 wwwroot\resorce\author-File\Dark-Green-Luxury-Real-Estate-Logo.png
 wwwroot\resorce\author-File\Kirmizi-Bej-Klasik-Kus-Fotografi-Kitap-Kapagi.png
+wwwroot\resorce\author-File\leaf-text-thumbnail.png
 wwwroot\resorce\author-File\Mor-ve-Pembe-Sade-Doga-Romantik-Kitap-Kapagi.png
 wwwroot\resorce\author-File\Mor-ve-Sari-illustrasyon-Wattpad-Kitap-Kapagi.png
 wwwroot\resorce\author-File\penguen.jpg
@@ -31,6 +32,7 @@ wwwroot\resorce\product-images\editicon.png
 wwwroot\resorce\product-images\IMG20250610064904.jpg
 wwwroot\resorce\product-images\Kirmizi-Bej-Klasik-Kus-Fotografi-Kitap-Kapagi.png
 wwwroot\resorce\product-images\Krem-ve-Mavi-Vintage-Desenli-Kitap-Kapagi.png
+wwwroot\resorce\product-images\logo.png
 wwwroot\resorce\product-images\penicon.png
 wwwroot\resorce\product-images\personavatarcircleicon.png
 wwwroot\resorce\product-images\Simple-Elegant-Young-Adult-Fantasy-Romance-Book-Cover.png
@@ -64,6 +66,7 @@ wwwroot\resorce\work-images\Cream-Black-Typography-Loop-Brand-Logo.png
 wwwroot\resorce\work-images\Cream-Minimalist-Oval-Floral-Handmade-Candle-Business-Logo.png
 wwwroot\resorce\work-images\Cute-Anime-Cartoon-Illustration-Girl-Avatar.png
 wwwroot\resorce\work-images\Dark-Green-Luxury-Real-Estate-Logo.png
+wwwroot\resorce\work-images\furniture-thumbnail.png
 wwwroot\resorce\work-images\Green-and-Blue-Watercolor-Childrens-Book-Cover.png
 wwwroot\resorce\work-images\IMG20250610064904.jpg
 wwwroot\resorce\work-images\IT-Sunumu.pdf
@@ -73,6 +76,8 @@ wwwroot\resorce\work-images\Kahverengi-ve-Sari-cicekli-Arkaplan-Vintage-ve-Zarif
 wwwroot\resorce\work-images\Kirmizi-Bej-Klasik-Kus-Fotografi-Kitap-Kapagi.png
 wwwroot\resorce\work-images\Krem-ve-Mavi-Vintage-Desenli-Kitap-Kapagi.png
 wwwroot\resorce\work-images\Lacivert-Minimalist-Kelebek-Uc-Kitap-Kapagi.png
+wwwroot\resorce\work-images\leaf-text-thumbnail.png
+wwwroot\resorce\work-images\logo.png
 wwwroot\resorce\work-images\Mavi-sik-Astroloji-Yolculugu-Kitap-Kapagi.png
 wwwroot\resorce\work-images\Mavi-ve-Turkuaz-Renkte-illustrasyon-Kitap-Kapagi-.png
 wwwroot\resorce\work-images\Mor-ve-Pembe-Sade-Doga-Romantik-Kitap-Kapagi.png

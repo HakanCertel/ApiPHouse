@@ -254,39 +254,33 @@ namespace YayinEviApi.API.Controllers.MaterialControllers
         [Authorize(AuthenticationSchemes = "Admin")]
         public async Task<IActionResult> Upload(string entityId)
         {
-
-            var datas = await _storageService.UploadAsync($@"resorce\product-images", Request.Form.Files);
-
-            var isActive = _fileManagementReadRepository.Select(x => x.EntityId == entityId, x => x).Any(a => a.IsActive);
-
-            await _fileManagementWriteRepository.AddRangeAsync(datas.Select(d => new FileManagement
+            try
             {
-                FileName = d.filename,
-                Path = d.pathOrContainerName,
-                Storage = _storageService.StorageName,
-                EntityId = entityId,
-                WhichPage = "MaterialAdd/Edit",
-                WhichClass = "MaterialClass",
-                IsActive=!isActive,
-                AddingUserId = _user.UserId,
-            }).ToList());
 
-            await _fileManagementWriteRepository.SaveAsync();
+                var datas = await _storageService.UploadAsync($@"resorce\product-images", Request.Form.Files);
 
-            //await _fileManagementWriteRepository.SaveAsync();
-            //await _materialFileRepository.AddRangeAsync(datas.Select(d => new MaterialFile
-            //{
-            //    FileName = d.filename,
-            //    Path = d.pathOrContainerName,
-            //    IsActive = !isActive,
-            //    EntityId = id,
-            //    AddingUserId = userId,
-            //    Storage = _storageService.StorageName,
-            //    Materials = new List<Material>() { material }
-            //}).ToList());
+                var isActive = _fileManagementReadRepository.Select(x => x.EntityId == entityId, x => x).Any(a => a.IsActive);
 
-            //await _materialFileRepository.SaveAsync();
-           
+                await _fileManagementWriteRepository.AddRangeAsync(datas.Select(d => new FileManagement
+                {
+                    FileName = d.filename,
+                    Path = d.pathOrContainerName,
+                    Storage = _storageService.StorageName,
+                    EntityId = entityId,
+                    WhichPage = "MaterialAdd/Edit",
+                    WhichClass = "MaterialClass",
+                    IsActive = !isActive,
+                    AddingUserId = _user.UserId,
+                }).ToList());
+
+                await _fileManagementWriteRepository.SaveAsync();
+            }
+            catch (Exception ex)
+            {
+                var hdh = ex;
+                throw;
+            }
+
             return Ok();
 
         }
