@@ -27,10 +27,10 @@ var allowedOrigins = new[]
     "http://localhost:4200",
     "https://apiphouse.onrender.com"
 };
-//builder.Services.AddCors(options => options.AddPolicy(name: MyAllowSpecificOrigins,policy =>
+//builder.Services.AddCors(options => options.AddDefaultPolicy( policy =>
 //    policy.WithOrigins(allowedOrigins).AllowAnyHeader().AllowAnyMethod().AllowCredentials())
 //);
-builder.Services.AddCors(options => options.AddPolicy(name: MyAllowSpecificOrigins, policy =>
+builder.Services.AddCors(options => options.AddDefaultPolicy(policy =>
     policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().AllowCredentials())
 );
 // Add services to the container.
@@ -84,7 +84,7 @@ if (app.Environment.IsDevelopment())
     app.UseHttpsRedirection();
 }
 
-app.UseStaticFiles(MyAllowSpecificOrigins);
+app.UseStaticFiles();
 
 app.UseCors();
 
