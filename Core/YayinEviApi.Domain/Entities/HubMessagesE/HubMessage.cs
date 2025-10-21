@@ -1,4 +1,5 @@
-﻿using YayinEviApi.Domain.Entities.Common;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using YayinEviApi.Domain.Entities.Common;
 
 namespace YayinEviApi.Domain.Entities.HubMessagesE
 {
@@ -11,5 +12,8 @@ namespace YayinEviApi.Domain.Entities.HubMessagesE
         public string? CreatingUserNameSurname { get; set; }
         public bool? Readed { get; set; }
         public bool? IsShowed { get; set; }
+
+        [NotMapped]
+        public override string Code { get; set; }
     }
 }

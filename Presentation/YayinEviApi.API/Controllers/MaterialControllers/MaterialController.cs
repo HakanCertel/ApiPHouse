@@ -198,7 +198,10 @@ namespace YayinEviApi.API.Controllers.MaterialControllers
         [HttpPost()]
         public async Task<IActionResult> Add(MaterailDto materialdto)
         {
-           
+            if (_materialRepository.Select(x => x.Code == materialdto.Code, x => x).Any())
+            {
+                materialdto.Code = _materialRepository.GetNewCodeAsync(materialdto.Serie, x => x.Code).Result?.ToString();
+            }
             var material = new Material
             {
                 Code = materialdto.Code,
@@ -315,6 +318,14 @@ namespace YayinEviApi.API.Controllers.MaterialControllers
             return Ok();
             //ChangeShowcaseImageCommandResponse response = await _mediator.Send(changeShowcaseImageCommandRequest);
             //return Ok(response);
+        }
+
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetNewCode(string serie="MTR")
+        {
+            var newCode=await   _materialRepository.GetNewCodeAsync(serie,x=>x.Code);
+
+            return Ok(new { newCode});
         }
     }
 }

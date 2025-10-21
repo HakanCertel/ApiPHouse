@@ -396,6 +396,9 @@ namespace YayinEviApi.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<string>("Code")
+                        .HasColumnType("text");
+
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp without time zone");
 
@@ -424,6 +427,9 @@ namespace YayinEviApi.Persistence.Migrations
 
                     b.Property<Guid>("BasketId")
                         .HasColumnType("uuid");
+
+                    b.Property<string>("Code")
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp without time zone");
@@ -670,6 +676,9 @@ namespace YayinEviApi.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<string>("Code")
+                        .HasColumnType("text");
+
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp without time zone");
 
@@ -784,6 +793,9 @@ namespace YayinEviApi.Persistence.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("text");
 
+                    b.Property<string>("Code")
+                        .HasColumnType("text");
+
                     b.Property<string>("Country")
                         .HasColumnType("text");
 
@@ -863,7 +875,6 @@ namespace YayinEviApi.Persistence.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Code")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime>("CreatedDate")
@@ -1154,7 +1165,6 @@ namespace YayinEviApi.Persistence.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Code")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime>("CreatedDate")
@@ -1212,6 +1222,9 @@ namespace YayinEviApi.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("Code")
+                        .HasColumnType("text");
+
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp without time zone");
 
@@ -1247,6 +1260,9 @@ namespace YayinEviApi.Persistence.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
+
+                    b.Property<string>("Code")
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp without time zone");
@@ -1491,6 +1507,9 @@ namespace YayinEviApi.Persistence.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Address")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Code")
                         .HasColumnType("text");
 
                     b.Property<string>("Country")
@@ -1904,6 +1923,9 @@ namespace YayinEviApi.Persistence.Migrations
                     b.Property<string>("AssignedUserId")
                         .HasColumnType("text");
 
+                    b.Property<string>("Code")
+                        .HasColumnType("text");
+
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp without time zone");
 
@@ -1980,6 +2002,9 @@ namespace YayinEviApi.Persistence.Migrations
                     b.Property<Guid>("CellofWarehouseId")
                         .HasColumnType("uuid");
 
+                    b.Property<string>("Code")
+                        .HasColumnType("text");
+
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp without time zone");
 
@@ -2014,6 +2039,9 @@ namespace YayinEviApi.Persistence.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
+
+                    b.Property<string>("Code")
+                        .HasColumnType("text");
 
                     b.Property<DateTime?>("ConfirmDate")
                         .HasColumnType("timestamp without time zone");

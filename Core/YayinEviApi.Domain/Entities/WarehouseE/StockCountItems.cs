@@ -18,5 +18,8 @@ namespace YayinEviApi.Domain.Entities.WarehouseE
         public CellofWarehouse CellofWarehouse { get; set; }
         public MaterialUnit Unit { get; set; }
         public StockCount StockCount { get; set; }
+
+        [NotMapped]
+        public override string Code { get; set; }
     }
 }

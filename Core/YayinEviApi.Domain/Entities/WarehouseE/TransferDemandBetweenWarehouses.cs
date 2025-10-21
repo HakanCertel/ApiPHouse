@@ -1,4 +1,5 @@
-﻿using YayinEviApi.Domain.Entities.Common;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using YayinEviApi.Domain.Entities.Common;
 
 namespace YayinEviApi.Domain.Entities.WarehouseE
 {
@@ -17,6 +18,9 @@ namespace YayinEviApi.Domain.Entities.WarehouseE
 
         public CellofWarehouse TransferingCellofWarehouse { get; set; }
         public CellofWarehouse TransferedCellofWarehouse { get; set; }
+
+        [NotMapped]
+        public override string Code { get; set; }
 
     }
 }

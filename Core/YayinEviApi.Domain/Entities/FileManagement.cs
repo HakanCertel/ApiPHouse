@@ -16,5 +16,7 @@ namespace YayinEviApi.Domain.Entities
 
         [NotMapped]
         public override DateTime UpdatedDate { get => base.UpdatedDate; set => base.UpdatedDate = value; }
+        [NotMapped]
+        public override string Code { get; set; }
     }
 }

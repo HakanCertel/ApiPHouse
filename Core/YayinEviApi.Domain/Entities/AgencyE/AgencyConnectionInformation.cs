@@ -1,4 +1,5 @@
-﻿using YayinEviApi.Domain.Entities.Common;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using YayinEviApi.Domain.Entities.Common;
 
 namespace YayinEviApi.Domain.Entities.AgencyE
 {
@@ -10,7 +11,9 @@ namespace YayinEviApi.Domain.Entities.AgencyE
         public string NameSurname { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
-
+        
         public Agency Agency { get; set; }
+        [NotMapped]
+        public override string Code { get; set; }
     }
 }

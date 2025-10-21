@@ -17,5 +17,8 @@ namespace YayinEviApi.Domain.Entities.GoodsAccepE
         public Material Material { get; set; }
         public MaterialUnit Unit { get; set; }
         public GoodsAccep Parent { get; set; }
+        
+        [NotMapped]
+        public override string Code { get; set; }
     }
 }

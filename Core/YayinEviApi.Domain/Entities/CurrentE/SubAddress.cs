@@ -1,4 +1,5 @@
-﻿using YayinEviApi.Domain.Entities.Common;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using YayinEviApi.Domain.Entities.Common;
 
 namespace YayinEviApi.Domain.Entities.CurrentE
 {
@@ -17,5 +18,8 @@ namespace YayinEviApi.Domain.Entities.CurrentE
         public string? Description { get; set; }
 
         public Current Parent { get; set; }
+
+        [NotMapped]
+        public override string Code { get; set; }
     }
 }

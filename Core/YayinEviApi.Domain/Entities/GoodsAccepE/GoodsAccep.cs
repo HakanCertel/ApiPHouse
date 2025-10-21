@@ -1,4 +1,5 @@
-﻿using YayinEviApi.Domain.Entities.Common;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using YayinEviApi.Domain.Entities.Common;
 using YayinEviApi.Domain.Entities.GoodsAccepE;
 using YayinEviApi.Domain.Entities.WarehouseE;
 
@@ -20,7 +21,6 @@ namespace YayinEviApi.Domain.Entities.GoodsAcceptE
 
         public CellofWarehouse AcceptCellofWarehouse { get; set; }
         public ICollection<GoodsAcceptItems>? GoodsAcceptItemList { get; set; }
-
 
     }
 }

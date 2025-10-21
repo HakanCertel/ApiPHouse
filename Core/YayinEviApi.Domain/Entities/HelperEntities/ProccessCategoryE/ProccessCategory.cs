@@ -9,7 +9,7 @@ namespace YayinEviApi.Domain.Entities.HelperEntities.ProccessCategoryE
 {
     public class ProccessCategory:BaseEntity
     {
-        public string Code { get; set; }
+        public string? Code { get; set; }
         public string Name { get; set; }
         public string? CreatingUserId { get; set; }
         public string? UpdatingUserId { get; set; }

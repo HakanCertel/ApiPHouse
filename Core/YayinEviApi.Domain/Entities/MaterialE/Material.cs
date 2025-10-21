@@ -8,7 +8,7 @@ namespace YayinEviApi.Domain.Entities.MaterialE
 {
     public class Material:BaseEntity
     {
-        public string Code { get; set; }
+        //public string Code { get; set; }
         public string Name { get; set; }
         public string? Description { get; set; }
         public MaterialTypes? MaterialType { get; set; } = MaterialTypes.product;

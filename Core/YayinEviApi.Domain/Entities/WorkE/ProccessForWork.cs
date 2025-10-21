@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,5 +17,8 @@ namespace YayinEviApi.Domain.Entities.WorkE
 
         public Work Work { get; set; }
         public Proccess Proccess { get; set; }
+
+        [NotMapped]
+        public override string Code { get; set; }
     }
 }

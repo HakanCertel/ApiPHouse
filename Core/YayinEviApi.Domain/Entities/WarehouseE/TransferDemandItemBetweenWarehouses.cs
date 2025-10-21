@@ -20,5 +20,7 @@ namespace YayinEviApi.Domain.Entities.WarehouseE
         public MaterialUnit Unit { get; set; }
         [NotMapped]
         public override bool IsActive { get; set; }
+        [NotMapped]
+        public override string Code { get; set; }
     }
 }

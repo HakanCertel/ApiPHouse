@@ -1263,6 +1263,22 @@
   },
   {
     "ContainingType": "YayinEviApi.API.Controllers.MaterialControllers.MaterialController",
+    "Method": "GetNewCode",
+    "RelativePath": "api/Material/GetNewCode",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "serie",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "YayinEviApi.API.Controllers.MaterialControllers.MaterialController",
     "Method": "Upload",
     "RelativePath": "api/Material/Upload",
     "HttpMethod": "POST",

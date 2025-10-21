@@ -2,7 +2,7 @@
 
 namespace YayinEviApi.Application.Repositories.IMaterialR
 {
-    public interface IMaterialRepository:IGeneralRepository<Material>
+    public interface IMaterialRepository:IGetNewCode<Material>
     {
     }
 }

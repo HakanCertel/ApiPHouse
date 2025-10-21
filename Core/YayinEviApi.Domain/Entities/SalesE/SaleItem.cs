@@ -1,4 +1,5 @@
-﻿using YayinEviApi.Domain.Entities.Common;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using YayinEviApi.Domain.Entities.Common;
 using YayinEviApi.Domain.Entities.MaterialE;
 using YayinEviApi.Domain.Enum;
 
@@ -16,5 +17,8 @@ namespace YayinEviApi.Domain.Entities.SalesE
 
         public Sale Parent { get; set; }
         public Material Material { get; set; }
+
+        [NotMapped]
+        public override string Code { get; set; }
     }
 }

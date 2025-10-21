@@ -1,4 +1,5 @@
-﻿using YayinEviApi.Domain.Entities.Common;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using YayinEviApi.Domain.Entities.Common;
 
 namespace YayinEviApi.Domain.Entities.HelperEntities
 {
@@ -12,5 +13,8 @@ namespace YayinEviApi.Domain.Entities.HelperEntities
         public string? UpdatingUserId { get; set; }
 
         public WorkCategory WorkCategory { get; set; }
+
+        [NotMapped]
+        public override string Code { get; set; }
     }
 }

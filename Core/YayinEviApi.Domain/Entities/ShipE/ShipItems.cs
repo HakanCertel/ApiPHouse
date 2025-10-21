@@ -16,5 +16,8 @@ namespace YayinEviApi.Domain.Entities.ShipE
         public Material Material { get; set; }
         public MaterialUnit Unit { get; set; }
         public Ship Parent { get; set; }
+
+        [NotMapped]
+        public override string Code { get; set; }
     }
 }

@@ -25,6 +25,7 @@ wwwroot\resorce\author-File\Sari-illustrasyon-Masal-Kitap-Kapagi.png
 wwwroot\resorce\author-File\Siyah-Modern-Kitap-Kapagi-Tasarimi.png
 wwwroot\resorce\author-File\Turuncu-Sari-Siyah-Sade-Kisisel-Gelisim-Kitap-Kapagi.png
 wwwroot\resorce\product-images\2025-05-05-at-18-05-15.jpeg
+wwwroot\resorce\product-images\Blue-Green-Illustrative-Magic-World-Kids-Book-Cover-.png
 wwwroot\resorce\product-images\closeicon.png
 wwwroot\resorce\product-images\Cream-Black-Typography-Loop-Brand-Logo.png
 wwwroot\resorce\product-images\deleteicon.png
@@ -107,6 +108,8 @@ wwwroot\resorce\workOrder-images\Cream-Black-Typography-Loop-Brand-Logo.png
 wwwroot\resorce\workOrder-images\Cream-Minimalist-Oval-Floral-Handmade-Candle-Business-Logo.png
 wwwroot\resorce\workOrder-images\Cute-Anime-Cartoon-Illustration-Girl-Avatar.png
 wwwroot\resorce\workOrder-images\Dark-Green-Luxury-Real-Estate-Logo.png
+wwwroot\resorce\workOrder-images\furniture-thumbnail.png
+wwwroot\resorce\workOrder-images\leaf-text-thumbnail.png
 wwwroot\resorce\workOrder-images\Pink-and-Orange-Playful-Anime-Girl-Avatar--.png
 wwwroot\resorce\workOrder-images\Projeler.pdf
 wwwroot\resorce\workOrder-images\Rahatlatici-Romantik-Kitap-Kapagi.png

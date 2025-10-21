@@ -27,6 +27,7 @@ namespace YayinEviApi.Application.DTOs.MaterialDtos
         public string? ImagePath { get; set; }
         public string? UnitId { get; set; }
         public string? UnitName { get; set; }
+        public string? Serie { get; set; }
         public IList<FileManagement>? MaterialFiles { get; set; }
     }
 }
