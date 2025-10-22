@@ -4,7 +4,7 @@ using YayinEviApi.Persistence.Contexts;
 
 namespace YayinEviApi.Persistence.Repositories.WarehouseR
 {
-    public class StockCountRepository : GeneralRepository<StockCount>,IStockCountRepository
+    public class StockCountRepository : GetNewCodeRepository<StockCount>,IStockCountRepository
     {
         public StockCountRepository(YayinEviApiDbContext context) : base(context)
         {

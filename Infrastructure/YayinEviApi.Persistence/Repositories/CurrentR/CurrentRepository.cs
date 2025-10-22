@@ -4,7 +4,7 @@ using YayinEviApi.Persistence.Contexts;
 
 namespace YayinEviApi.Persistence.Repositories.CurrentR
 {
-    public class CurrentRepository : GeneralRepository<Current>, ICurrentRepository
+    public class CurrentRepository : GetNewCodeRepository<Current>, ICurrentRepository
     {
         public CurrentRepository(YayinEviApiDbContext context) : base(context)
         {

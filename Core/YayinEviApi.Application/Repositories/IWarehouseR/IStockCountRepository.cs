@@ -2,7 +2,7 @@
 
 namespace YayinEviApi.Application.Repositories.IWarehouseR
 {
-    public interface IStockCountRepository:IGeneralRepository<StockCount>
+    public interface IStockCountRepository:IGetNewCode<StockCount>
     {
     }
 }

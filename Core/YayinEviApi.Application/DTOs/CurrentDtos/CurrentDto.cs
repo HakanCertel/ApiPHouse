@@ -23,6 +23,7 @@ namespace YayinEviApi.Application.DTOs.CurrentDtos
         public string? County { get; set; }
         public string? Town { get; set; }
         public string? Description { get; set; }
+        public string? Serie { get; set; }
         public ICollection<SubCurrent>? SubCurrents { get; set; }
         public ICollection<SubAddress>? SubAddresses { get; set; }
     }

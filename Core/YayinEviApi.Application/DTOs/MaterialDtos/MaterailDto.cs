@@ -28,6 +28,6 @@ namespace YayinEviApi.Application.DTOs.MaterialDtos
         public string? UnitId { get; set; }
         public string? UnitName { get; set; }
         public string? Serie { get; set; }
-        public IList<FileManagement>? MaterialFiles { get; set; }
+        public List<FileManagement>? MaterialFiles { get; set; }
     }
 }

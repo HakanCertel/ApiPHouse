@@ -3,6 +3,7 @@
     public class StockCountDto
     {
         public string? Id { get; set; }
+        public string? Code { get; set; }
         public string? DocumentCode { get; set; }
         public DateTime? DocumenDate { get; set; }
         public bool IsConfirmed { get; set; }
@@ -12,5 +13,6 @@
         public string? CreatingUserName { get; set; }
         public string? UpdatingUserId { get; set; }
         public string? UpdatingUserName { get; set; }
+        public string? Serie { get; set; }
     }
 }

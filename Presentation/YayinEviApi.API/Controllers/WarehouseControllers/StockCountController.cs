@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Net;
 using YayinEviApi.Application.Abstractions.Services;
+using YayinEviApi.Application.DTOs.CurrentDtos;
 using YayinEviApi.Application.DTOs.User;
 using YayinEviApi.Application.DTOs.WarehouseDtos;
 using YayinEviApi.Application.Repositories.IWarehouseR;
@@ -73,9 +74,13 @@ namespace YayinEviApi.API.Controllers.WarehouseControllers
         [HttpPost]
         public async Task<IActionResult> Add(StockCountDto stockCount)
         {
+            if (_stockCountRepository.Select(x => x.Code == stockCount.Code, x => x).Any())
+            {
+                stockCount.Code = _stockCountRepository.GetNewCodeAsync(stockCount.Serie, x => x.Code).Result?.ToString();
+            }
             StockCount sc = new StockCount
             {
-                DocumentCode=stockCount.DocumentCode,
+                Code=stockCount.Code,
                 DocumentDate=Convert.ToDateTime( stockCount.DocumenDate),
                 CreatingUserId=_user.UserId,
                 ConfirmDate=stockCount.ConfirmDate,
@@ -255,6 +260,14 @@ namespace YayinEviApi.API.Controllers.WarehouseControllers
             await _stockCountItemsRepository.RemoveAsync(id);
             await _stockCountItemsRepository.SaveAsync();
             return Ok();
+        }
+
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetNewCode(string serie = "CNT")
+        {
+            var newCode = await _stockCountRepository.GetNewCodeAsync(serie, x => x.Code);
+
+            return Ok(new { newCode });
         }
     }
 }

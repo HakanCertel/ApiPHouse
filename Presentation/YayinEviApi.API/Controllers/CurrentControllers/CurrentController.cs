@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Net;
 using YayinEviApi.Application.Abstractions.Services;
 using YayinEviApi.Application.DTOs.CurrentDtos;
+using YayinEviApi.Application.DTOs.MaterialDtos;
 using YayinEviApi.Application.DTOs.User;
 using YayinEviApi.Application.Repositories.ICurrentR;
 using YayinEviApi.Application.RequestParameters;
@@ -92,6 +93,10 @@ namespace YayinEviApi.API.Controllers
         [HttpPost()]
         public async Task<IActionResult> Add(CurrentDto currentDto)
         {
+            if (_currentRepository.Select(x => x.Code == currentDto.Code, x => x).Any())
+            {
+                currentDto.Code = _currentRepository.GetNewCodeAsync(currentDto.Serie, x => x.Code).Result?.ToString();
+            }
             Current current = new Current
             {
                 Name = currentDto.Name,
@@ -156,6 +161,13 @@ namespace YayinEviApi.API.Controllers
             await _currentRepository.RemoveAsync(id);
             await _currentRepository.SaveAsync();
             return Ok();
+        }
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetNewCode(string serie = "MTR")
+        {
+            var newCode = await _currentRepository.GetNewCodeAsync(serie, x => x.Code);
+
+            return Ok(new { newCode });
         }
 
     }

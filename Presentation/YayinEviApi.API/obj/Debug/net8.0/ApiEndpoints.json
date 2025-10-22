@@ -641,6 +641,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "YayinEviApi.API.Controllers.CurrentController",
+    "Method": "GetNewCode",
+    "RelativePath": "api/Current/GetNewCode",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "serie",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "YayinEviApi.API.Controllers.DepartmentController",
     "Method": "Add",
     "RelativePath": "api/Department",

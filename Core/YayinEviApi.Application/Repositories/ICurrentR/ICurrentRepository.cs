@@ -2,7 +2,7 @@
 
 namespace YayinEviApi.Application.Repositories.ICurrentR
 {
-    public interface ICurrentRepository:IGeneralRepository<Current>
+    public interface ICurrentRepository:IGetNewCode<Current>
     {
     }
 }
