@@ -26,14 +26,19 @@ namespace YayinEviApi.API.Controllers.WarehouseControllers
             _cellofWareHouseRepository = cellofWareHouseRepository;
             _userService = userService;
 
+            _cellofWarehouseExpression = x => x.Id != null;
             _user = _userService.GetUser().Result;
         }
 
         [HttpGet("{id?}")]
-        public async Task<IActionResult> GetAll(string? id)
+        public async Task<IActionResult> GetAll(string? id,[FromQuery]string? warehouseId)
         {
-            _cellofWarehouseExpression = id == null ? null : x => x.ShelfofWarehouseId.ToString() == id;
-            var howList = _cellofWarehouseExpression == null ? _cellofWareHouseRepository.Table : _cellofWareHouseRepository.Table.Where(_cellofWarehouseExpression);
+            if (id != null)
+                _cellofWarehouseExpression = x => x.ShelfofWarehouseId.ToString() == id;
+            else if(warehouseId != null)
+                _cellofWarehouseExpression=x=>x.ShelfofWarehouse.HallofWarehouse.WarehouseId.ToString()==warehouseId;
+            
+            var howList = _cellofWareHouseRepository.Table.Where(_cellofWarehouseExpression);
 
             var warehouses = howList.Select(x => new CellofWarehouseDto
             {

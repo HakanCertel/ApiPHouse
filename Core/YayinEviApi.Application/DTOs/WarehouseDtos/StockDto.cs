@@ -24,5 +24,9 @@
         public decimal? Quantity { get; set; }
         public decimal? RezervationQuantity { get; set; }
         public decimal? UsableQuantity { get; set; }
+        public decimal? QuantityBeforeUpdated { get; set; }
+        public string? MovmentClassItemId { get; set; }
+
+
     }
 }

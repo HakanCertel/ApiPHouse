@@ -14,6 +14,7 @@
         public decimal? RezervedQuantity { get; set; }
         public decimal? Price { get; set; }
         public decimal? ItemDiscountRate { get; set; }
+        public decimal? DiscountTotal { get; set; }
         public decimal? NetTotal { get; set; }
         public decimal? TaxTotal { get; set; }
         public decimal? GeneralTotal { get; set; }

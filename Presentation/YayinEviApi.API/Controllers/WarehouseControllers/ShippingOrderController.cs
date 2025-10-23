@@ -42,8 +42,11 @@ namespace YayinEviApi.API.Controllers.WarehouseControllers
         public async Task<IActionResult> GetAll([FromQuery] GetAllShoppingOrderQueryRequest query)
         {
            
-             _shippingOrderExpression = query.State== "Tümü"?x=>x.Id!=null&&x.IsActive==query.Cancel: query.State!=null? x=>x.ShippingOrderState==query.State.GetEnum<WorkState>():x=>x.Id!=null;
-            
+             _shippingOrderExpression = query.State== "Tümü"?x=>x.ShippingOrderState!="Tamamlandı".GetEnum<WorkState>()&&x.IsActive==query.Cancel: query.State!=null? x=>x.ShippingOrderState==query.State.GetEnum<WorkState>():x=>x.Id!=null;
+            if (query.State == "Beklemede")
+            {
+                _shippingOrderExpression = x => x.ShippingOrderState == query.State.GetEnum<WorkState>() || x.ShippingOrderState == "Hazır Değil".GetEnum<WorkState>();
+            }
             if (query.IsLoggingUser == true)
             {
                 _shippingOrderExpression=x=>x.AssignedUserId==_user.UserId&&x.IsActive;
@@ -220,7 +223,7 @@ namespace YayinEviApi.API.Controllers.WarehouseControllers
                     ShippingOrderState=ship.ShippingOrderState.GetEnum<WorkState>(),
                     AssignedUserId = ship.AssignedUserId,
                     UpdatingUserId=_user.UserId,
-                    ProccessedQuantity=ship.ProccessedQuantity,
+                    ProccessedQuantity=Convert.ToDecimal(ship.ProccessedQuantity),
                 };
                 _soList.Add(_so);
             }
@@ -297,7 +300,7 @@ namespace YayinEviApi.API.Controllers.WarehouseControllers
         public async Task<IActionResult> GetAllOrderForUser()
         {
 
-            var shippings = _assignedUserToShippingWorkRepository.Table.Where(x => x.UserId.ToString() == _user.UserId && x.IsActive).Select(x => new
+            var shippings = _assignedUserToShippingWorkRepository.Table.Where(x => x.UserId == _user.UserId && x.IsActive ).Select(x => new
             {
                 assignedWork = x,
                 ship = x.ShippingOrder,

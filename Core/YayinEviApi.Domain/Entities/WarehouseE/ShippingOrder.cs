@@ -1,4 +1,5 @@
-﻿using YayinEviApi.Domain.Entities.Common;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using YayinEviApi.Domain.Entities.Common;
 using YayinEviApi.Domain.Entities.SalesE;
 using YayinEviApi.Domain.Enum;
 
@@ -22,10 +23,13 @@ namespace YayinEviApi.Domain.Entities.WarehouseE
         public DateTime ShippingDate { get; set; }
         public DateTime? ShippedDate { get; set; }
         public WorkState ShippingOrderState { get; set; }
-        public decimal? ProccessedQuantity { get; set; }
+        public decimal ProccessedQuantity { get; set; } = 0;
         public SaleItem SaleItem { get; set; }
         public Sale Sale { get; set; }
         public ICollection<AssignedUserToShippingWork> AssignedUserToShippingWorks { get; set; }
+
+        [NotMapped]
+        public override string? Code { get ; set ; }
 
     }
 }

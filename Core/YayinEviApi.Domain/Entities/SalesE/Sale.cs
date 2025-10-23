@@ -19,6 +19,7 @@ namespace YayinEviApi.Domain.Entities.SalesE
         public decimal? MainDiscountRate { get; set; }
         public decimal? FixDiscount { get; set; }
         public bool IsSendedShippingOrder { get; set; }
+        public bool IsCompleted { get; set; }
         public Current Current { get; set; }
         public SubCurrent DeliveryCurrent { get; set; }
         public ICollection<SaleItem> SaleItems { get; set; }

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Net;
 using YayinEviApi.Application.Abstractions.Services;
+using YayinEviApi.Application.DTOs.MaterialDtos;
 using YayinEviApi.Application.DTOs.ShipDtos;
 using YayinEviApi.Application.DTOs.User;
 using YayinEviApi.Application.Repositories.IShipR;
@@ -43,6 +44,7 @@ namespace YayinEviApi.API.Controllers.ShipControllers
             {
                 Id=x.ship.Id.ToString(),
                 DocumentCode=x.ship.DocumentCode,
+                Code=x.ship.Code,
                 DocumentDate=x.ship.DocumentDate,
                 CreatingUserId=x.ship.CreatingUserId,
                 CreatingUserName = x.cUserName,
@@ -55,7 +57,9 @@ namespace YayinEviApi.API.Controllers.ShipControllers
                 Country=x.ship.Country,
                 County=x.ship.County,
                 CurrentId = x.ship.CurrentId.ToString(),
-                CurrentName = x.ship.CurrentName,
+                CurrentCode=x.ship.Current.Code,
+                CurrentName = x.ship.Current.Name,
+                CUrrentAddress=x.ship.Current.Address,
                 Town = x.ship.Town,
                 
             }).ToList();
@@ -71,12 +75,14 @@ namespace YayinEviApi.API.Controllers.ShipControllers
             var sc = await _shipRepository.Select(x=>x.Id.ToString()==id, x => new
             {
                 ship = x,
+                //warehouse=x.ShipCellofWarehouse.ShelfofWarehouse.HallofWarehouse.Warehouse,
                 current=x.Current,
                 cUserName = _userService.GetUser(x.CreatingUserId).Result.NameSurname,
                 uUserName = x.UpdatingUserId != null ? _userService.GetUser(x.UpdatingUserId).Result.NameSurname : null,
             }).Select(x => new ShipDto
             {
                 Id = x.ship.Id.ToString(),
+                Code=x.ship.Code,
                 DocumentCode = x.ship.DocumentCode,
                 DocumentDate = x.ship.DocumentDate,
                 CreatingUserId = x.ship.CreatingUserId,
@@ -86,12 +92,13 @@ namespace YayinEviApi.API.Controllers.ShipControllers
                 ShipCellofWarehouseId = x.ship.ShipCellofWarehouseId.ToString(),
                 ShipCellofWarehouseName = x.ship.ShipCellofWarehouse.Name,
                 WarehouseName=x.ship.ShipCellofWarehouse.ShelfofWarehouse.HallofWarehouse.Warehouse.Name,
+                WarehouseId=x.ship.ShipCellofWarehouse.ShelfofWarehouse.HallofWarehouse.Warehouse.Id.ToString(),
                 CurrentId = x.ship.CurrentId.ToString(),
                 CurrentCode=x.current.Code,
-                Address = x.current.Address,
-                Country = x.current.Country,
-                County = x.current.County,
                 CurrentName=x.current.Name,
+                Address = x.current.Address,
+                County = x.current.County,
+                Country = x.current.Country,
                 Town = x.current.Town,
                 CreatedDate= x.ship.CreatedDate
 
@@ -102,8 +109,13 @@ namespace YayinEviApi.API.Controllers.ShipControllers
         [HttpPost]
         public async Task<IActionResult> Add(ShipDto ship)
         {
+            if (_shipRepository.Select(x => x.Code == ship.Code, x => x).Any())
+            {
+                ship.Code = _shipRepository.GetNewCodeAsync(ship.Serie, x => x.Code).Result?.ToString();
+            }
             Ship ga = new Ship
             {
+                Code=ship.Code,
                 DocumentCode= ship.DocumentCode,
                 DocumentDate=Convert.ToDateTime(ship.DocumentDate),
                 CreatingUserId=_user.UserId,
@@ -126,6 +138,7 @@ namespace YayinEviApi.API.Controllers.ShipControllers
             _shipRepository.Update(new()
             {
                 Id=Guid.Parse(ship.Id),
+                Code=ship.Code,
                 DocumentCode= ship.DocumentCode,
                 DocumentDate=Convert.ToDateTime(ship.DocumentDate),
                 CreatingUserId= ship.CreatingUserId,
@@ -165,6 +178,7 @@ namespace YayinEviApi.API.Controllers.ShipControllers
             var stockCountItems = _shipItemRepository.Table.Where(x => x.ParentId.ToString() == id).Select(x => new
             {
                 items = x,
+                material=x.Material,
                 parent = x.Parent,
                 cell = x.Parent.ShipCellofWarehouse,
                 cUserName = _userService.GetUser(x.Parent.CreatingUserId).Result.NameSurname,
@@ -176,9 +190,9 @@ namespace YayinEviApi.API.Controllers.ShipControllers
                 ParentCode=x.parent.DocumentCode,
                 DocumentDate=x.parent.DocumentDate,
                 Quantity=x.items.Quantity,
-                UnitId=x.items.UnitId.ToString(),
-                UnitCode=x.items.Unit.Code,
-                UnitName=x.items.Unit.Name,
+                UnitId=x.material.UnitId.ToString(),
+                UnitCode=x.material.Unit.Code,
+                UnitName=x.material.Unit.Name,
                 OutgoingCellId=x.cell.Id.ToString(),
                 OutgoingCellName=x.cell.Name,
                 MaterialId=x.items.MaterialId.ToString(),
@@ -267,6 +281,14 @@ namespace YayinEviApi.API.Controllers.ShipControllers
             await _shipItemRepository.RemoveAsync(id);
             await _shipItemRepository.SaveAsync();
             return Ok();
+        }
+
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetNewCode(string serie = "IRS")
+        {
+            var newCode = await _shipRepository.GetNewCodeAsync(serie, x => x.Code);
+
+            return Ok(new { newCode });
         }
     }
 }

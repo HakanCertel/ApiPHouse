@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 using System.Net;
 using YayinEviApi.Application.Abstractions.Services;
+using YayinEviApi.Application.DTOs.CurrentDtos;
 using YayinEviApi.Application.DTOs.SaleDtos;
 using YayinEviApi.Application.DTOs.User;
 using YayinEviApi.Application.Repositories.ISaleR;
@@ -25,14 +27,17 @@ namespace YayinEviApi.API.Controllers.SaleControllers
         private IRezervationService _rezervationService;
         readonly ISaleRepository _saleRepository;
         readonly ISaleItemRepository _saleItemRepository;
+        private Expression<Func<SaleItem,bool>> _saleItemExpression;
 
         public SaleController(ISaleRepository saleRepository, IUserService userService, ISaleItemRepository saleItemRepository, IRezervationService rezervationService)
         {
             _saleRepository = saleRepository;
-            _userService = userService;
-            _user = _userService.GetUser().Result;
             _saleItemRepository = saleItemRepository;
             _rezervationService = rezervationService;
+            
+            _userService = userService;
+            _user = _userService.GetUser().Result;
+            _saleItemExpression = x => x.Id != null && x.IsActive;
         }
         [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery] Pagination pagination)
@@ -134,6 +139,10 @@ namespace YayinEviApi.API.Controllers.SaleControllers
         [HttpPost]
         public async Task<IActionResult> Add(SaleDto sale)
         {
+            if (_saleRepository.Select(x => x.Code == sale.Code, x => x).Any())
+            {
+                sale.Code = _saleRepository.GetNewCodeAsync(sale.Serie, x => x.Code).Result?.ToString();
+            }
             Sale _sale = new Sale
             {
                 Code= sale.Code,
@@ -203,57 +212,64 @@ namespace YayinEviApi.API.Controllers.SaleControllers
         }
 
         [HttpGet("[action]/{id?}")]
-        public async Task<IActionResult> GetAllByParentId(string? id)
+        public async Task<IActionResult> GetAllByParentId(string? id,[FromQuery]string? currentId)
         {
-            var saleItems = _saleItemRepository.Table.Where(x => x.ParentId == Guid.Parse(id)).Select(x => new
-            {
-                item = x,
-                parent = x.Parent,
-                cUserName = _userService.GetUser(x.Parent.CreatingUserId).Result.NameSurname,
-                uUserName = x.Parent.UpdatingUserId != null ? _userService.GetUser(x.Parent.UpdatingUserId).Result.NameSurname:null,
-                net= x.Quantity * x.Price-(x.Quantity*x.Price*x.ItemDiscountRate/100),
-                kdv= (x.Quantity * x.Price - (x.Quantity * x.Price * x.ItemDiscountRate / 100)) *x.TaxType.toName().TaxConverter(),
-                material=x.Material,
-                current=x.Parent.Current,
-                //deliveryCur=x.Parent.DeliveryCurrent,
-                //rezercQ=_rezervationService.GetSingle(x.Id.ToString()).RezervationQuantity,
+            if(currentId!=null)
+                _saleItemExpression=x=>x.Parent.CurrentId.ToString()==currentId;
+            else if(id!=null)
+                _saleItemExpression = x => x.ParentId.ToString() == id;
 
-            }).ToList().Select(x => new SaleItemDto
-            {
-                Id = x.item.Id.ToString(),
-                ParentId=x.item.ParentId.ToString(),
-                ParentCode=x.parent.Code,
-                DocumentDate=x.parent.DocumentDate,
-                Quantity=x.item.Quantity,
-                RezervedQuantity= _rezervationService.GetSingle(x.item.Id.ToString()).Result==null?0: _rezervationService.GetSingle(x.item.Id.ToString()).Result.RezervationQuantity,
-                MaterialUnitId = x.item.Material.UnitId.ToString(),
-                //MaterialUnitName = x.material.Unit.Name,
-                MaterialId=x.material.Id.ToString(),
-                MaterialCode=x.material.Code,
-                MaterialName=x.material.Name,
-                DeliveryDate=x.parent.DeliveryDate,
-                CurrencyType=x.parent.CurrencyType.toName(),
-                CurrentId=x.current.Id.ToString(),
-                CurrentCode=x.current.Code,
-                CurrentName=x.current.Name,
-                CurrentAddress=x.current.Address,
-                CurrentCountry=x.current.Country,
-                CurrentCounty=x.current.County,
-                //DeliveryCurrentId=x.deliveryCur.ToString(),
-                //DeliveryCurrentCode=x.deliveryCur.Code,
-                //DeliveryCurrentName=x.deliveryCur.Name,
-                //DeliveryCurrentCountry=x.deliveryCur.Country,
-                //DeliveryCurrentCounty=x.deliveryCur.County,
-                //DeliveryCurrentAddress=x.deliveryCur.Address,
-                Price=x.item.Price,
-                TaxType=x.item.TaxType.toName(),
-                ItemDiscountRate=x.item.ItemDiscountRate,
-                NetTotal=x.net,
-                TaxTotal=x.kdv,
-                GeneralTotal=x.net+x.kdv,
-                IsActive=x.item.IsActive,
-                IsSendedShippingOrder=x.item.IsSendedShippingOrder,
-            }).ToList();
+            var saleItems = _saleItemRepository.Table.Where(_saleItemExpression).Select(x => new
+                {
+                    item = x,
+                    parent = x.Parent,
+                    cUserName = _userService.GetUser(x.Parent.CreatingUserId).Result.NameSurname,
+                    uUserName = x.Parent.UpdatingUserId != null ? _userService.GetUser(x.Parent.UpdatingUserId).Result.NameSurname : null,
+                    net = x.Quantity * x.Price - (x.Quantity * x.Price * x.ItemDiscountRate / 100),
+                    kdv = (x.Quantity * x.Price - (x.Quantity * x.Price * x.ItemDiscountRate / 100)) * x.TaxType.toName().TaxConverter(),
+                    material = x.Material,
+                    discount = (x.Quantity * x.Price * x.ItemDiscountRate / 100),
+                    current = x.Parent.Current,
+                    //deliveryCur=x.Parent.DeliveryCurrent,
+                    //rezercQ=_rezervationService.GetSingle(x.Id.ToString()).RezervationQuantity,
+
+                }).ToList().Select(x => new SaleItemDto
+                {
+                    Id = x.item.Id.ToString(),
+                    ParentId = x.item.ParentId.ToString(),
+                    ParentCode = x.parent.Code,
+                    DocumentDate = x.parent.DocumentDate,
+                    Quantity = x.item.Quantity,
+                    RezervedQuantity = _rezervationService.GetSingle(x.item.Id.ToString()).Result == null ? 0 : _rezervationService.GetSingle(x.item.Id.ToString()).Result.RezervationQuantity,
+                    MaterialUnitId = x.item.Material.UnitId.ToString(),
+                    //MaterialUnitName = x.material.Unit.Name,
+                    MaterialId = x.material.Id.ToString(),
+                    MaterialCode = x.material.Code,
+                    MaterialName = x.material.Name,
+                    DeliveryDate = x.parent.DeliveryDate,
+                    CurrencyType = x.parent.CurrencyType.toName(),
+                    CurrentId = x.current.Id.ToString(),
+                    CurrentCode = x.current.Code,
+                    CurrentName = x.current.Name,
+                    CurrentAddress = x.current.Address,
+                    CurrentCountry = x.current.Country,
+                    CurrentCounty = x.current.County,
+                    //DeliveryCurrentId=x.deliveryCur.ToString(),
+                    //DeliveryCurrentCode=x.deliveryCur.Code,
+                    //DeliveryCurrentName=x.deliveryCur.Name,
+                    //DeliveryCurrentCountry=x.deliveryCur.Country,
+                    //DeliveryCurrentCounty=x.deliveryCur.County,
+                    //DeliveryCurrentAddress=x.deliveryCur.Address,
+                    Price = x.item.Price,
+                    TaxType = x.item.TaxType.toName(),
+                    ItemDiscountRate = x.item.ItemDiscountRate,
+                    DiscountTotal = x.discount,
+                    NetTotal = x.net,
+                    TaxTotal = x.kdv,
+                    GeneralTotal = x.net + x.kdv,
+                    IsActive = x.item.IsActive,
+                    IsSendedShippingOrder = x.item.IsSendedShippingOrder,
+                }).ToList();
 
             return Ok(saleItems);
         }
@@ -343,6 +359,14 @@ namespace YayinEviApi.API.Controllers.SaleControllers
             await _saleItemRepository.RemoveAsync(id);
             await _saleItemRepository.SaveAsync();
             return Ok();
+        }
+
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetNewCode(string serie = "ORD")
+        {
+            var newCode = await _saleRepository.GetNewCodeAsync(serie, x => x.Code);
+
+            return Ok(new { newCode });
         }
     }
 }

@@ -30,15 +30,22 @@ namespace YayinEviApi.API.Controllers.WarehouseControllers
             _userService = userService;
             _stockRepository = stockRepository;
             _stockMovementRepository = stockMovementRepository;
-            _user = _userService.GetUser().Result;
             _rezervationRepository = rezervationRepository;
+            
+            _user = _userService.GetUser().Result;
+            _filterExpressionStock = x => x.Id != null;
         }
 
-        [HttpGet("{id?}")]
-        public async Task<IActionResult> GetAll(string? id)
+        [HttpGet("{materialId?}")]
+        public async Task<IActionResult> GetAll(string? materialId, [FromQuery] string? warehouseId)
         {
-            _filterExpressionStock = id == null ? null : x => x.MaterialId.ToString() == id;
-            
+            if(materialId!=null&&warehouseId==null)
+                _filterExpressionStock =x => x.MaterialId.ToString() == materialId;
+            else if(warehouseId!=null&&materialId==null)
+                _filterExpressionStock=x=>x.CellofWarehouse.ShelfofWarehouse.HallofWarehouse.WarehouseId.ToString() == warehouseId;
+            else if(materialId != null && warehouseId != null)
+                _filterExpressionStock= x => x.MaterialId.ToString() == materialId&& x.CellofWarehouse.ShelfofWarehouse.HallofWarehouse.WarehouseId.ToString() == warehouseId;
+
             var stockList = _filterExpressionStock == null ? _stockRepository.Table : _stockRepository.Table.Where(_filterExpressionStock);
 
             var stocks = stockList.Select(x => new
@@ -57,9 +64,10 @@ namespace YayinEviApi.API.Controllers.WarehouseControllers
                 Quantity = x.stock.Quantity,
                 RezervationQuantity=x.rezervation,
                 UsableQuantity=x.stock.Quantity-x.rezervation,
-                UnitId = x.stock.UnitId.ToString(),
-                UnitCode = x.unit.Code,
-                UnitName = x.unit.Name,
+                QuantityBeforeUpdated=x.stock.Quantity,
+                UnitId = x.material.UnitId.ToString(),
+                UnitCode = x.material.Unit.Code,
+                UnitName = x.material.Unit.Name,
                 CellofWarehouseId = x.stock.CellofWarehouseId.ToString(),
                 CellofWarehouseCode = x.cell.Code,
                 CellofWarehouseName = x.cell.Name,
@@ -165,6 +173,30 @@ namespace YayinEviApi.API.Controllers.WarehouseControllers
             return Ok(hasStocks);
         }
 
+        [HttpPut("[action]")]
+        public async Task<IActionResult> UpdateEntiringStock(StockDto[] items)
+        {
+            if (items.Length > 0)
+            {
+                foreach (var item in items)
+                {
+                    var movementItem= await _stockMovementRepository.GetSingleAsync(x => x.MovementClassItemId == item.MovmentClassItemId);
+                    if (movementItem == null)
+                        return StatusCode(StatusCodes.Status404NotFound);
+                    var stock = _stockRepository.GetSingleAsync(x => x.Id.ToString() == item.Id).Result;
+                    item.Quantity= stock.Quantity+(stock.Quantity- movementItem.MovementQuantity);
+                    _stockRepository.Update(stock);
+                }
+              
+                await _stockRepository.SaveAsync();
+
+                return StatusCode(StatusCodes.Status200OK);
+            }
+
+            return StatusCode(StatusCodes.Status304NotModified);
+
+        }
+
         [HttpGet("[action]/{materialId?}")]
         public async Task<IActionResult> GetAllMovements(string? materialId)
         {
@@ -173,7 +205,7 @@ namespace YayinEviApi.API.Controllers.WarehouseControllers
 
             var stocksMovements = stockMovementsList.Select(x => new
             {
-                stock = x,
+                stockMovment = x,
                 material = x.Material,
                 unit = x.Unit,
                 enteringCell = x.EnteringCell,
@@ -187,21 +219,22 @@ namespace YayinEviApi.API.Controllers.WarehouseControllers
                 userNameSurname=_userService.GetUser(x.CreatingUserId).Result.NameSurname,
             }).Select(x => new StockMovementDto
             {
-                Id = x.stock.Id.ToString(),
-                UnitId = x.unit != null ? x.stock.UnitId.ToString():null,
-                UnitCode = x.unit!=null?x.unit.Code:null,
-                UnitName = x.unit != null ? x.unit.Name:null,
+                Id = x.stockMovment.Id.ToString(),
+                UnitId = x.material.Unit.Id.ToString(),
+                UnitCode = x.material.Unit.Code,
+                UnitName = x.material.Unit.Name,
                 MaterialId = x.material.Id.ToString(),
                 MaterialCode = x.material.Code,
                 MaterialName = x.material.Name,
-                CreatingUserId=x.stock.CreatingUserId,
+                CreatingUserId=x.stockMovment.CreatingUserId,
                 CreatingUserNameSurname=x.userNameSurname,
-                MovementClass=x.stock.MovementClass,
-                MovementClassCode=x.stock.MovementClassCode,
-                MovementClassId=x.stock.MovementClassId,
-                MovementQuantity=x.stock.MovementQuantity,
-                MovementDate=x.stock.CreatedDate,
-                OutgoingCellofWarehouseId =x.outgoingCell!=null? x.stock.OutgoingCellId.ToString():null,
+                MovementClass=x.stockMovment.MovementClass,
+                MovementClassCode=x.stockMovment.MovementClassCode,
+                MovementClassId=x.stockMovment.MovementClassId,
+                MovementClassItemId=x.stockMovment.MovementClassItemId,
+                MovementQuantity=x.stockMovment.MovementQuantity,
+                MovementDate=x.stockMovment.CreatedDate,
+                OutgoingCellofWarehouseId =x.outgoingCell!=null? x.stockMovment.OutgoingCellId.ToString():null,
                 OutgoingCellofWarehouseCode = x.outgoingCell != null? x.outgoingCell.Code:null,
                 OutgoingCellofWarehouseName = x.outgoingCell != null ? x.outgoingCell.Name:null,
                 OutgoingShelfofWarehouseId = x.outgoingCell != null ? x.outgoingShelf.Id.ToString():null,
@@ -213,7 +246,7 @@ namespace YayinEviApi.API.Controllers.WarehouseControllers
                 OutgoingWarehouseId = x.outgoingCell != null ? x.outgoingWarehouse.Id.ToString():null,
                 OutgoingWarehouseCode = x.outgoingCell != null ? x.outgoingWarehouse.Code:null,
                 OutgoingWarehouseName = x.outgoingCell != null ? x.outgoingWarehouse.Name:null,
-                EnteringCellofWarehouseId = x.stock.EnteringCellId.ToString(),
+                EnteringCellofWarehouseId = x.stockMovment.EnteringCellId.ToString(),
                 EnteringCellofWarehouseCode = x.enteringCell.Code,
                 EnteringCellofWarehouseName = x.enteringCell.Name,
                 EnteringShelfofWarehouseId = x.enteringShelf.Id.ToString(),
@@ -229,6 +262,7 @@ namespace YayinEviApi.API.Controllers.WarehouseControllers
 
             return Ok(stocksMovements);
         }
+
 
         [HttpGet("[action]")]
         public async Task<IActionResult> GetMovementsByClassId(string materialId,string classId)
@@ -248,7 +282,7 @@ namespace YayinEviApi.API.Controllers.WarehouseControllers
                 var stock = new StockMovement
                 {
                     MaterialId = Guid.Parse(item.MaterialId),
-                    UnitId = item.UnitId != null ? Guid.Parse(item.UnitId) : null,
+                    //UnitId = item.UnitId != null ? Guid.Parse(item.UnitId) : null,
                     MovementQuantity = Convert.ToDecimal(item.MovementQuantity),
                     EnteringCellId = item.EnteringCellofWarehouseId != null ? Guid.Parse(item.EnteringCellofWarehouseId):null,
                     OutgoingCellId =item.OutgoingCellofWarehouseId!=null? Guid.Parse(item.OutgoingCellofWarehouseId):null,
@@ -256,6 +290,7 @@ namespace YayinEviApi.API.Controllers.WarehouseControllers
                     MovementClass=item.MovementClass,
                     MovementClassCode=item.MovementClassCode,
                     MovementClassId=item.MovementClassId,
+                    MovementClassItemId=item.MovementClassItemId,
                 };
                 stocks.Add(stock);
             }
@@ -276,7 +311,7 @@ namespace YayinEviApi.API.Controllers.WarehouseControllers
                 {
                     Id= Guid.Parse(item.Id),
                     MaterialId = Guid.Parse(item.MaterialId),
-                    UnitId =item.UnitId!=null? Guid.Parse(item.UnitId):null,
+                    //UnitId =item.UnitId!=null? Guid.Parse(item.UnitId):null,
                     MovementQuantity = Convert.ToDecimal(item.MovementQuantity),
                     EnteringCellId = Guid.Parse(item.EnteringCellofWarehouseId),
                     OutgoingCellId = Guid.Parse(item.OutgoingCellofWarehouseId),

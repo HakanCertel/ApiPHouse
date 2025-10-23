@@ -1,4 +1,5 @@
-﻿using YayinEviApi.Domain.Entities.Common;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using YayinEviApi.Domain.Entities.Common;
 using YayinEviApi.Domain.Entities.MaterialE;
 using YayinEviApi.Domain.Entities.UnitE;
 
@@ -14,6 +15,9 @@ namespace YayinEviApi.Domain.Entities.WarehouseE
         public Material Material { get; set; }
         public CellofWarehouse CellofWarehouse { get; set; }
         public MaterialUnit Unit { get; set; }
+
+        [NotMapped]
+        public override string Code { get; set; }
 
     }
 }

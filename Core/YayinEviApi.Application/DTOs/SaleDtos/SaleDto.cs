@@ -36,6 +36,7 @@ namespace YayinEviApi.Application.DTOs.SaleDtos
         public bool IsSendedShippingOrder { get; set; }
         public decimal? MainDiscount { get; set; }
         public decimal? FixDiscount { get; set; }
+        public string? Serie { get; set; }
         public ICollection<SaleItem>? SaleItems { get; set; }
 
     }

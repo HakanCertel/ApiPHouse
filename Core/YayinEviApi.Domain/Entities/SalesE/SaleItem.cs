@@ -10,10 +10,12 @@ namespace YayinEviApi.Domain.Entities.SalesE
         public Guid? ParentId { get; set; }
         public Guid? MaterialId { get; set; }
         public decimal Quantity { get; set; }
+        public decimal ShippedQuantity { get; set; }
         public decimal Price { get; set; }
         public TaxType TaxType { get; set; }
         public decimal? ItemDiscountRate { get; set; }
         public bool IsSendedShippingOrder { get; set; }
+        public bool IsCompleted { get; set; }
 
         public Sale Parent { get; set; }
         public Material Material { get; set; }

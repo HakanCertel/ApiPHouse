@@ -16,6 +16,7 @@ namespace YayinEviApi.Domain.Entities.WarehouseE
         public string MovementClass { get; set; }
         public string MovementClassId { get; set; }
         public string? MovementClassCode { get; set; }
+        public string? MovementClassItemId { get; set; }
 
         public Material Material { get; set; }
         public MaterialUnit Unit { get; set; }

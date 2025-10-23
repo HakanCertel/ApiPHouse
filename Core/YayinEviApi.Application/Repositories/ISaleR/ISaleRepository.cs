@@ -2,7 +2,7 @@
 
 namespace YayinEviApi.Application.Repositories.ISaleR
 {
-    public interface ISaleRepository:IGeneralRepository<Sale>
+    public interface ISaleRepository: IGetNewCode<Sale>
     {
     }
 }

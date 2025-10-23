@@ -4,7 +4,7 @@ using YayinEviApi.Persistence.Contexts;
 
 namespace YayinEviApi.Persistence.Repositories.GoodsAcceptR
 {
-    public class ShipRepository : GeneralRepository<Ship>, IShipRepository
+    public class ShipRepository : GetNewCodeRepository<Ship>, IShipRepository
     {
         public ShipRepository(YayinEviApiDbContext context) : base(context)
         {

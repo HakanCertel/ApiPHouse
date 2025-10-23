@@ -718,12 +718,14 @@ namespace YayinEviApi.Persistence.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("FileName")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("boolean");
 
                     b.Property<string>("Path")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Storage")
@@ -1426,6 +1428,9 @@ namespace YayinEviApi.Persistence.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("boolean");
 
+                    b.Property<bool>("IsCompleted")
+                        .HasColumnType("boolean");
+
                     b.Property<bool>("IsSendedShippingOrder")
                         .HasColumnType("boolean");
 
@@ -1465,6 +1470,9 @@ namespace YayinEviApi.Persistence.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("boolean");
 
+                    b.Property<bool>("IsCompleted")
+                        .HasColumnType("boolean");
+
                     b.Property<bool>("IsSendedShippingOrder")
                         .HasColumnType("boolean");
 
@@ -1481,6 +1489,9 @@ namespace YayinEviApi.Persistence.Migrations
                         .HasColumnType("numeric");
 
                     b.Property<decimal>("Quantity")
+                        .HasColumnType("numeric");
+
+                    b.Property<decimal>("ShippedQuantity")
                         .HasColumnType("numeric");
 
                     b.Property<byte>("TaxType")
@@ -1921,9 +1932,6 @@ namespace YayinEviApi.Persistence.Migrations
                     b.Property<string>("AssignedUserId")
                         .HasColumnType("text");
 
-                    b.Property<string>("Code")
-                        .HasColumnType("text");
-
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp without time zone");
 
@@ -1958,7 +1966,7 @@ namespace YayinEviApi.Persistence.Migrations
                     b.Property<DateTime?>("OrderPackingDate")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<decimal?>("ProccessedQuantity")
+                    b.Property<decimal>("ProccessedQuantity")
                         .HasColumnType("numeric");
 
                     b.Property<Guid?>("SaleId")
@@ -1999,9 +2007,6 @@ namespace YayinEviApi.Persistence.Migrations
 
                     b.Property<Guid>("CellofWarehouseId")
                         .HasColumnType("uuid");
-
-                    b.Property<string>("Code")
-                        .HasColumnType("text");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp without time zone");
@@ -2052,7 +2057,6 @@ namespace YayinEviApi.Persistence.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("DocumentCode")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime>("DocumentDate")
@@ -2146,6 +2150,9 @@ namespace YayinEviApi.Persistence.Migrations
 
                     b.Property<string>("MovementClassId")
                         .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("MovementClassItemId")
                         .HasColumnType("text");
 
                     b.Property<decimal>("MovementQuantity")

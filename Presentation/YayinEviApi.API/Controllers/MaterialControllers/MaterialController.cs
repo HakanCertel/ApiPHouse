@@ -37,19 +37,21 @@ namespace YayinEviApi.API.Controllers.MaterialControllers
         public MaterialController(IMaterialRepository materialRepository, IUserService userService, IMaterialFileRepository materialFileRepository, IStorageService storageService, IMediator mediator, IFileManagementWriteRepository fileManagementWriteRepository, IFileManagementReadRepository fileManagementReadRepository)
         {
             _materialRepository = materialRepository;
+            _mediator = mediator;
             _userService = userService;
             _materialFileRepository = materialFileRepository;
             _storageService = storageService;
             _fileManagementWriteRepository = fileManagementWriteRepository;
             _fileManagementReadRepository = fileManagementReadRepository;
-
+           
+            _materailFilterExpression = x => x.Id != null;
             _user = _userService.GetUser().Result;
-            _mediator = mediator;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery] Pagination? pagination)
         {
+
             var totalMaterialCount = _materialRepository.GetAll(false).Count();
             var materialList = _materialRepository.Table.Select(x => new
             {
@@ -87,11 +89,15 @@ namespace YayinEviApi.API.Controllers.MaterialControllers
 
         }
 
-        [HttpGet("[action]")]
-        public async Task<IActionResult> GetAllWithoutPagination()
+        [HttpPost("[action]")]
+        public async Task<IActionResult> GetAllWithoutPagination([FromBody] string[] ids,[FromQuery] Pagination? pagination)
         {
             var totalMaterialCount = _materialRepository.GetAll(false).Count();
-            var materials = _materialRepository.Table.Select(x => new
+            if(ids!=null && ids.Length > 0)
+            {
+                _materailFilterExpression = x => !ids.Contains(x.Id.ToString());
+            }
+            var materials = _materialRepository.Table.Where(_materailFilterExpression).Select(x => new
             {
                 material = x,
                 wh = x.Warehouse != null ? x.Warehouse : new Warehouse(),

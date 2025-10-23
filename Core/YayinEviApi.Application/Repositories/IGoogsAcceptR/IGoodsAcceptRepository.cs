@@ -2,7 +2,7 @@
 
 namespace YayinEviApi.Application.Repositories.IGoogsAcceptR
 {
-    public interface IGoodsAcceptRepository:IGeneralRepository<GoodsAccep>
+    public interface IGoodsAcceptRepository:IGetNewCode<GoodsAccep>
     {
     }
 }

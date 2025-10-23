@@ -40,6 +40,7 @@ namespace YayinEviApi.API.Controllers.WarehouseControllers
             }).Select(x => new StockCountDto
             {
                Id=x.sCount.Id.ToString(),
+               Code=x.sCount.Code,
                DocumentCode=x.sCount.DocumentCode,
                DocumenDate=x.sCount.DocumentDate,
                IsConfirmed=x.sCount.IsConfirmed,
@@ -60,6 +61,7 @@ namespace YayinEviApi.API.Controllers.WarehouseControllers
             var sc = await _stockCountRepository.Select(x=>x.Id.ToString()==id, x => new StockCountDto
             {
                 Id = x.Id.ToString(),
+                Code= x.Code,
                 DocumentCode = x.DocumentCode,
                 DocumenDate = x.DocumentDate,
                 IsConfirmed = x.IsConfirmed,
@@ -101,6 +103,7 @@ namespace YayinEviApi.API.Controllers.WarehouseControllers
             _stockCountRepository.Update(new()
             {
                 Id=Guid.Parse(sc.Id),
+                Code=sc.Code,
                 DocumentCode=sc.DocumentCode,
                 DocumentDate=Convert.ToDateTime(sc.DocumenDate),
                 ConfirmDate=sc.ConfirmDate,
@@ -140,6 +143,7 @@ namespace YayinEviApi.API.Controllers.WarehouseControllers
             {
                 sCount = x.StockCount,
                 sCountItem = x,
+                material=x.Material,
                 cell = x.CellofWarehouse,
                 shelf = x.CellofWarehouse.ShelfofWarehouse,
                 hall = x.CellofWarehouse.ShelfofWarehouse.HallofWarehouse,
@@ -153,9 +157,9 @@ namespace YayinEviApi.API.Controllers.WarehouseControllers
                 StockCountCode=x.sCount.DocumentCode,
                 DocumentDate=x.sCount.DocumentDate,
                 Quantity=x.sCountItem.Quantity,
-                UnitId=x.sCountItem.UnitId.ToString(),
-                UnitCode=x.sCountItem.Unit.Code,
-                UnitName=x.sCountItem.Unit.Name,
+                UnitId=x.material.UnitId.ToString(),
+                UnitCode=x.material.Unit.Code,
+                UnitName=x.material.Unit.Name,
                 CellofWarehouseId=x.sCountItem.CellofWarehouseId.ToString(),
                 CellofWarehouseCode=x.sCountItem.CellofWarehouse.Code,
                 CellofWarehouseName=x.sCountItem.CellofWarehouse.Name,
@@ -213,7 +217,7 @@ namespace YayinEviApi.API.Controllers.WarehouseControllers
                 var countItem = new StockCountItems
                 {
                     MaterialId = Guid.Parse(item.MaterialId),
-                    UnitId =item.UnitId!=null? Guid.Parse(item.UnitId):null,
+                    //UnitId =item.UnitId!=null? Guid.Parse(item.UnitId):null,
                     Quantity=Convert.ToDecimal( item.Quantity),
                     StockCountId=Guid.Parse(item.StockCounttId),
                     CellofWarehouseId=Guid.Parse(item.CellofWarehouseId),
@@ -238,7 +242,7 @@ namespace YayinEviApi.API.Controllers.WarehouseControllers
                 {
                     Id= Guid.Parse(item.Id),
                     MaterialId = Guid.Parse(item.MaterialId),
-                    UnitId = item.UnitId != null ? Guid.Parse(item.UnitId) : null,
+                    //UnitId = item.UnitId != null ? Guid.Parse(item.UnitId) : null,
                     Quantity = Convert.ToDecimal(item.Quantity),
                     StockCountId = Guid.Parse(item.StockCounttId),
                     CellofWarehouseId = Guid.Parse(item.CellofWarehouseId),

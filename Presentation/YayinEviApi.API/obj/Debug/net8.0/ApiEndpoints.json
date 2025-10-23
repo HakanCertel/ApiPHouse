@@ -26,6 +26,11 @@
         "Name": "State",
         "Type": "System.String",
         "IsRequired": false
+      },
+      {
+        "Name": "Ids",
+        "Type": "System.String[]",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -263,6 +268,11 @@
       {
         "Name": "State",
         "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Ids",
+        "Type": "System.String[]",
         "IsRequired": false
       }
     ],
@@ -525,6 +535,11 @@
         "Name": "id",
         "Type": "System.String",
         "IsRequired": false
+      },
+      {
+        "Name": "warehouseId",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -571,6 +586,11 @@
       {
         "Name": "State",
         "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Ids",
+        "Type": "System.String[]",
         "IsRequired": false
       }
     ],
@@ -823,6 +843,11 @@
         "Name": "State",
         "Type": "System.String",
         "IsRequired": false
+      },
+      {
+        "Name": "Ids",
+        "Type": "System.String[]",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -967,6 +992,22 @@
         "Name": "id",
         "Type": "System.String",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "YayinEviApi.API.Controllers.GoodsAcceptControllers.GoodsAcceptController",
+    "Method": "GetNewCode",
+    "RelativePath": "api/GoodsAccept/GetNewCode",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "serie",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -1162,6 +1203,11 @@
         "Name": "State",
         "Type": "System.String",
         "IsRequired": false
+      },
+      {
+        "Name": "Ids",
+        "Type": "System.String[]",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -1239,10 +1285,41 @@
     "ContainingType": "YayinEviApi.API.Controllers.MaterialControllers.MaterialController",
     "Method": "GetAllWithoutPagination",
     "RelativePath": "api/Material/GetAllWithoutPagination",
-    "HttpMethod": "GET",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "ids",
+        "Type": "System.String[]",
+        "IsRequired": true
+      },
+      {
+        "Name": "Page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Size",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "IsActive",
+        "Type": "System.Nullable\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "State",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Ids",
+        "Type": "System.String[]",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": []
   },
   {
@@ -1853,6 +1930,11 @@
         "Name": "State",
         "Type": "System.String",
         "IsRequired": false
+      },
+      {
+        "Name": "Ids",
+        "Type": "System.String[]",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -2028,6 +2110,11 @@
         "Name": "State",
         "Type": "System.String",
         "IsRequired": false
+      },
+      {
+        "Name": "Ids",
+        "Type": "System.String[]",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -2140,6 +2227,11 @@
         "Name": "id",
         "Type": "System.String",
         "IsRequired": false
+      },
+      {
+        "Name": "currentId",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -2172,6 +2264,22 @@
         "Name": "id",
         "Type": "System.String",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "YayinEviApi.API.Controllers.SaleControllers.SaleController",
+    "Method": "GetNewCode",
+    "RelativePath": "api/Sale/GetNewCode",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "serie",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -2282,6 +2390,11 @@
       {
         "Name": "State",
         "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Ids",
+        "Type": "System.String[]",
         "IsRequired": false
       }
     ],
@@ -2427,6 +2540,22 @@
         "Name": "id",
         "Type": "System.String",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "YayinEviApi.API.Controllers.ShipControllers.ShipController",
+    "Method": "GetNewCode",
+    "RelativePath": "api/Ship/GetNewCode",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "serie",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -2598,13 +2727,18 @@
   {
     "ContainingType": "YayinEviApi.API.Controllers.WarehouseControllers.StockAndMovementsController",
     "Method": "GetAll",
-    "RelativePath": "api/StockAndMovements/{id}",
+    "RelativePath": "api/StockAndMovements/{materialId}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
+        "Name": "materialId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "warehouseId",
         "Type": "System.String",
         "IsRequired": false
       }
@@ -2685,6 +2819,22 @@
     "Method": "OutgoingItems",
     "RelativePath": "api/StockAndMovements/OutgoingItems",
     "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "items",
+        "Type": "YayinEviApi.Application.DTOs.WarehouseDtos.StockDto[]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "YayinEviApi.API.Controllers.WarehouseControllers.StockAndMovementsController",
+    "Method": "UpdateEntiringStock",
+    "RelativePath": "api/StockAndMovements/UpdateEntiringStock",
+    "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -2851,6 +3001,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "YayinEviApi.API.Controllers.WarehouseControllers.StockCountController",
+    "Method": "GetNewCode",
+    "RelativePath": "api/StockCount/GetNewCode",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "serie",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "YayinEviApi.API.Controllers.WarehouseControllers.TransferBetweenWarehousesController",
     "Method": "GetAll",
     "RelativePath": "api/TransferBetweenWarehouses",
@@ -2876,6 +3042,11 @@
       {
         "Name": "State",
         "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Ids",
+        "Type": "System.String[]",
         "IsRequired": false
       }
     ],
@@ -3257,6 +3428,11 @@
       {
         "Name": "State",
         "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Ids",
+        "Type": "System.String[]",
         "IsRequired": false
       }
     ],
@@ -3649,6 +3825,11 @@
       {
         "Name": "State",
         "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Ids",
+        "Type": "System.String[]",
         "IsRequired": false
       }
     ],

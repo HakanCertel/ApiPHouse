@@ -5,6 +5,7 @@ namespace YayinEviApi.Application.DTOs.GoodsAcceptDtos
     public class GoodsAcceptDto
     {
         public string? Id { get; set; }
+        public string? Code { get; set; }
         public string? AcceptCellofWarehouseId { get; set; }
         public string? AcceptCellofWarehouseName { get; set; }
         public string? WarehouseName { get; set; }
@@ -22,6 +23,7 @@ namespace YayinEviApi.Application.DTOs.GoodsAcceptDtos
         public string? UpdatingUserName { get; set; }
         public DateTime? CreatedDate { get; set; }
         public ICollection<GoodsAcceptItems>? GoodsAcceptItemList { get; set; }
+        public string? Serie { get; set; }
 
     }
 }

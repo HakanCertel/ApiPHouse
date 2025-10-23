@@ -2,7 +2,7 @@
 
 namespace YayinEviApi.Application.Repositories.IShipR
 {
-    public interface IShipRepository : IGeneralRepository<Ship>
+    public interface IShipRepository : IGetNewCode<Ship>
     {
     }
 }

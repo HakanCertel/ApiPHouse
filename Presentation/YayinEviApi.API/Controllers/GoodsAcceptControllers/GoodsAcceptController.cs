@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Net;
+using System.Reflection.Metadata.Ecma335;
 using YayinEviApi.Application.Abstractions.Services;
 using YayinEviApi.Application.DTOs.GoodsAcceptDtos;
 using YayinEviApi.Application.DTOs.User;
@@ -43,6 +44,7 @@ namespace YayinEviApi.API.Controllers.GoodsAcceptControllers
             }).Select(x => new GoodsAcceptDto
             {
                 Id=x.gAccept.Id.ToString(),
+                Code=x.gAccept.Code,
                 DocumentCode=x.gAccept.DocumentCode,
                 DocumentDate=x.gAccept.DocumentDate,
                 CreatingUserId=x.gAccept.CreatingUserId,
@@ -140,7 +142,7 @@ namespace YayinEviApi.API.Controllers.GoodsAcceptControllers
                 Address=goodsAccept.Address,
                 Country=goodsAccept.Country,
                 County=goodsAccept.County,
-                CurrentId=goodsAccept.CurrentId!=null?Guid.Parse(goodsAccept.CurrentId):null,
+                //CurrentId=goodsAccept.CurrentId!=null?Guid.Parse(goodsAccept.CurrentId):null,
                 CurrentName =goodsAccept.CurrentName,
                 Town=goodsAccept.Town,
                 CreatedDate= Convert.ToDateTime(goodsAccept.CreatedDate)
@@ -244,7 +246,7 @@ namespace YayinEviApi.API.Controllers.GoodsAcceptControllers
 
             await _goodsAccepItemRepository.SaveAsync();
 
-            return StatusCode((int)HttpStatusCode.Created);
+            return Ok(countItems);
         }
 
         [HttpPost("[action]")]
@@ -279,6 +281,14 @@ namespace YayinEviApi.API.Controllers.GoodsAcceptControllers
             await _goodsAccepItemRepository.RemoveAsync(id);
             await _goodsAccepItemRepository.SaveAsync();
             return Ok();
+        }
+
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetNewCode(string serie = "IRS")
+        {
+            var newCode = await _goodsAcceptRepository.GetNewCodeAsync(serie, x => x.Code);
+
+            return Ok(new { newCode });
         }
     }
 }

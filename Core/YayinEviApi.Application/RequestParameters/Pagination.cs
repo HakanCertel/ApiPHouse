@@ -6,6 +6,7 @@
         public int Size { get; set; } = 5;
         public bool? IsActive { get; set; } = true;
         public string? State { get; set; }
+        public string[]? Ids { get; set; }
 
     }
     public record NullablePagination
