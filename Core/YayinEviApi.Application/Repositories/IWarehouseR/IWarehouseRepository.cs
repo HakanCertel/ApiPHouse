@@ -7,7 +7,7 @@ using YayinEviApi.Domain.Entities.WarehouseE;
 
 namespace YayinEviApi.Application.Repositories.IWarehouseR
 {
-    public interface IWarehouseRepository:IGeneralRepository<Warehouse>
+    public interface IWarehouseRepository:IGetNewCode<Warehouse>
     {
     }
 }

@@ -125,7 +125,7 @@ namespace YayinEviApi.API.Controllers.WarehouseControllers
 
             await _stockRepository.SaveAsync();
 
-            hasStocks.AddRange(newStocks);
+            //hasStocks.AddRange(newStocks);
 
             return Ok(hasStocks);
         }
@@ -168,13 +168,13 @@ namespace YayinEviApi.API.Controllers.WarehouseControllers
 
             await _stockRepository.SaveAsync();
 
-            hasStocks.AddRange(newStocks);
+            //hasStocks.AddRange(newStocks);
 
             return Ok(hasStocks);
         }
 
         [HttpPut("[action]")]
-        public async Task<IActionResult> UpdateEntiringStock(StockDto[] items)
+        public async Task<IActionResult> UpdateEntiringStock(StockDto[] items,[FromQuery]bool isEntiring=true)
         {
             if (items.Length > 0)
             {
@@ -183,8 +183,15 @@ namespace YayinEviApi.API.Controllers.WarehouseControllers
                     var movementItem= await _stockMovementRepository.GetSingleAsync(x => x.MovementClassItemId == item.MovmentClassItemId);
                     if (movementItem == null)
                         return StatusCode(StatusCodes.Status404NotFound);
-                    var stock = _stockRepository.GetSingleAsync(x => x.Id.ToString() == item.Id).Result;
-                    item.Quantity= stock.Quantity+(stock.Quantity- movementItem.MovementQuantity);
+                    //stok miktarının güncellenmesi
+                    var stock = _stockRepository.GetSingleAsync(x => x.MaterialId.ToString() == item.MaterialId&&x.CellofWarehouseId.ToString()==item.CellofWarehouseId).Result;
+                    if(isEntiring)
+                        stock.Quantity= stock.Quantity+Convert.ToDecimal(item.Quantity- movementItem.MovementQuantity);
+                    else
+                        stock.Quantity = stock.Quantity - (Convert.ToDecimal(item.Quantity - movementItem.MovementQuantity));
+                    //Hareket miktarının güncellenmesi
+                    movementItem.MovementQuantity = Convert.ToDecimal(item.Quantity);
+                    _stockMovementRepository.Update(movementItem);
                     _stockRepository.Update(stock);
                 }
               
@@ -319,6 +326,7 @@ namespace YayinEviApi.API.Controllers.WarehouseControllers
                     MovementClass = item.MovementClass,
                     MovementClassCode = item.MovementClassCode,
                     MovementClassId = item.MovementClassId,
+                    MovementClassItemId=item.MovementClassItemId,
                     UpdatedDate= DateTime.Now,
                 };
                 stocks.Add(stock);

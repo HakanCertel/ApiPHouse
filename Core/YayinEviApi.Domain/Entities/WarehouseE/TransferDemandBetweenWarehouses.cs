@@ -19,8 +19,5 @@ namespace YayinEviApi.Domain.Entities.WarehouseE
         public CellofWarehouse TransferingCellofWarehouse { get; set; }
         public CellofWarehouse TransferedCellofWarehouse { get; set; }
 
-        [NotMapped]
-        public override string Code { get; set; }
-
     }
 }

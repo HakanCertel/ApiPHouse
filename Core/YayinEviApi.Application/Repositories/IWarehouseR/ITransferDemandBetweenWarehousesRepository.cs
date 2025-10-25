@@ -2,7 +2,7 @@
 
 namespace YayinEviApi.Application.Repositories.IWarehouseR
 {
-    public interface ITransferDemandBetweenWarehousesRepository:IGeneralRepository<TransferDemandBetweenWarehouses>
+    public interface ITransferDemandBetweenWarehousesRepository:IGetNewCode<TransferDemandBetweenWarehouses>
     {
     }
 }

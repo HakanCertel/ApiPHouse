@@ -4,7 +4,7 @@ using YayinEviApi.Persistence.Contexts;
 
 namespace YayinEviApi.Persistence.Repositories.WarehouseR
 {
-    public class TransferDemandBetweenWarehousesRepository : GeneralRepository<TransferDemandBetweenWarehouses>,ITransferDemandBetweenWarehousesRepository
+    public class TransferDemandBetweenWarehousesRepository : GetNewCodeRepository<TransferDemandBetweenWarehouses>,ITransferDemandBetweenWarehousesRepository
     {
         public TransferDemandBetweenWarehousesRepository(YayinEviApiDbContext context) : base(context)
         {

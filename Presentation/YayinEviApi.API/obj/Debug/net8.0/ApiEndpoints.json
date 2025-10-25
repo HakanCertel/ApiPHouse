@@ -2842,6 +2842,11 @@
         "Name": "items",
         "Type": "YayinEviApi.Application.DTOs.WarehouseDtos.StockDto[]",
         "IsRequired": true
+      },
+      {
+        "Name": "isEntiring",
+        "Type": "System.Boolean",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -3197,6 +3202,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "YayinEviApi.API.Controllers.WarehouseControllers.TransferBetweenWarehousesController",
+    "Method": "GetNewCode",
+    "RelativePath": "api/TransferBetweenWarehouses/GetNewCode",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "serie",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "YayinEviApi.API.Controllers.UsersController",
     "Method": "CreateUser",
     "RelativePath": "api/Users",
@@ -3398,6 +3419,22 @@
         "Name": "id",
         "Type": "System.String",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "YayinEviApi.API.Controllers.WarehouseControllers.WarehouseController",
+    "Method": "GetNewCode",
+    "RelativePath": "api/Warehouse/GetNewCode",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "serie",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []

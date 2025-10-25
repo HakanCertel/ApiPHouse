@@ -49,6 +49,7 @@ namespace YayinEviApi.API.Controllers.WarehouseControllers
             {
                 Id = x.tdbw.Id.ToString(),
                 DocumentCode = x.tdbw.DocumentCode,
+                Code= x.tdbw.Code,
                 DocumentDate = x.tdbw.DocumentDate,
                 IsConfirmed = x.tdbw.IsConfirmed,
                 ConfirmedDate = x.tdbw.ConfirmedDate,
@@ -82,6 +83,7 @@ namespace YayinEviApi.API.Controllers.WarehouseControllers
             {
                 Id = x.Id.ToString(),
                 DocumentCode = x.DocumentCode,
+                Code=x.Code,
                 DocumentDate = x.DocumentDate,
                 IsConfirmed = x.IsConfirmed,
                 ConfirmedDate = x.ConfirmedDate,
@@ -108,6 +110,7 @@ namespace YayinEviApi.API.Controllers.WarehouseControllers
             TransferDemandBetweenWarehouses sc = new TransferDemandBetweenWarehouses
             {
                 DocumentCode = transferDto.DocumentCode,
+                Code=transferDto.Code,
                 DocumentDate = Convert.ToDateTime(transferDto.DocumentDate),
                 CreatingUserId = _user.UserId,
                 ConfirmedDate = transferDto.ConfirmedDate,
@@ -124,6 +127,7 @@ namespace YayinEviApi.API.Controllers.WarehouseControllers
 
             await _transferDemandBetweenWarehousesRepository.SaveAsync();
             transferDto.Id=sc.Id.ToString();
+            transferDto.CreatingUserId=_user.UserId;
             return Ok(transferDto);
             //return StatusCode((int)HttpStatusCode.Created);
 
@@ -135,6 +139,7 @@ namespace YayinEviApi.API.Controllers.WarehouseControllers
             _transferDemandBetweenWarehousesRepository.Update(new()
             {
                 Id = Guid.Parse(sc.Id),
+                Code=sc.Code,
                 DocumentCode = sc.DocumentCode,
                 DocumentDate = Convert.ToDateTime(sc.DocumentDate),
                 ConfirmedDate = sc.ConfirmedDate,
@@ -171,6 +176,14 @@ namespace YayinEviApi.API.Controllers.WarehouseControllers
             await _transferDemandBetweenWarehousesRepository.RemoveAsync(id);
             await _transferDemandBetweenWarehousesRepository.SaveAsync();
             return Ok();
+        }
+
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetNewCode(string serie = "WHD")
+        {
+            var newCode = await _transferDemandBetweenWarehousesRepository.GetNewCodeAsync(serie, x => x.Code);
+
+            return Ok(new { newCode });
         }
 
         [HttpGet("[action]/{id?}")]
@@ -265,7 +278,7 @@ namespace YayinEviApi.API.Controllers.WarehouseControllers
 
             await _transferDemandItemBetweenWarehousesRepository.SaveAsync();
 
-            return StatusCode((int)HttpStatusCode.Created);
+            return Ok(countItems);
         }
 
         [HttpPost("[action]")]

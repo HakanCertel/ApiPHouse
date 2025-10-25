@@ -123,6 +123,7 @@ namespace YayinEviApi.API.Controllers.GoodsAcceptControllers
 
             await _goodsAcceptRepository.SaveAsync();
             goodsAccept.Id = ga.Id.ToString();
+            goodsAccept.CreatingUserId = _user.UserId;
             return Ok(goodsAccept);
             //return StatusCode((int)HttpStatusCode.Created);
 

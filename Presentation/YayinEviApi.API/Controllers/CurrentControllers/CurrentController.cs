@@ -85,7 +85,8 @@ namespace YayinEviApi.API.Controllers
                 Email = x.Email,
                 MobilePhone = x.MobilePhone,
                 PhoneNumber = x.PhoneNumber,
-                ResponsiblePerson = x.ResponsiblePerson
+                ResponsiblePerson = x.ResponsiblePerson,
+                IsActive=x.IsActive,
             }).FirstOrDefaultAsync(x => x.Id == id);
 
             return Ok(ageny);
@@ -116,7 +117,8 @@ namespace YayinEviApi.API.Controllers
                 Email = currentDto.Email,
                 MobilePhone = currentDto.MobilePhone,
                 PhoneNumber = currentDto.PhoneNumber,
-                ResponsiblePerson = currentDto.ResponsiblePerson
+                ResponsiblePerson = currentDto.ResponsiblePerson,
+                IsActive= currentDto.IsActive,
             };
             await _currentRepository.AddAsync(current);
             await _currentRepository.SaveAsync();
@@ -146,8 +148,8 @@ namespace YayinEviApi.API.Controllers
                 Email = currentDto.Email,
                 MobilePhone = currentDto.MobilePhone,
                 PhoneNumber = currentDto.PhoneNumber,
-                ResponsiblePerson = currentDto.ResponsiblePerson
-
+                ResponsiblePerson = currentDto.ResponsiblePerson,
+                IsActive= currentDto.IsActive,
             });
             await _currentRepository.SaveAsync();
 

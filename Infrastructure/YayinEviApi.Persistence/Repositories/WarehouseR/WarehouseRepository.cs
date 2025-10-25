@@ -4,7 +4,7 @@ using YayinEviApi.Persistence.Contexts;
 
 namespace YayinEviApi.Persistence.Repositories.WarehouseR
 {
-    public class WarehouseRepository : GeneralRepository<Warehouse>, IWarehouseRepository
+    public class WarehouseRepository : GetNewCodeRepository<Warehouse>, IWarehouseRepository
     {
         public WarehouseRepository(YayinEviApiDbContext context) : base(context)
         {

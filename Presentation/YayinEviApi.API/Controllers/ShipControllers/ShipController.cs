@@ -128,6 +128,7 @@ namespace YayinEviApi.API.Controllers.ShipControllers
 
             await _shipRepository.SaveAsync();
             ship.Id = ga.Id.ToString();
+            ship.CreatingUserId = _user.UserId;
             return Ok(ship);
             //return StatusCode((int)HttpStatusCode.Created);
 
@@ -248,7 +249,7 @@ namespace YayinEviApi.API.Controllers.ShipControllers
 
             await _shipItemRepository.SaveAsync();
 
-            return StatusCode((int)HttpStatusCode.Created);
+            return Ok(countItems);
         }
 
         [HttpPost("[action]")]

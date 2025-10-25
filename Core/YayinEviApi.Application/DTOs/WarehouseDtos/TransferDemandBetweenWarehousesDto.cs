@@ -3,6 +3,7 @@
     public class TransferDemandBetweenWarehousesDto
     {
         public string? Id { get; set; }
+        public string? Code { get; set; }
         public string? DocumentCode { get; set; }
         public DateTime? DocumentDate { get; set; }
         public bool IsConfirmed { get; set; }
@@ -21,6 +22,7 @@
         public string? UpdatingUserName { get; set; }
         public DateTime? CreatedDate { get; set; }
         public string? Description { get; set; }
+        public string? Serie { get; set; }
 
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using YayinEviApi.Application.Abstractions.Services;
+using YayinEviApi.Application.DTOs.CurrentDtos;
 using YayinEviApi.Application.DTOs.User;
 using YayinEviApi.Application.DTOs.WarehouseDtos;
 using YayinEviApi.Application.Repositories.IWarehouseR;
@@ -62,6 +63,10 @@ namespace YayinEviApi.API.Controllers.WarehouseControllers
         [HttpPost()]
         public async Task<IActionResult> Add(Warehousedto warehouse)
         {
+            if (_warehouseRepository.Select(x => x.Code == warehouse.Code, x => x).Any())
+            {
+                warehouse.Code = _warehouseRepository.GetNewCodeAsync(warehouse.Serie, x => x.Code).Result?.ToString();
+            }
             await _warehouseRepository.AddAsync(new()
             {
                 Code = warehouse.Code,
@@ -101,6 +106,14 @@ namespace YayinEviApi.API.Controllers.WarehouseControllers
             await _warehouseRepository.RemoveAsync(id);
             await _warehouseRepository.SaveAsync();
             return Ok();
+        }
+
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetNewCode(string serie = "WRH")
+        {
+            var newCode = await _warehouseRepository.GetNewCodeAsync(serie, x => x.Code);
+
+            return Ok(new { newCode });
         }
     }
 }

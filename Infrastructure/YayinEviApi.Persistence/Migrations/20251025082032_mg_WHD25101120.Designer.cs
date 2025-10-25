@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using YayinEviApi.Persistence.Contexts;
@@ -11,9 +12,11 @@ using YayinEviApi.Persistence.Contexts;
 namespace YayinEviApi.Persistence.Migrations
 {
     [DbContext(typeof(YayinEviApiDbContext))]
-    partial class YayinEviApiDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251025082032_mg_WHD25101120")]
+    partial class mg_WHD25101120
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
