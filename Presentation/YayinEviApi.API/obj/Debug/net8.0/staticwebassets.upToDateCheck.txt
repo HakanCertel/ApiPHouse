@@ -13,6 +13,7 @@ wwwroot\resorce\author-File\Cute-Anime-Cartoon-Illustration-Girl-Avatar.png
 wwwroot\resorce\author-File\Cute-Anime-Illustration-Boy-Avatar.png
 wwwroot\resorce\author-File\Dark-Green-Luxury-Real-Estate-Logo.png
 wwwroot\resorce\author-File\Kirmizi-Bej-Klasik-Kus-Fotografi-Kitap-Kapagi.png
+wwwroot\resorce\author-File\Lacivert-Minimalist-Kelebek-Uc-Kitap-Kapagi.png
 wwwroot\resorce\author-File\leaf-text-thumbnail.png
 wwwroot\resorce\author-File\Mor-ve-Pembe-Sade-Doga-Romantik-Kitap-Kapagi.png
 wwwroot\resorce\author-File\Mor-ve-Sari-illustrasyon-Wattpad-Kitap-Kapagi.png
@@ -58,6 +59,7 @@ wwwroot\resorce\work-images\Beyaz-Minimalist-Dugun-Ani-Defteri-Kapak-Tasarimi.pn
 wwwroot\resorce\work-images\Black-and-Grey-Dark-Forest-Aesthetic-Book-Cover.png
 wwwroot\resorce\work-images\Black-And-White-Modern-Typographic-Simple-Virus-Apparel-Logo.png
 wwwroot\resorce\work-images\Black-Beige-Vintage-Illustration-Mermaid-Restaurant-Logo.png
+wwwroot\resorce\work-images\Blue-and-Green-Comic-Cartoon-Anime-Boy-Avatar.png
 wwwroot\resorce\work-images\Blue-and-White-Illustrated-Fairy-Tales-Book-Cover.png
 wwwroot\resorce\work-images\Blue-Green-Illustrative-Magic-World-Kids-Book-Cover-.png
 wwwroot\resorce\work-images\Blue-Green-Illustrative-Magic-World-Kids-Book-Cover--1.png

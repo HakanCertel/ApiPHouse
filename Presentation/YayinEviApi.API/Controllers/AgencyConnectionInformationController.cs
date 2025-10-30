@@ -4,7 +4,6 @@ using System.Net;
 using YayinEviApi.Application.DTOs.AgencyDto;
 using YayinEviApi.Application.Repositories.AgencyR;
 using YayinEviApi.Domain.Entities.AgencyE;
-using YayinEviApi.Persistence.Repositories.AgencyR;
 
 namespace YayinEviApi.API.Controllers
 {

@@ -98,9 +98,9 @@ namespace YayinEviApi.API.Controllers
                 Path = d.pathOrContainerName,
                 Storage = _storageService.StorageName,
                 EntityId= entityId,
-                //WhichPage=whichPage,
-                WhichClass="AppUserClass",
-                AddingUserId=_user.UserId,
+                WhichPage = whichPage,
+                WhichClass ="AppUserClass",
+                //AddingUserId=_user.UserId,
 
             }).ToList());
 
