@@ -87,9 +87,10 @@ namespace YayinEviApi.Persistence.Services
             AppUser? user = await _userManager.FindByNameAsync(usernameOrEmail);
             if (user == null)
                 user = await _userManager.FindByEmailAsync(usernameOrEmail);
-
+            
             if (user == null)
-                throw new NotFoundUserException();
+                return new Token();
+                //throw new NotFoundUserException();
 
             SignInResult result = await _signInManager.CheckPasswordSignInAsync(user, password, false);
             if (result.Succeeded) //Authentication başarılı!

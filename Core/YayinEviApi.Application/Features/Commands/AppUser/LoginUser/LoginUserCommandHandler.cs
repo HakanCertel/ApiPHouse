@@ -14,11 +14,13 @@ namespace YayinEviApi.Application.Features.Commands.AppUser.LoginUser
         public async Task<LoginUserCommandResponse> Handle(LoginUserCommandRequest request, CancellationToken cancellationToken)
         {
             var token = await _authService.LoginAsync(request.UsernameOrEmail, request.Password, 5000);
-            return new LoginUserSuccessCommandResponse()
-            {
-                Token = token,
-                UsernameOrEmail=request.UsernameOrEmail,
-            };
+            if(token.AccessToken != null)
+                return new LoginUserSuccessCommandResponse()
+                {
+                    Token = token,
+                    UsernameOrEmail=request.UsernameOrEmail,
+                };
+            return new LoginUserErrorCommandResponse() { Message="Kullanıcı Bilgisi Hatası"};
         }
         // readonly IAuthService _authService;
         //public LoginUserCommandHandler(IAuthService authService)
