@@ -24,7 +24,7 @@ builder.Services.AddSignalRServices();
 
 var allowedOrigins = new[]
 {
-    "https://publishhouse.netlify.app", 
+    "https://toldyazilim.netlify.app", 
     "http://localhost:4200",
     "https://apiphouse.onrender.com"
 };
