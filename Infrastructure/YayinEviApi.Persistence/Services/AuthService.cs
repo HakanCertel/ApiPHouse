@@ -6,6 +6,7 @@ using YayinEviApi.Application.Abstractions.IToken;
 using YayinEviApi.Application.Abstractions.Services;
 using YayinEviApi.Application.DTOs;
 using YayinEviApi.Application.Exceptions;
+using YayinEviApi.Application.Repositories;
 using YayinEviApi.Domain.Entities.Identity;
 
 namespace YayinEviApi.Persistence.Services
@@ -14,9 +15,10 @@ namespace YayinEviApi.Persistence.Services
     {
         readonly HttpClient _httpClient;
         readonly IConfiguration _configuration;
-        readonly UserManager<Domain.Entities.Identity.AppUser> _userManager;
+        readonly UserManager<AppUser> _userManager;
+        readonly IFileManagementReadRepository _fileManagementReadRepository;
         readonly ITokenHandler _tokenHandler;
-        readonly SignInManager<Domain.Entities.Identity.AppUser> _signInManager;
+        readonly SignInManager<AppUser> _signInManager;
         readonly IUserService _userService;
         //readonly IMailService _mailService;
         public AuthService(IHttpClientFactory httpClientFactory,
@@ -24,7 +26,8 @@ namespace YayinEviApi.Persistence.Services
             UserManager<AppUser> userManager,
             ITokenHandler tokenHandler,
             SignInManager<AppUser> signInManager,
-            IUserService userService
+            IUserService userService,
+            IFileManagementReadRepository fileManagementReadRepository
             //IMailService mailService
             )
         {
@@ -34,6 +37,7 @@ namespace YayinEviApi.Persistence.Services
             _tokenHandler = tokenHandler;
             _signInManager = signInManager;
             _userService = userService;
+            _fileManagementReadRepository = fileManagementReadRepository;
             //_mailService = mailService;
         }
         async Task<Token> CreateUserExternalAsync(AppUser user, string email, string name, UserLoginInfo info, int accessTokenLifeTime)
@@ -96,6 +100,7 @@ namespace YayinEviApi.Persistence.Services
             if (result.Succeeded) //Authentication başarılı!
             {
                 Token token = _tokenHandler.CreateAccessToken(accessTokenLifeTime,user);
+                token.ImagePath = _fileManagementReadRepository.GetWhere(x => x.EntityId == user.Id&&x.IsActive).FirstOrDefault()?.Path;
                 await _userService.UpdateRefreshTokenAsync(token.RefreshToken, user, token.Expiration, 100);
                 return token;
             }

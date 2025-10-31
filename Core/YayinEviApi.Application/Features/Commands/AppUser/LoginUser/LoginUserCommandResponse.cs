@@ -9,6 +9,7 @@ namespace YayinEviApi.Application.Features.Commands.AppUser.LoginUser
     {
         public Token Token { get; set; }
         public string? UsernameOrEmail { get; set; }
+        public string? ImagePath { get; set; }
     }
     public class LoginUserErrorCommandResponse : LoginUserCommandResponse
     {

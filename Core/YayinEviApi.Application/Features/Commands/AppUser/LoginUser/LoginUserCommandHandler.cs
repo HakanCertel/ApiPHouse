@@ -18,6 +18,7 @@ namespace YayinEviApi.Application.Features.Commands.AppUser.LoginUser
                 return new LoginUserSuccessCommandResponse()
                 {
                     Token = token,
+                    ImagePath=token.ImagePath,
                     UsernameOrEmail=request.UsernameOrEmail,
                 };
             return new LoginUserErrorCommandResponse() { Message="Kullanıcı Bilgisi Hatası"};
