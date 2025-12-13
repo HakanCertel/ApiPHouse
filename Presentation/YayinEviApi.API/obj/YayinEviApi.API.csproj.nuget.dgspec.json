@@ -291,6 +291,9 @@
             "projectReferences": {
               "C:\\Users\\User\\Documents\\GitHub\\ApiPHouse\\Core\\YayinEviApi.Application\\YayinEviApi.Application.csproj": {
                 "projectPath": "C:\\Users\\User\\Documents\\GitHub\\ApiPHouse\\Core\\YayinEviApi.Application\\YayinEviApi.Application.csproj"
+              },
+              "C:\\Users\\User\\Documents\\GitHub\\ApiPHouse\\Infrastructure\\YayinEviApi.Infrastructure\\YayinEviApi.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\User\\Documents\\GitHub\\ApiPHouse\\Infrastructure\\YayinEviApi.Infrastructure\\YayinEviApi.Infrastructure.csproj"
               }
             }
           }

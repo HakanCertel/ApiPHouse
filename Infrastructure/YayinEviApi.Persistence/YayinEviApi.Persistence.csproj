@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\YayinEviApi.Application\YayinEviApi.Application.csproj" />
+    <ProjectReference Include="..\YayinEviApi.Infrastructure\YayinEviApi.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>

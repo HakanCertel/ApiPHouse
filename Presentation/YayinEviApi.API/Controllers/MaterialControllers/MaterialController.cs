@@ -27,14 +27,17 @@ namespace YayinEviApi.API.Controllers.MaterialControllers
         private IUserService _userService;
         readonly IMediator _mediator;
         readonly CreateUser _user;
+        readonly IMaterialService _materialService;
         readonly IFileManagementReadRepository _fileManagementReadRepository;
         readonly IFileManagementWriteRepository _fileManagementWriteRepository;
         readonly IMaterialRepository _materialRepository;
         readonly IMaterialFileRepository _materialFileRepository;
+        readonly IRecipeService _recipeService;
+        readonly IGeneralRepository<Material> _generalRepository;
         private readonly IStorageService _storageService;
         Expression<Func<Material, bool>>? _materailFilterExpression;
 
-        public MaterialController(IMaterialRepository materialRepository, IUserService userService, IMaterialFileRepository materialFileRepository, IStorageService storageService, IMediator mediator, IFileManagementWriteRepository fileManagementWriteRepository, IFileManagementReadRepository fileManagementReadRepository)
+        public MaterialController(IMaterialRepository materialRepository, IUserService userService, IMaterialFileRepository materialFileRepository, IStorageService storageService, IMediator mediator, IFileManagementWriteRepository fileManagementWriteRepository, IFileManagementReadRepository fileManagementReadRepository, IRecipeService recipeService, IGeneralRepository<Material> generalRepository, IMaterialService materialService)
         {
             _materialRepository = materialRepository;
             _mediator = mediator;
@@ -43,15 +46,20 @@ namespace YayinEviApi.API.Controllers.MaterialControllers
             _storageService = storageService;
             _fileManagementWriteRepository = fileManagementWriteRepository;
             _fileManagementReadRepository = fileManagementReadRepository;
-           
+
             _materailFilterExpression = x => x.Id != null;
             _user = _userService.GetUser().Result;
+            _recipeService = recipeService;
+            _generalRepository = generalRepository;
+            _materialService = materialService;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery] Pagination? pagination)
         {
 
+                /*await _recipeService.GetAll(pagination);*/
+            //var materialList=/*materialList.Cast<MaterailDto>().ToList();*/
             var totalMaterialCount = _materialRepository.GetAll(false).Count();
             var materialList = _materialRepository.Table.Select(x => new
             {
@@ -63,27 +71,27 @@ namespace YayinEviApi.API.Controllers.MaterialControllers
                 materialType = x.MaterialType != null ? x.MaterialType.toName() : ""
 
             })
-            .Select(x => new MaterailDto
-            {
-                Id = x.material.Id.ToString(),
-                Code = x.material.Code,
-                Name = x.material.Name,
-                Description = x.material.Description,
-                MaterialType = x.materialType,
-                IsActive = x.material.IsActive,
-                WarehouseId = x.material.WarehouseId != null ? x.material.WarehouseId.ToString() : null,
-                WarehouseCode = x.wh.Code,
-                WarehouseName = x.wh.Name,
-                HallofWarehouseId = x.material.HallofWarehouseId != null ? x.material.HallofWarehouseId.ToString() : null,
-                HallofWarehouseCode = x.hwh.Code,
-                HallofWarehouseName = x.hwh.Name,
-                ShelfofWarehouseId = x.material.ShelfofWarehouseId != null ? x.material.ShelfofWarehouseId.ToString() : null,
-                ShelfofWarehouseCode = x.swh.Code,
-                ShelfofWarehouseName = x.swh.Name,
-                CellofWarehouseId = x.material.CellofWarehouseId != null ? x.material.CellofWarehouseId.ToString() : null,
-                CellofWarehouseCode = x.cwh.Code,
-                CellofWarehouseName = x.cwh.Name,
-            }).ToList();
+        .Select(x => new MaterailDto
+        {
+            Id = x.material.Id.ToString(),
+            Code = x.material.Code,
+            Name = x.material.Name,
+            Description = x.material.Description,
+            MaterialType = x.materialType,
+            IsActive = x.material.IsActive,
+            WarehouseId = x.material.WarehouseId != null ? x.material.WarehouseId.ToString() : null,
+            WarehouseCode = x.wh.Code,
+            WarehouseName = x.wh.Name,
+            HallofWarehouseId = x.material.HallofWarehouseId != null ? x.material.HallofWarehouseId.ToString() : null,
+            HallofWarehouseCode = x.hwh.Code,
+            HallofWarehouseName = x.hwh.Name,
+            ShelfofWarehouseId = x.material.ShelfofWarehouseId != null ? x.material.ShelfofWarehouseId.ToString() : null,
+            ShelfofWarehouseCode = x.swh.Code,
+            ShelfofWarehouseName = x.swh.Name,
+            CellofWarehouseId = x.material.CellofWarehouseId != null ? x.material.CellofWarehouseId.ToString() : null,
+            CellofWarehouseCode = x.cwh.Code,
+            CellofWarehouseName = x.cwh.Name,
+        }).ToList();
             var materials = materialList.Select(x => x).Skip(pagination.Page * pagination.Size).Take(pagination.Size);
             return Ok(new {totalMaterialCount,materials});
 
@@ -174,30 +182,6 @@ namespace YayinEviApi.API.Controllers.MaterialControllers
                 ImagePath = imagePath,
             }).FirstOrDefault();
 
-            //var newMaterial = new MaterailDto
-            //{
-            //    Id = material.Id.ToString(),
-            //    Code = material.Code,
-            //    Name = material.Name,
-            //    Description= material.Description,
-            //    MaterialType=material.MaterialType?.toName(),
-            //    IsActive = material.IsActive,
-            //    CellofWarehouseId=material.CellofWarehouseId?.ToString(),
-            //    CellofWarehouseCode = material.CellofWarehouse?.Code,
-            //    CellofWarehouseName= material.CellofWarehouse?.Name,
-            //    ShelfofWarehouseId = material.ShelfofWarehouse?.Id.ToString(),
-            //    ShelfofWarehouseCode = material.ShelfofWarehouse?.Code,
-            //    ShelfofWarehouseName = material.ShelfofWarehouse?.Name,
-            //    HallofWarehouseId=material.HallofWarehouseId?.ToString(),
-            //    HallofWarehouseCode=material.HallofWarehouse?.Code,
-            //    HallofWarehouseName=material.HallofWarehouse?.Name,
-            //    WarehouseId = material.WarehouseId?.ToString(),
-            //    WarehouseCode = material.Warehouse?.Code,
-            //    WarehouseName = material.Warehouse?.Name,
-            //    MaterialFiles=files,
-            //    ImagePath=imagePath?.Path,
-            //};
-
             return Ok(material);
         }
 
@@ -208,18 +192,8 @@ namespace YayinEviApi.API.Controllers.MaterialControllers
             {
                 materialdto.Code = _materialRepository.GetNewCodeAsync(materialdto.Serie, x => x.Code).Result?.ToString();
             }
-            var material = new Material
-            {
-                Code = materialdto.Code,
-                Name = materialdto.Name,
-                IsActive = materialdto.IsActive,
-                MaterialType=materialdto.MaterialType!=null&&materialdto.MaterialType!=""?materialdto.MaterialType.GetEnum<MaterialTypes>():null,
-                CellofWarehouseId = materialdto.CellofWarehouseId!=null? Guid.Parse(materialdto.CellofWarehouseId):null,
-                ShelfofWarehouseId = materialdto.ShelfofWarehouseId != null ? Guid.Parse(materialdto.ShelfofWarehouseId) : null,
-                HallofWarehouseId = materialdto.HallofWarehouseId != null ? Guid.Parse(materialdto.HallofWarehouseId) : null,
-                WarehouseId = materialdto.WarehouseId != null ? Guid.Parse(materialdto.WarehouseId) : null,
-                UnitId= materialdto.UnitId!=null?Guid.Parse(materialdto.UnitId) : null,
-            };
+            var material = materialdto.EntityCovert<Material>();
+          
             await _materialRepository.AddAsync(material);
 
             await _materialRepository.SaveAsync();

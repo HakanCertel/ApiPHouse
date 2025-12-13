@@ -476,6 +476,246 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "YayinEviApi.API.Controllers.CategoryControllers.CategoriesController",
+    "Method": "Add",
+    "RelativePath": "api/Categories/addMainCategory",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "entity",
+        "Type": "YayinEviApi.Application.DTOs.CategoriesDtos.MainCategoryDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "YayinEviApi.API.Controllers.CategoryControllers.CategoriesController",
+    "Method": "Add",
+    "RelativePath": "api/Categories/addSubCategory_1",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "entity",
+        "Type": "YayinEviApi.Application.DTOs.CategoriesDtos.SubCategory_1Dto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "YayinEviApi.API.Controllers.CategoryControllers.CategoriesController",
+    "Method": "Add",
+    "RelativePath": "api/Categories/addSubCategory_2",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "entity",
+        "Type": "YayinEviApi.Application.DTOs.CategoriesDtos.SubCategory_2Dto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "YayinEviApi.API.Controllers.CategoryControllers.CategoriesController",
+    "Method": "Add",
+    "RelativePath": "api/Categories/addSubCategory_3",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "entity",
+        "Type": "YayinEviApi.Application.DTOs.CategoriesDtos.SubCategory_3Dto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "YayinEviApi.API.Controllers.CategoryControllers.CategoriesController",
+    "Method": "Add",
+    "RelativePath": "api/Categories/addSubCategory_4",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "entity",
+        "Type": "YayinEviApi.Application.DTOs.CategoriesDtos.SubCategory_4Dto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "YayinEviApi.API.Controllers.CategoryControllers.CategoriesController",
+    "Method": "Edit",
+    "RelativePath": "api/Categories/editMainCategory",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "entity",
+        "Type": "YayinEviApi.Application.DTOs.CategoriesDtos.MainCategoryDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "YayinEviApi.API.Controllers.CategoryControllers.CategoriesController",
+    "Method": "Edit",
+    "RelativePath": "api/Categories/editSubCategory_1",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "entity",
+        "Type": "YayinEviApi.Domain.Entities.CategoriesE.SubCategory_1",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "YayinEviApi.API.Controllers.CategoryControllers.CategoriesController",
+    "Method": "Edit",
+    "RelativePath": "api/Categories/editSubCategory_2",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "entity",
+        "Type": "YayinEviApi.Application.DTOs.CategoriesDtos.SubCategory_2Dto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "YayinEviApi.API.Controllers.CategoryControllers.CategoriesController",
+    "Method": "Edit",
+    "RelativePath": "api/Categories/editSubCategory_3",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "entity",
+        "Type": "YayinEviApi.Application.DTOs.CategoriesDtos.SubCategory_3Dto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "YayinEviApi.API.Controllers.CategoryControllers.CategoriesController",
+    "Method": "Edit",
+    "RelativePath": "api/Categories/editSubCategory_4",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "entity",
+        "Type": "YayinEviApi.Application.DTOs.CategoriesDtos.SubCategory_4Dto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "YayinEviApi.API.Controllers.CategoryControllers.CategoriesController",
+    "Method": "List",
+    "RelativePath": "api/Categories/listMainCategory",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "mainId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "YayinEviApi.API.Controllers.CategoryControllers.CategoriesController",
+    "Method": "ListSub_1",
+    "RelativePath": "api/Categories/listSubCategory_1",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "YayinEviApi.API.Controllers.CategoryControllers.CategoriesController",
+    "Method": "ListSub_2",
+    "RelativePath": "api/Categories/listSubCategory_2",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "YayinEviApi.API.Controllers.CategoryControllers.CategoriesController",
+    "Method": "ListSub_3",
+    "RelativePath": "api/Categories/listSubCategory_3",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "YayinEviApi.API.Controllers.CategoryControllers.CategoriesController",
+    "Method": "ListSub_4",
+    "RelativePath": "api/Categories/listSubCategory_4",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "YayinEviApi.API.Controllers.WarehouseControllers.CellofWarehouseController",
     "Method": "Add",
     "RelativePath": "api/CellofWarehouse",
@@ -1999,6 +2239,186 @@
         "Name": "id",
         "Type": "System.String",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "YayinEviApi.API.Controllers.ProductionManagementControllers.RecipeControllers.RecipeController",
+    "Method": "Add",
+    "RelativePath": "api/Recipe",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "recipe",
+        "Type": "YayinEviApi.Application.DTOs.ProductionManagementDtos.RecipeDtos.RecipeDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "YayinEviApi.API.Controllers.ProductionManagementControllers.RecipeControllers.RecipeController",
+    "Method": "Edit",
+    "RelativePath": "api/Recipe",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "recipe",
+        "Type": "YayinEviApi.Application.DTOs.ProductionManagementDtos.RecipeDtos.RecipeDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "YayinEviApi.API.Controllers.ProductionManagementControllers.RecipeControllers.RecipeController",
+    "Method": "GetAll",
+    "RelativePath": "api/Recipe",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Size",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "IsActive",
+        "Type": "System.Nullable\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "State",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Ids",
+        "Type": "System.String[]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "YayinEviApi.API.Controllers.ProductionManagementControllers.RecipeControllers.RecipeController",
+    "Method": "Delete",
+    "RelativePath": "api/Recipe/{Id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "YayinEviApi.API.Controllers.ProductionManagementControllers.RecipeControllers.RecipeController",
+    "Method": "AddItems",
+    "RelativePath": "api/Recipe/AddItems",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "recipeItems",
+        "Type": "System.Collections.Generic.List\u00601[[YayinEviApi.Application.DTOs.ProductionManagementDtos.RecipeDtos.RecipeItemsDto, YayinEviApi.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "YayinEviApi.API.Controllers.ProductionManagementControllers.RecipeControllers.RecipeController",
+    "Method": "DeleteItem",
+    "RelativePath": "api/Recipe/DeleteItem/{Id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "YayinEviApi.API.Controllers.ProductionManagementControllers.RecipeControllers.RecipeController",
+    "Method": "EditItems",
+    "RelativePath": "api/Recipe/EditItems",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "recipeItems",
+        "Type": "System.Collections.Generic.List\u00601[[YayinEviApi.Application.DTOs.ProductionManagementDtos.RecipeDtos.RecipeItemsDto, YayinEviApi.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "YayinEviApi.API.Controllers.ProductionManagementControllers.RecipeControllers.RecipeController",
+    "Method": "GetAllByParentId",
+    "RelativePath": "api/Recipe/GetAllByParentId/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "YayinEviApi.API.Controllers.ProductionManagementControllers.RecipeControllers.RecipeController",
+    "Method": "GetById",
+    "RelativePath": "api/Recipe/GetById/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "YayinEviApi.API.Controllers.ProductionManagementControllers.RecipeControllers.RecipeController",
+    "Method": "GetNewCode",
+    "RelativePath": "api/Recipe/GetNewCode",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "serie",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []

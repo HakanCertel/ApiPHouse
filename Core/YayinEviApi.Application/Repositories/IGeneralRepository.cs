@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq.Expressions;
 using YayinEviApi.Domain.Entities.Common;
 
 namespace YayinEviApi.Application.Repositories
@@ -16,8 +11,8 @@ namespace YayinEviApi.Application.Repositories
         bool RemoveRange(List<T> datas);
         Task<bool> RemoveAsync(string id);
         bool Update(T model);
-
         bool UpdateRange(List<T> datas);
+        void Update(T entity, IEnumerable<string> fields);
         Task<int> SaveAsync();
 
         IQueryable<T> GetAll(bool tracking = true);

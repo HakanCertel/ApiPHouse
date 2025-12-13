@@ -1,10 +1,10 @@
-﻿using YayinEviApi.Application.DTOs.FileManagemenDtos;
-using YayinEviApi.Domain.Entities;
-using YayinEviApi.Domain.Entities.WarehouseE;
+﻿using YayinEviApi.Domain.Entities;
+using YayinEviApi.Domain.Entities.Common;
+using YayinEviApi.Domain.Interfaces;
 
 namespace YayinEviApi.Application.DTOs.MaterialDtos
 {
-    public class MaterailDto
+    public class MaterailDto:BaseEntity
     {
         public string? Id { get; set; }
         public string? Code { get; set; }
@@ -27,6 +27,15 @@ namespace YayinEviApi.Application.DTOs.MaterialDtos
         public string? ImagePath { get; set; }
         public string? UnitId { get; set; }
         public string? UnitName { get; set; }
+        public string MainCategoryName { get; set; }
+        public string MainCategoryCode { get; set; }
+        public string MainCategoryId { get; set; }
+        public string SubCategory_1Name { get; set; }
+        public string SubCategory_1Code { get; set; }
+        public string SubCategory_1Id { get; set; }
+        public string SubCategory_2Name { get; set; }
+        public string SubCategory_2Code { get; set; }
+        public string SubCategory_2Id { get; set; }
         public string? Serie { get; set; }
         public List<FileManagement>? MaterialFiles { get; set; }
     }

@@ -1,6 +1,8 @@
-﻿namespace YayinEviApi.Domain.Entities.Common
+﻿using YayinEviApi.Domain.Interfaces;
+
+namespace YayinEviApi.Domain.Entities.Common
 {
-    public class BaseEntity
+    public class BaseEntity:IBaseEntity
     {
         public Guid Id { get; set; }
         public virtual string? Code { get; set; }

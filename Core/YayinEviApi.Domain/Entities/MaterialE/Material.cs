@@ -1,4 +1,5 @@
-﻿using YayinEviApi.Domain.Entities.Common;
+﻿using YayinEviApi.Domain.Entities.CategoriesE;
+using YayinEviApi.Domain.Entities.Common;
 using YayinEviApi.Domain.Entities.RezervationE;
 using YayinEviApi.Domain.Entities.UnitE;
 using YayinEviApi.Domain.Entities.WarehouseE;
@@ -17,16 +18,18 @@ namespace YayinEviApi.Domain.Entities.MaterialE
         public Guid? ShelfofWarehouseId { get; set; }
         public Guid? CellofWarehouseId { get; set; }
         public Guid? UnitId { get; set; }
+        public Guid? MainCategoryId { get; set; }
 
         public Warehouse? Warehouse { get; set; }
         public HallofWarehouse? HallofWarehouse { get; set; }
         public ShelfofWarehouse? ShelfofWarehouse { get; set; }
         public CellofWarehouse? CellofWarehouse { get; set; }
         public MaterialUnit? Unit { get; set; }
-
+        public MainCategory? MainCategory { get; set; }
 
         public ICollection<MaterialFile> MaterialFiles { get; set; }
         public ICollection<Rezervation> Rezervations { get; set; }
         public ICollection<Stock> Stocks { get; set; }
+        public ICollection<MainCategory> MainCategories { get; set; }
     }
 }

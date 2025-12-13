@@ -2768,7 +2768,8 @@
           "Microsoft.Extensions.Configuration": "9.0.5",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.5",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "9.0.4",
-          "YayinEviApi.Application": "1.0.0"
+          "YayinEviApi.Application": "1.0.0",
+          "YayinEviApi.Infrastructure": "1.0.0"
         },
         "compile": {
           "bin/placeholder/YayinEviApi.Persistence.dll": {}

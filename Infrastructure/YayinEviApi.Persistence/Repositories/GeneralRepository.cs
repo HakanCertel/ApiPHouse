@@ -47,15 +47,23 @@ namespace YayinEviApi.Persistence.Repositories
             EntityEntry entityEntry = Table.Update(model);
             return entityEntry.State == EntityState.Modified;
         }
-        public async Task<int> SaveAsync()
-            => await _context.SaveChangesAsync();
-
         public bool UpdateRange(List<T> datas)
         {
             Table.UpdateRange(datas);
             return true;
         }
 
+        public void Update(T entity, IEnumerable<string> fields)
+        {
+            Table.Attach(entity);
+            var entry=_context.Entry(entity);
+            foreach (var field in fields)
+            {
+                entry.Property(field).IsModified=true;
+            }
+        }
+        public async Task<int> SaveAsync()
+            => await _context.SaveChangesAsync();
 
 
         public IQueryable<T> GetAll(bool tracking = true)
@@ -101,5 +109,7 @@ namespace YayinEviApi.Persistence.Repositories
         {
             return filter == null ? Table.Select(selector) : Table.Where(filter).Select(selector);
         }
+
+     
     }
 }

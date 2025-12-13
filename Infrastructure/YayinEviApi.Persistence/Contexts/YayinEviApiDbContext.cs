@@ -21,6 +21,7 @@ using YayinEviApi.Domain.Entities.CurrentE;
 using YayinEviApi.Domain.Entities.SalesE;
 using YayinEviApi.Domain.Entities.RezervationE;
 using YayinEviApi.Domain.Entities.ShipE;
+using YayinEviApi.Domain.Entities.ProductionManagementE.RecipeE;
 
 namespace YayinEviApi.Persistence.Contexts
 {
@@ -59,6 +60,8 @@ namespace YayinEviApi.Persistence.Contexts
         public DbSet<ShelfofWarehouse> ShelfofWarehouse { get; set; }
         public DbSet<Material> Materials { get; set; }
         public DbSet<MaterialUnit> MaterialUnits { get; set; }
+        public DbSet<Recipe> Recipes { get; set; }
+        public DbSet<RecipeItems> RecipeItems { get; set; }
         public DbSet<StockCount> StockCounts { get; set; }
         public DbSet<StockCountItems> StockCountItems { get; set; }
         public DbSet<Stock> Stocks { get; set; }
@@ -81,7 +84,7 @@ namespace YayinEviApi.Persistence.Contexts
         public DbSet<TransferDemandItemBetweenWarehouses> TransferDemandItemsBetweenWarehouses { get; set; }
         public DbSet<HubMessage> HubMessages { get; set; }
 
-
+        
         protected override void OnModelCreating(ModelBuilder builder)
         {
 
@@ -96,7 +99,7 @@ namespace YayinEviApi.Persistence.Contexts
                 .HasOne(b => b.Order)
                 .WithOne(o => o.Basket)
                 .HasForeignKey<Order>(b => b.Id);
-            
+            builder.Entity<RecipeItems>().HasOne<Recipe>().WithMany().HasForeignKey(x=>x.ParentId).OnDelete(DeleteBehavior.Restrict);
             //builder.Entity<Order>()
             //    .HasOne(o => o.CompletedOrder)
             //    .WithOne(c => c.Order)
@@ -117,6 +120,7 @@ namespace YayinEviApi.Persistence.Contexts
                         break;
                     case EntityState.Added:
                         data.Entity.CreatedDate = DateTime.UtcNow;
+                        data.Entity.IsActive = true;
                         break;
                 }
             }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -47,6 +48,37 @@ namespace YayinEviApi.Infrastructure.Operations
             }
 
             return default(T);
+        }
+
+        public static object GetEnumValueFromDescription(Type enumType, string description)
+        {
+            if (description == null)
+                return null;
+
+            // Enum türünün her bir alanını (sabitini) döngüye al
+            foreach (FieldInfo field in enumType.GetFields())
+            {
+                // Alanın üzerine eklenmiş tüm DescriptionAttribute'larını al
+                DescriptionAttribute[] attributes = (DescriptionAttribute[])field.GetCustomAttributes(
+                    typeof(DescriptionAttribute), false);
+
+                // Nitelik varsa ve niteliğin Description değeri kaynak string ile eşleşiyorsa
+                if (attributes != null && attributes.Length > 0 &&
+                    attributes[0].Description.Equals(description, StringComparison.OrdinalIgnoreCase))
+                {
+                    // Eşleşen sabit değerini döndür
+                    return field.GetValue(null);
+                }
+
+                // Nitelik yoksa, doğrudan sabit adını (field.Name) string ile karşılaştır
+                if (field.Name.Equals(description, StringComparison.OrdinalIgnoreCase))
+                {
+                    return field.GetValue(null);
+                }
+            }
+
+            // Eşleşme bulunamazsa bir istisna fırlatılabilir veya null döndürülebilir
+            throw new ArgumentException($"'{description}' açıklamasına sahip bir sabit '{enumType.Name}' içinde bulunamadı.");
         }
     }
 }

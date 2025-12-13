@@ -5,7 +5,7 @@ namespace YayinEviApi.Domain.Entities.HelperEntities
 {
     public class WorkType:BaseEntity
     {
-        public Guid WorkCategoryId { get; set; }
+        public Guid? WorkCategoryId { get; set; }
         public string? TypeCode { get; set; }
         public string? TypeName { get; set; }
         public string? Description { get; set; }

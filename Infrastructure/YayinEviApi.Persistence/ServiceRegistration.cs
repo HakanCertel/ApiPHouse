@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using YayinEviApi.Application.Abstractions.Services;
 using YayinEviApi.Application.Abstractions.Services.Authentications;
+using YayinEviApi.Application.Abstractions.Services.ICategoryServices;
 using YayinEviApi.Application.Repositories;
 using YayinEviApi.Application.Repositories.AgencyFileR;
 using YayinEviApi.Application.Repositories.AgencyR;
@@ -16,6 +17,7 @@ using YayinEviApi.Application.Repositories.IHelperEntitiesR.IWorkTypeR;
 using YayinEviApi.Application.Repositories.IMaterialR;
 using YayinEviApi.Application.Repositories.IProccessCategoryR;
 using YayinEviApi.Application.Repositories.IProccessR;
+using YayinEviApi.Application.Repositories.IProductionManagementR.IRecipeR;
 using YayinEviApi.Application.Repositories.IRezervationR;
 using YayinEviApi.Application.Repositories.ISaleR;
 using YayinEviApi.Application.Repositories.IShipR;
@@ -27,7 +29,9 @@ using YayinEviApi.Application.Repositories.ProccessCategoryR;
 using YayinEviApi.Application.Repositories.ProjectR;
 using YayinEviApi.Application.Repositories.WorkOrderR;
 using YayinEviApi.Application.Services;
+using YayinEviApi.Domain.Entities.Common;
 using YayinEviApi.Domain.Entities.Identity;
+using YayinEviApi.Domain.Interfaces;
 using YayinEviApi.Persistence.Contexts;
 using YayinEviApi.Persistence.Repositories;
 using YayinEviApi.Persistence.Repositories.AgencyFileR;
@@ -48,6 +52,7 @@ using YayinEviApi.Persistence.Repositories.OrderR;
 using YayinEviApi.Persistence.Repositories.ProccessCategoryR;
 using YayinEviApi.Persistence.Repositories.ProccessR;
 using YayinEviApi.Persistence.Repositories.ProductImageFileR;
+using YayinEviApi.Persistence.Repositories.ProductionManagementR.RecipeR;
 using YayinEviApi.Persistence.Repositories.ProductR;
 using YayinEviApi.Persistence.Repositories.ProjectR;
 using YayinEviApi.Persistence.Repositories.PublishFileR;
@@ -58,16 +63,17 @@ using YayinEviApi.Persistence.Repositories.WarehouseR;
 using YayinEviApi.Persistence.Repositories.WorkOrderR;
 using YayinEviApi.Persistence.Repositories.WorkR;
 using YayinEviApi.Persistence.Services;
+using YayinEviApi.Persistence.Services.HelperTableServices;
 
 namespace YayinEviApi.Persistence
 {
     public static class ServiceRegistration
     {
-        public static void AddPersistenceServices(this IServiceCollection services) 
+        public static void AddPersistenceServices(this IServiceCollection services)
         {
-            //services.AddDbContext<YayinEviApiDbContext>(options => 
-            //options.UseSqlServer(@"Server=DESKTOP-DNL1VKI;Database=YayinEviDB;Trusted_Connection=True;TrustServerCertificate=True"));
-            services.AddDbContext<YayinEviApiDbContext>(options => options.UseNpgsql("Host=dpg-d3lcdommcj7s739r24lg-a.oregon-postgres.render.com;Port=5432;Database=phousedb;Username=hakan;Password=lAkHeHFrbGC2CrOygKtGIpwViNn8UfOD;Ssl Mode=Require;Trust Server Certificate=True"));
+            services.AddDbContext<YayinEviApiDbContext>(options =>
+            options.UseSqlServer(@"Server=DESKTOP-DNL1VKI;Database=YayinEviDB;Trusted_Connection=True;TrustServerCertificate=True"));
+            //services.AddDbContext<YayinEviApiDbContext>(options => options.UseNpgsql("Host=dpg-d3lcdommcj7s739r24lg-a.oregon-postgres.render.com;Port=5432;Database=phousedb;Username=hakan;Password=lAkHeHFrbGC2CrOygKtGIpwViNn8UfOD;Ssl Mode=Require;Trust Server Certificate=True"));
 
             services.AddIdentity<AppUser, AppRole>(options =>
             {
@@ -79,6 +85,10 @@ namespace YayinEviApi.Persistence
                 //options.User.RequireUniqueEmail=true;
             }).AddEntityFrameworkStores<YayinEviApiDbContext>();
            
+            services.AddScoped(typeof(IGeneralRepository<>), typeof(GeneralRepository<>));
+            services.AddScoped(typeof(IGetNewCode<>), typeof(GetNewCodeRepository<>));
+            services.AddScoped<IRecipeRepository, RecipeRepository>();
+            services.AddScoped<IRecipeItemsRepository, RecipeItemsRepository>();
             services.AddScoped<ICustomerReadRepository, CustomerReadRepository>();
             services.AddScoped<ICustomerWriteRepository, CustomerWriteRepository>();
             services.AddScoped<IOrderReadRepository, OrderReadRepository>();
@@ -157,8 +167,12 @@ namespace YayinEviApi.Persistence
             services.AddScoped<ITransferDemandBetweenWarehousesRepository, TransferDemandBetweenWarehousesRepository>();
             services.AddScoped<ITransferDemandItemBetweenWarehousesRepository, TransferDemandItemBetweenWarehousesRepository>();
 
-
+            //services.AddScoped<IMainCategoryService, MainCategoryService>();
+            //services.AddScoped<ISubCategory_1Service, SubCategory_1Service>();
+            //services.AddScoped<ISubCategory_2Service, SubCategory_2Service>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IRecipeService, RecipeService>();
+            services.AddScoped<IMaterialService, MaterialService>();
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IExternalAuthentication, AuthService>();
             services.AddScoped<IInternalAuthentication, AuthService>();

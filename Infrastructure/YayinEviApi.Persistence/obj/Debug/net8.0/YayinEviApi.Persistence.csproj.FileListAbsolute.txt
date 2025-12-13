@@ -34,3 +34,5 @@ C:\Users\User\Documents\GitHub\ApiPHouse\Infrastructure\YayinEviApi.Persistence\
 C:\Users\User\Documents\GitHub\ApiPHouse\Infrastructure\YayinEviApi.Persistence\obj\Debug\net8.0\refint\YayinEviApi.Persistence.dll
 C:\Users\User\Documents\GitHub\ApiPHouse\Infrastructure\YayinEviApi.Persistence\obj\Debug\net8.0\YayinEviApi.Persistence.pdb
 C:\Users\User\Documents\GitHub\ApiPHouse\Infrastructure\YayinEviApi.Persistence\obj\Debug\net8.0\ref\YayinEviApi.Persistence.dll
+C:\Users\User\Documents\GitHub\ApiPHouse\Infrastructure\YayinEviApi.Persistence\bin\Debug\net8.0\YayinEviApi.Infrastructure.dll
+C:\Users\User\Documents\GitHub\ApiPHouse\Infrastructure\YayinEviApi.Persistence\bin\Debug\net8.0\YayinEviApi.Infrastructure.pdb
